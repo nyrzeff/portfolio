@@ -48,9 +48,6 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.2.3(@types/eslint@9.6.1)(eslint-config-prettier@10.0.2(eslint@9.21.0))(eslint@9.21.0)(prettier@3.5.2)
-      gatsby-plugin-eslint:
-        specifier: ^4.0.4
-        version: 4.0.4(eslint-webpack-plugin@2.7.0(eslint@9.21.0)(webpack@5.98.0))(eslint@9.21.0)(gatsby@5.14.1(babel-eslint@10.1.0(eslint@9.21.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.7.3))
       gatsby-plugin-pnpm:
         specifier: ^1.2.10
         version: 1.2.10(gatsby@5.14.1(babel-eslint@10.1.0(eslint@9.21.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.7.3))
@@ -3129,13 +3126,6 @@ packages:
     engines: {parcel: 2.x}
     peerDependencies:
       '@parcel/core': ^2.0.0
-
-  gatsby-plugin-eslint@4.0.4:
-    resolution: {integrity: sha512-o3WKrW+ssF6XJmmTAfy7XeLsbTzdTwibBDnM6/Ub2cSDNXd1YjshtidJu4BXOLvtWW/LoqpMfWi0OPbVsb/ZLA==}
-    peerDependencies:
-      eslint: ^7.18.0 || ^8
-      eslint-webpack-plugin: ^2.4.3 || ^3 || ^4
-      gatsby: ^2 || ^3 || ^4 || ^5
 
   gatsby-plugin-page-creator@5.14.0:
     resolution: {integrity: sha512-H7Yk6Z+kRgOKlco6gFyj9tay+V9eeufZce+NSH6tqHq7pQ56+/X46y4XdeBsrr6wnRs0dBy+Z9rmJTD5w78c2w==}
@@ -9248,17 +9238,6 @@ snapshots:
       schema-utils: 3.3.0
       webpack: 5.98.0
 
-  eslint-webpack-plugin@2.7.0(eslint@9.21.0)(webpack@5.98.0):
-    dependencies:
-      '@types/eslint': 7.29.0
-      arrify: 2.0.1
-      eslint: 9.21.0
-      jest-worker: 27.5.1
-      micromatch: 4.0.8
-      normalize-path: 3.0.0
-      schema-utils: 3.3.0
-      webpack: 5.98.0
-
   eslint@7.32.0:
     dependencies:
       '@babel/code-frame': 7.12.11
@@ -9783,13 +9762,6 @@ snapshots:
       '@parcel/runtime-js': 2.8.3(@parcel/core@2.8.3)
       '@parcel/transformer-js': 2.8.3(@parcel/core@2.8.3)
       '@parcel/transformer-json': 2.8.3(@parcel/core@2.8.3)
-
-  gatsby-plugin-eslint@4.0.4(eslint-webpack-plugin@2.7.0(eslint@9.21.0)(webpack@5.98.0))(eslint@9.21.0)(gatsby@5.14.1(babel-eslint@10.1.0(eslint@9.21.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.7.3)):
-    dependencies:
-      eslint: 9.21.0
-      eslint-webpack-plugin: 2.7.0(eslint@9.21.0)(webpack@5.98.0)
-      gatsby: 5.14.1(babel-eslint@10.1.0(eslint@9.21.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.7.3)
-      webpack-merge: 5.10.0
 
   gatsby-plugin-page-creator@5.14.0(gatsby@5.14.1(babel-eslint@10.1.0(eslint@9.21.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.7.3))(graphql@16.10.0):
     dependencies:
