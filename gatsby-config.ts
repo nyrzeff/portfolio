@@ -32,6 +32,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     "eslint-config-react-app",
   ],
 };
