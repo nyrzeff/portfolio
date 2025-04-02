@@ -1,45 +1,64 @@
 import React, { useState } from "react";
-import SwiperCore, { Autoplay, EffectCoverflow, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
-import "swiper/css";
-import "./style.css";
+import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 
-interface ImageGalleryProps {
+interface ImageData {
   images: IGatsbyImageData[];
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
-  SwiperCore.use([EffectCoverflow, Autoplay, Pagination]);
+const ImageGallery: React.FC<ImageData> = ({
+  images,
+}: {
+  images: ImageData[];
+}) => {
+  const [selectedImage, setSelectedImage] = useState<IGatsbyImageData | null>(
+    null,
+  );
 
   return (
-    <div className="swiper">
-      <Swiper
-        effect={"coverflow"}
-        autoplay={{
-          delay: 1500,
-          disableOnInteraction: false,
+    <>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: "10px",
+          paddingBottom: "10px",
         }}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: false,
-        }}
-        pagination={true}
-        className="mySwiper"
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <GatsbyImage key={index} image={image} alt={`Image ${index + 1}`} />
-          </SwiperSlide>
+          <div
+            key={index}
+            style={{ width: "100%", height: "auto", cursor: "pointer" }}
+            onClick={() => setSelectedImage(image)}
+          >
+            <GatsbyImage image={getImage(image)!} alt={`Image ${index + 1}`} />
+          </div>
         ))}
-      </Swiper>
-    </div>
+      </div>
+
+      {selectedImage && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0, 0, 0, 0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <GatsbyImage
+            image={selectedImage}
+            alt="Fullscreen"
+            style={{ maxWidth: "90%", maxHeight: "90%" }}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
