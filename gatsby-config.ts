@@ -10,6 +10,11 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    "gatsby-plugin-sass",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "eslint-config-react-app",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -29,11 +34,10 @@ const config: GatsbyConfig = {
         path: `${__dirname}/src/images/`,
       },
     },
-    "gatsby-plugin-sass",
-    "gatsby-plugin-image",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
-    "eslint-config-react-app",
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {},
+    },
   ],
 };
 
