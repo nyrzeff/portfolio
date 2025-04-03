@@ -23,7 +23,7 @@ interface ProjectImage {
   image: IGatsbyImageData;
 }
 
-const ProjectGallery: React.FC = () => {
+const Projects: React.FC = () => {
   const content: MarkdownRemarkNode = useContent();
   const frontmatter = content[0].frontmatter;
   const images: Record<string, IGatsbyImageData[]> = useImages(
@@ -45,4 +45,4 @@ const ProjectGallery: React.FC = () => {
   );
 };
 
-export default ProjectGallery;
+export default Projects;
