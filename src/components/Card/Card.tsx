@@ -1,7 +1,7 @@
 import React from "react";
 import ImageGallery from "../ImageGallery";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import "./style.scss";
+import * as styles from "./Card.module.scss";
 
 interface CardProps {
   title: string;
@@ -10,17 +10,19 @@ interface CardProps {
   images: IGatsbyImageData[];
 }
 
+console.log(styles);
+
 const Card: React.FC<CardProps> = ({ title, subtitle, content, images }) => {
   return (
-    <div className="card">
-      <h1 className="card-title">{title}</h1>
-      <h2 className="card-subtitle">{subtitle}</h2>
-      <div className="card-image">
+    <div className={styles.card}>
+      <h1 className={styles.cardTitle}>{title}</h1>
+      <h2 className={styles.cardSubtitle}>{subtitle}</h2>
+      <div className={styles.cardImage}>
         <ImageGallery images={images} />
       </div>
-      <div className="card-content">
+      <div className={styles.cardContent}>
         <p
-          className="card-text"
+          className={styles.cardText}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>

@@ -1,0 +1,74 @@
+/* variables */
+:root {
+  --primary: #f70d1a;
+  --secondary: #006400;
+}
+
+/* XS */
+.card {
+  color: white;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: black;
+}
+
+.card-image img {
+  width: 100%;
+}
+
+.card-content {
+  color: white;
+  padding: 15px;
+}
+
+.card-title {
+  text-align: center;
+  color: white;
+  // font-size: clamp(1.5rem, 5vw, 3rem); 
+  font-size: 100px; 
+}
+
+.card-subtitle {
+  text-align: center;
+  color: lightgrey;
+  font-size: 1rem;;
+}
+
+.card-text {
+  text-align: center;
+  color: white;
+}
+
+// /* SM */
+// @media (min-width: 576px) {
+//   .card {
+//   }
+// }
+
+// /* MD */
+// @media (min-width: 768px) {
+//   .card {
+//   }
+// }
+
+// /* LG */
+// @media (min-width: 1024px) {
+//   .card {
+//   }
+// }
+
+// /* XL */
+// @media (min-width: 1440px) {
+//   .card {
+//   }
+// }
+
+
+// /* XXL */
+// @media (min-width: 1920px) {
+//   .card {
+//   }
+// }
