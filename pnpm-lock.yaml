@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      eslint-plugin-flowtype:
+        specifier: ^8.0.3
+        version: 8.0.3(@babel/plugin-syntax-flow@7.26.0(@babel/core@7.26.10))(@babel/plugin-transform-react-jsx@7.25.9(@babel/core@7.26.10))(eslint@9.23.0)
       gatsby:
         specifier: ^5.14.1
         version: 5.14.1(babel-eslint@10.1.0(eslint@9.23.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@0.21.3)(typescript@5.8.2)
@@ -10056,7 +10059,7 @@ snapshots:
       babel-eslint: 10.1.0(eslint@9.23.0)
       confusing-browser-globals: 1.0.11
       eslint: 7.32.0
-      eslint-plugin-flowtype: 5.10.0(eslint@9.23.0)
+      eslint-plugin-flowtype: 5.10.0(eslint@7.32.0)
       eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.29.0(eslint@9.23.0)(typescript@5.8.2))(eslint@9.23.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.23.0)
       eslint-plugin-react: 7.37.5(eslint@9.23.0)
@@ -10119,9 +10122,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-flowtype@5.10.0(eslint@9.23.0):
+  eslint-plugin-flowtype@5.10.0(eslint@7.32.0):
     dependencies:
-      eslint: 9.23.0
+      eslint: 7.32.0
       lodash: 4.17.21
       string-natural-compare: 3.0.1
 
@@ -11117,7 +11120,7 @@ snapshots:
       error-stack-parser: 2.1.4
       eslint: 7.32.0
       eslint-config-react-app: 6.0.0(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@5.8.2))(eslint@7.32.0)(typescript@5.8.2))(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@5.8.2))(babel-eslint@10.1.0(eslint@9.23.0))(eslint-plugin-flowtype@5.10.0(eslint@7.32.0))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@5.8.2))(eslint@7.32.0))(eslint-plugin-jsx-a11y@6.10.2(eslint@7.32.0))(eslint-plugin-react-hooks@4.6.2(eslint@7.32.0))(eslint-plugin-react@7.37.5(eslint@7.32.0))(eslint@7.32.0)(typescript@5.8.2)
-      eslint-plugin-flowtype: 5.10.0(eslint@9.23.0)
+      eslint-plugin-flowtype: 5.10.0(eslint@7.32.0)
       eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.29.0(eslint@9.23.0)(typescript@5.8.2))(eslint@9.23.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.23.0)
       eslint-plugin-react: 7.37.5(eslint@9.23.0)
