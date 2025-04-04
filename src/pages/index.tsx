@@ -1,13 +1,13 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
+import Layout from "../components/Layout";
 import Projects from "../components/Projects";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
-      <h1>My Projects</h1>
+    <Layout>
       <Projects />
-    </main>
+    </Layout>
   );
 };
 

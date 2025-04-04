@@ -30,7 +30,10 @@ const ImageGallery: React.FC<ImageData> = ({
             style={{ width: "100%", height: "auto", cursor: "pointer" }}
             onClick={() => setSelectedImage(image)}
           >
-            <GatsbyImage image={getImage(image)!} alt={`Image ${index + 1}`} />
+            <GatsbyImage
+              image={getImage(image) ?? ""}
+              alt={`Image ${index + 1}`}
+            />
           </div>
         ))}
       </div>

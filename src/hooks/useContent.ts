@@ -20,5 +20,5 @@ export const useContent = () => {
     }
   `);
 
-  return data.allMarkdownRemark.edges.map((edge: any) => edge.node);
+  return data.allMarkdownRemark.edges.map((edge: unknown) => edge.node);
 };
