@@ -1,5 +1,5 @@
 import React from "react";
-import ImageGallery from "../ImageGallery";
+import { ImageGallery } from "../ImageGallery";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import * as styles from "./Card.module.scss";
 
@@ -12,7 +12,12 @@ interface CardProps {
 
 console.log(styles);
 
-const Card: React.FC<CardProps> = ({ title, subtitle, content, images }) => {
+export const Card: React.FC<CardProps> = ({
+  title,
+  subtitle,
+  content,
+  images,
+}) => {
   return (
     <div className={styles.card}>
       <h1 className={styles.cardTitle}>{title}</h1>
@@ -29,5 +34,3 @@ const Card: React.FC<CardProps> = ({ title, subtitle, content, images }) => {
     </div>
   );
 };
-
-export default Card;

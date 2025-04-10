@@ -1,6 +1,6 @@
 import React from "react";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import Card from "../Card";
+import { Card } from "../Card";
 import { useContent } from "../../hooks/useContent";
 import { useImages } from "../../hooks/useImages";
 
@@ -17,7 +17,7 @@ interface MarkdownRemarkNode {
   id: string;
 }
 
-const Projects: React.FC = () => {
+export const Projects: React.FC = () => {
   const content: MarkdownRemarkNode = useContent();
   const frontmatter: Frontmatter = content[0]?.frontmatter;
   const images: Record<string, IGatsbyImageData[]> = useImages(
@@ -38,5 +38,3 @@ const Projects: React.FC = () => {
     </div>
   );
 };
-
-export default Projects;

@@ -5,7 +5,7 @@ interface ImageData {
   images: IGatsbyImageData[];
 }
 
-const ImageGallery: React.FC<ImageData> = ({
+export const ImageGallery: React.FC<ImageData> = ({
   images,
 }: {
   images: ImageData[];
@@ -64,5 +64,3 @@ const ImageGallery: React.FC<ImageData> = ({
     </>
   );
 };
-
-export default ImageGallery;
