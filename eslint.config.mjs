@@ -1,30 +1,29 @@
-import eslint from "@eslint/js";
-import tseslint from "@typescript-eslint";
-import importPlugin from "eslint-plugin-import";
+import js from "@eslint/js";
+import eslintPluginImportX from "eslint-plugin-import-x";
+import tsParser from "@typescript-eslint/parser";
 
 export default [
-  ...tseslint.config(
-    eslint.configs.recommended,
-    tseslint.configs.strict,
-    tseslint.configs.stylistic,
-  ),
+  js.configs.recommended,
+  eslintPluginImportX.flatConfigs.recommended,
+  eslintPluginImportX.flatConfigs.typescript,
   {
+    files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
+      "no-unused-vars": "off",
+      "import-x/no-dynamic-require": "warn",
+      "import-x/no-nodejs-modules": "warn",
     },
   },
-  {
-    ignores: ["dist", "node_modules", "public", ".cache"],
-  },
-  importPlugin.flatConfigs.recommended,
   {
     files: ["src/**"],
     ignores: ["src/pages/**"],
     rules: {
-      "import/no-default-export": "error",
+      "import-x/no-default-export": "error",
     },
   },
 ];
