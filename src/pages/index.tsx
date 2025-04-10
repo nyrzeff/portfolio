@@ -1,11 +1,24 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { Layout, Projects } from "@/components";
+import {
+  Layout,
+  Header,
+  Intro,
+  Stack,
+  Projects,
+  Contact,
+  Footer,
+} from "@/components";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
+      <Header />
+      <Intro />
+      <Stack />
       <Projects />
+      <Contact />
+      <Footer />
     </Layout>
   );
 };
