@@ -1,4 +1,9 @@
+export { Layout } from "./Layout";
+export { Header } from "./Header";
+export { Intro } from "./Intro";
+export { Stack } from "./Stack";
+export { Projects } from "./Projects";
 export { Card } from "./Card";
 export { ImageGallery } from "./ImageGallery";
-export { Layout } from "./Layout";
-export { Projects } from "./Projects";
+export { Contact } from "./Contact";
+export { Footer } from "./Footer";
