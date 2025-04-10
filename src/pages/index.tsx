@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { HeadFC, PageProps } from "gatsby";
-import { Layout, Projects } from "../components";
+import { Layout, Projects } from "@/components";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (

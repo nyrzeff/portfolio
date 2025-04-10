@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageGallery } from "../ImageGallery";
+import { ImageGallery } from "@/components";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import * as styles from "./Card.module.scss";
 
