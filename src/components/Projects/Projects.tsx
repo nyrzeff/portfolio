@@ -1,8 +1,7 @@
 import React from "react";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import { Card } from "../Card";
-import { useContent } from "../../hooks/useContent";
-import { useImages } from "../../hooks/useImages";
+import { Card } from "@/components";
+import { useContent, useImages } from "@/hooks";
 
 interface Frontmatter {
   title: string;
