@@ -1,0 +1,72 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70px;
+  background: radial-gradient(circle, black, #333);
+}
+
+nav {
+  padding: 1.5rem 2rem;
+  background-color: darkblue;
+  color: white;
+  margin-left: auto;
+}
+
+.checkbox {
+  display: none;
+
+  &:checked ~ .nav-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.borgar {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+
+
+  span {
+    height: 3em;
+    width: 1em;
+    background: lavender;
+    border-radius: 1em;
+    // transition: all 0.3s ease;
+    margin: 1px 0;
+  }
+}
+
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 4.5rem;
+  right: 0;
+  background: darkblue;
+  // z-index: 1;
+  width: 200px;
+
+  a {
+    color: white;
+  }
+}
+
+.section {
+  font-size: 2em;
+  color: white;
+  margin: 0 1em;
+}
+
+.hero-image {
+  height: 75px;
+  width: 75px;
+}
