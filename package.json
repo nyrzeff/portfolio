@@ -20,15 +20,6 @@
   },
   "dependencies": {
     "eslint-plugin-flowtype": "^8.0.3",
-    "gatsby": "^5.14.3",
-    "gatsby-plugin-alias-imports": "^1.0.5",
-    "gatsby-plugin-image": "^3.14.0",
-    "gatsby-plugin-manifest": "^5.14.0",
-    "gatsby-plugin-sass": "^6.14.0",
-    "gatsby-plugin-sharp": "^5.14.0",
-    "gatsby-source-filesystem": "^5.14.0",
-    "gatsby-transformer-remark": "^6.14.0",
-    "gatsby-transformer-sharp": "^5.14.0",
     "libvips": "^0.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -50,7 +41,6 @@
     "eslint-import-resolver-typescript": "^4.3.2",
     "eslint-plugin-import-x": "^4.10.2",
     "eslint-plugin-prettier": "^5.2.6",
-    "gatsby-plugin-pnpm": "^1.2.10",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.1"
