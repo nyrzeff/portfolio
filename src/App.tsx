@@ -9,7 +9,7 @@ import {
 } from "./components";
 import "./App.css";
 
-function App() {
+export function App() {
   return (
     <Layout>
       <Header />
@@ -21,5 +21,3 @@ function App() {
     </Layout>
   );
 }
-
-export default App;

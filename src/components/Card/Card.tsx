@@ -1,4 +1,3 @@
-import React from "react";
 import { ImageGallery } from "@/components";
 import styles from "./Card.module.scss";
 
