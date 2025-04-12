@@ -1,13 +1,12 @@
 import React from "react";
 import { ImageGallery } from "@/components";
-import { IGatsbyImageData } from "gatsby-plugin-image";
-import * as styles from "./Card.module.scss";
+import styles from "./Card.module.scss";
 
 interface CardProps {
   title: string;
   subtitle: string;
   content: string;
-  images: IGatsbyImageData[];
+  images: string[];
 }
 
 console.log(styles);

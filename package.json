@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "vite",
     "clean": "rm -rf dist .tsbuildinfo node-modules/.tmp",
-    "build": "tsc && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

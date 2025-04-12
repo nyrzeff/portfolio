@@ -1,6 +1,10 @@
 import { ReactNode } from "react";
-import * as styles from "./Layout.module.scss";
+import styles from "./Layout.module.scss";
 
-export const Layout: React.FC = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+export const Layout = ({ children }: Props) => {
   return <main className={styles.container}>{children}</main>;
 };
