@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { default as matter } from "gray-matter";
-import { Card } from "../../components";
+import { Card } from "@components/";
 
 interface Frontmatter {
   id: string;
