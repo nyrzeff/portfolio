@@ -1,6 +1,6 @@
 import { ImageGallery } from "@components";
-import styles from "./Card.module.scss";
 import Markdown from "react-markdown";
+import styles from "./Card.module.scss";
 
 interface CardProps {
   title: string;
@@ -16,13 +16,13 @@ export const Card: React.FC<CardProps> = ({
   images,
 }: CardProps) => {
   return (
-    <article className={styles.card}>
-      <h1 className={styles.cardTitle}>{title}</h1>
-      <h2 className={styles.cardSubtitle}>{subtitle}</h2>
-      <div className={styles.cardImage}>
+    <article className={styles["card"]}>
+      <h1 className={styles["card-title"]}>{title}</h1>
+      <h2 className={styles["card-subtitle"]}>{subtitle}</h2>
+      <div className={styles["card-image"]}>
         <ImageGallery images={images} />
       </div>
-      <div className={styles.cardContent}>
+      <div className={styles["card-content"]}>
         <Markdown>{content}</Markdown>
       </div>
     </article>
