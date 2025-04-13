@@ -1,4 +1,16 @@
+/* global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: system-ui, sans-serif;
+}
+
 .container {
   text-align: center;
-  background: purple; 
+  background: lightblue;
 }
