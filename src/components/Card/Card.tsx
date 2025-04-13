@@ -23,7 +23,7 @@ export const Card: React.FC<CardProps> = ({
         <ImageGallery images={images} />
       </div>
       <div className={styles.cardContent}>
-        <Markdown class={styles.cardText}>{content}</Markdown>
+        <Markdown>{content}</Markdown>
       </div>
     </article>
   );
