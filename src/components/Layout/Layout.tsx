@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const Layout = ({ children }: Props) => {
-  return <main className={styles.container}>{children}</main>;
+  return <main className={styles["container"]}>{children}</main>;
 };
