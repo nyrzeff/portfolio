@@ -5,12 +5,27 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 html, body {
   height: 100%;
   font-family: system-ui, sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
+  display: grid;
+  min-width: 100vw;
+  min-height: 100vh;
   text-align: center;
   background: lightblue;
 }
