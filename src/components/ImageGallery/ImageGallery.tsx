@@ -4,11 +4,7 @@ interface ImageData {
   images: string[];
 }
 
-export const ImageGallery: React.FC<ImageData> = ({
-  images,
-}: {
-  images: string[];
-}) => {
+export const ImageGallery: React.FC<ImageData> = ({ images }: ImageData) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (

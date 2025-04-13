@@ -1,4 +1,4 @@
-import { ImageGallery } from "@/components";
+import { ImageGallery } from "../../components";
 import styles from "./Card.module.scss";
 
 interface CardProps {
@@ -8,16 +8,14 @@ interface CardProps {
   images: string[];
 }
 
-console.log(styles);
-
 export const Card: React.FC<CardProps> = ({
   title,
   subtitle,
   content,
   images,
-}) => {
+}: CardProps) => {
   return (
-    <div className={styles.card}>
+    <article className={styles.card}>
       <h1 className={styles.cardTitle}>{title}</h1>
       <h2 className={styles.cardSubtitle}>{subtitle}</h2>
       <div className={styles.cardImage}>
@@ -29,6 +27,6 @@ export const Card: React.FC<CardProps> = ({
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
-    </div>
+    </article>
   );
 };
