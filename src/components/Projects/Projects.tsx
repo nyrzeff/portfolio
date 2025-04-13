@@ -1,37 +1,79 @@
-import React from "react";
-import { IGatsbyImageData } from "gatsby-plugin-image";
-import { Card } from "@/components";
-import { useContent, useImages } from "@/hooks";
+import { useState, useEffect } from "react";
+import { type GrayMatterFile, default as matter } from "gray-matter";
+import { Card } from "@components";
 
 interface Frontmatter {
+  id: string;
   title: string;
   subtitle: string;
   tags: string[];
-  tech: string[];
+  stack: string[];
 }
 
-interface MarkdownRemarkNode {
+interface Project {
   frontmatter: Frontmatter;
-  html: string;
-  id: string;
+  content: string;
+  images: string[];
 }
+
+const getProjectImages = async (projectId: string): Promise<string[]> => {
+  // import everything and then filter during runtime because
+  // glob import is a build-time feature
+  const imageModules = import.meta.glob("/src/assets/images/**", {
+    eager: true,
+    query: "?url",
+  });
+
+  const imagePaths: string[] = Object.entries(imageModules)
+    .filter(([path]) => path.includes(`/assets/images/${projectId}/`))
+    .map(([, mod]) => (mod as { default: string }).default);
+
+  return imagePaths;
+};
+
+const importProjects = async () => {
+  const modules = import.meta.glob("/src/content/*.md", { as: "raw" });
+
+  const projects = await Promise.all(
+    Object.entries(modules).map(async ([, loader]) => {
+      const rawContent = await loader();
+      const { data, content } = matter(rawContent) as GrayMatterFile<string>;
+      const frontmatter = data as Frontmatter;
+      const images = await getProjectImages(frontmatter.id);
+
+      return {
+        frontmatter,
+        content,
+        images,
+      };
+    }),
+  );
+
+  return projects;
+};
 
 export const Projects: React.FC = () => {
-  const content: MarkdownRemarkNode = useContent();
-  const frontmatter: Frontmatter = content[0]?.frontmatter;
-  const images: Record<string, IGatsbyImageData[]> = useImages(
-    frontmatter?.title,
-  );
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await importProjects();
+      setProjects(data);
+    };
+    fetchData();
+  }, []);
+
+  if (!projects) return <p>Loading...</p>;
 
   return (
     <div>
-      {Object.entries(images).map(([_, imgs]) => (
+      {projects.map((project) => (
         <Card
-          key={content[0]?.id}
-          project={frontmatter?.title}
-          description={frontmatter?.subtitle}
-          content={content[0]?.html}
-          images={imgs}
+          key={project.frontmatter.id}
+          title={project.frontmatter.title}
+          subtitle={project.frontmatter.subtitle}
+          content={project.content}
+          images={project.images}
         />
       ))}
     </div>

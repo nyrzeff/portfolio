@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-import { getImage, GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { useState } from "react";
 
 interface ImageData {
-  images: IGatsbyImageData[];
+  images: string[];
 }
 
-export const ImageGallery: React.FC<ImageData> = ({
-  images,
-}: {
-  images: ImageData[];
-}) => {
-  const [selectedImage, setSelectedImage] = useState<IGatsbyImageData | null>(
-    null,
-  );
+export const ImageGallery: React.FC<ImageData> = ({ images }: ImageData) => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <>
@@ -30,10 +23,7 @@ export const ImageGallery: React.FC<ImageData> = ({
             style={{ width: "100%", height: "auto", cursor: "pointer" }}
             onClick={() => setSelectedImage(image)}
           >
-            <GatsbyImage
-              image={getImage(image) ?? ""}
-              alt={`Image ${index + 1}`}
-            />
+            <img src={image ?? ""} alt={`Image ${index + 1}`} />
           </div>
         ))}
       </div>
@@ -54,8 +44,8 @@ export const ImageGallery: React.FC<ImageData> = ({
           }}
           onClick={() => setSelectedImage(null)}
         >
-          <GatsbyImage
-            image={selectedImage}
+          <img
+            src={selectedImage}
             alt="Fullscreen"
             style={{ maxWidth: "90%", maxHeight: "90%" }}
           />

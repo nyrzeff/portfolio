@@ -1,4 +1,5 @@
 ---
+id: "pomometrics"
 title: "Pomometrics"
 subtitle: "The ultimate Pomodoro technique calculator"
 tags:
@@ -7,7 +8,7 @@ tags:
     - Conventional Commits
     - Test coverage
     - Refactoring
-tech:
+stack:
     - HTML
     - CSS
     - JavaScript
