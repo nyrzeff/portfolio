@@ -6,7 +6,7 @@ import {
   Projects,
   Contact,
   Footer,
-} from "@components/";
+} from "@components";
 import "./App.css";
 
 export function App() {

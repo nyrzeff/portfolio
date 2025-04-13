@@ -1,4 +1,4 @@
-import { ImageGallery } from "@components/";
+import { ImageGallery } from "@components";
 import styles from "./Card.module.scss";
 
 interface CardProps {

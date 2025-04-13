@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { default as matter } from "gray-matter";
-import { Card } from "@components/";
+import { type GrayMatterFile, default as matter } from "gray-matter";
+import { Card } from "@components";
 
 interface Frontmatter {
   id: string;
@@ -16,16 +16,19 @@ interface Project {
   images: string[];
 }
 
-const getProjectImages = async (projectId): string => {
+const getProjectImages = async (projectId: string): Promise<string[]> => {
   // import everything and then filter during runtime because
   // glob import is a build-time feature
   const imageModules = import.meta.glob("/src/assets/images/**", {
+    eager: true,
     query: "?url",
   });
 
-  return Object.entries(imageModules)
+  const imagePaths: string[] = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/assets/images/${projectId}/`))
-    .map(([, url]) => url as string);
+    .map(([, mod]) => (mod as { default: string }).default);
+
+  return imagePaths;
 };
 
 const importProjects = async () => {
@@ -36,9 +39,7 @@ const importProjects = async () => {
       const rawContent = await loader();
       const { data, content } = matter(rawContent) as GrayMatterFile<string>;
       const frontmatter = data as Frontmatter;
-
-      const rawImages = await getProjectImages(frontmatter.id);
-      const images = Object.values(rawImages).map((mod) => mod.name);
+      const images = await getProjectImages(frontmatter.id);
 
       return {
         frontmatter,
