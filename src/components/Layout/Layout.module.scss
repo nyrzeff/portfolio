@@ -1,11 +1,18 @@
-body {
-  overflow-x: hidden;
+@use "../../styles/variables" as *;
+
+.layout-wrapper {
+  position: relative;
 }
 
-.container {
+.menu-open .content {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.content {
   display: grid;
   min-width: 100vw;
   min-height: 100vh;
   text-align: center;
-  background: lightblue;
+  background: $color-background;
 }

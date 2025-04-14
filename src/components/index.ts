@@ -1,5 +1,6 @@
 export { Layout } from "./Layout";
 export { Header } from "./Header";
+export { SideMenu } from "./SideMenu";
 export { Intro } from "./Intro";
 export { Stack } from "./Stack";
 export { Projects } from "./Projects";
