@@ -1,0 +1,16 @@
+@use "sass:color";
+
+// base
+$color-primary:      #3a86ff; // electric blue
+$color-accent:       #2de2e6; // neon teal
+$color-warm:         #ff9f1c; // soft orange
+$color-neutral:      #1e1e1e; // graphite gray
+$color-background:   #0f0f0f; // deep space black
+
+// semantic roles 
+$color-text:         #ffffff;
+$color-heading:      $color-primary;
+$color-link:         $color-accent;
+$color-hover:        $color-warm;
+$color-border:       color.adjust($color-neutral, $lightness: 0%);
+$color-surface:      color.adjust($color-background, $lightness: 5%);
