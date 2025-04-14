@@ -2,6 +2,7 @@
 
 .layout-wrapper {
   position: relative;
+  background: $color-background-gradient;
 }
 
 .menu-open {
@@ -14,5 +15,4 @@
   min-width: 100vw;
   min-height: 100vh;
   text-align: center;
-  background: $color-background;
 }
