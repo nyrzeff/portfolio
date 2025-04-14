@@ -1,0 +1,54 @@
+@use "../../styles/variables" as *;
+
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-top: 50px;
+  width: 80vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: -80vw;
+  background: rgba($color-surface,0.5);
+  backdrop-filter: blur(10px);
+  padding: 0 1rem 0 3rem;
+  border-left: 1px solid $color-border;
+  z-index: 1;
+  transition: transform 0.1s ease;
+  transform: translateX(0);
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+    padding-top: 1rem;
+  }
+
+  ul li {
+    background: linear-gradient(to bottom, $color-background, $color-neutral);
+    border: 1px solid $color-border;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: right;
+    font-weight: bold;
+
+    &:hover {
+      border: 1px solid $color-hover;
+    }
+  }
+
+  a {
+    color: $color-text;
+  }
+
+  &.open {
+
+    transform: translateX(-80vw);
+    transition: transform 0.1s ease;
+  }
+}

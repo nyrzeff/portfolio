@@ -1,32 +1,35 @@
-import * as React from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import * as styles from "./Header.module.scss";
+import React from "react";
+import styles from "./Header.module.scss";
 
-export const Header: React.FC = () => {
-  const imagePath = "../../../favicon.png";
+interface HeaderProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  menuOpen,
+  setMenuOpen,
+}: HeaderProps) => {
+  const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
 
   return (
-    <header className={styles.header}>
+    <header className={styles["header"]}>
       <a href="#">
-        <StaticImage
+        <img
           src={imagePath}
           alt="Eye of Nyrzeff"
-          className={styles.heroImage}
+          className={styles["hero-image"]}
         />
       </a>
       <nav>
-        <input type="checkbox" id="checkbox" className={styles.checkbox} />
-        <label htmlFor="checkbox" className={styles.borgar}>
+        <button
+          className={`${styles["batatas"]} ${menuOpen ? styles["open"] : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           <span></span>
           <span></span>
           <span></span>
-        </label>
-        <div className={styles.navMobile}>
-          <a href="#">Blog</a>
-          <a href="#">Stack</a>
-          <a href="#">Projects</a>
-          <a href="#">Contact me!</a>
-        </div>
+        </button>
       </nav>
     </header>
   );
