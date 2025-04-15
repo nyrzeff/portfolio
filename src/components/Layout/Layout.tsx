@@ -14,7 +14,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <div
         className={`${styles["layout-wrapper"]} ${menuOpen ? styles["menu-open"] : ""}`}
       >
-        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <Header />
         <main className={styles["content"]}>{children}</main>
         <Footer />
       </div>
