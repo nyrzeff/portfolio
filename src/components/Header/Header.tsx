@@ -1,15 +1,6 @@
-import React from "react";
 import styles from "./Header.module.scss";
 
-interface HeaderProps {
-  menuOpen: boolean;
-  setMenuOpen: (open: boolean) => void;
-}
-
-export const Header: React.FC<HeaderProps> = ({
-  menuOpen,
-  setMenuOpen,
-}: HeaderProps) => {
+export const Header: React.FC = () => {
   const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
 
   return (
