@@ -1,22 +1,33 @@
 @use "sass:color";
 
-// base
-$color-robot:                #3a86ff; // electric blue
-$color-anomaly:              #2de2e6; // neon teal
-$color-human:                #ff9f1c; // soft orange
-$color-monster:              #1e1e1e; // graphite gray
-$color-alien:                #0f0f0f; // deep space black
+// mastery
+$color-primary: #3a86ff; // electric blue
+
+// technology
+$color-secondary: #b6ff00; // lime plasma
+
+// creativity
+$color-accent: #2de2e6; // neon teal
+
+// rationality
+$color-neutral: #1e1e1e; // graphite gray
+
+// humanity
+$color-hover: #a16ae8; // iridescent violet
+
+// curiosity
+$color-background: #0f0f0f; // deep space black
+
+// fury
+$color-danger: #ef4444; // laser red
 
 // semantic roles 
+$color-border:               color.adjust($color-neutral, $lightness: 5%);
+$color-surface:              color.adjust($color-background, $lightness: 5%);
+$color-background-gradient:  radial-gradient(circle, $color-neutral, $color-background);
+$color-warning:              $color-danger;
 $color-text:                 #ffffff;
-$color-heading:              $color-robot;
-$color-link:                 $color-anomaly;
-$color-hover:                $color-human;
-$color-border:               color.adjust($color-monster, $lightness: 0%);
-$color-surface:              color.adjust($color-alien, $lightness: 5%);
-$color-background:           $color-alien;
-$color-background-gradient:  radial-gradient(circle, $color-alien, black);
 
 // sizes
-$header-height:               50px;
-$side-menu-width:             85vw;
+$header-height:              50px;
+$side-menu-width:            85vw;
