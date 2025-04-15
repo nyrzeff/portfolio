@@ -6,10 +6,9 @@ header {
   justify-content: flex-end;
   align-items: center;
   width: auto;
-  height: 50px;
-  background: radial-gradient(circle, $color-surface, $color-background);
-  border-bottom: 1px solid $color-border;
+  height: $header-height;
   padding: 0 1rem;
+  z-index: 0;
 
   a {
     display: flex;
@@ -32,35 +31,22 @@ header {
     margin-left: auto;
     height: 100%;
     width: 100%;
-  }
-}
+    z-index: 2;
 
-/* 🍟 */
-.batatas {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 2em;
-  height: 1.5em;
-  cursor: pointer;
-  color: $color-link;
+    .link-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
 
-  span {
-    display: block;
-    height: 3px;
-    background: currentColor;
-    border-radius: 1rem;
-    padding: 1px 0;
-
-    &:nth-child(1),
-    &:nth-child(3) {
-      width: inherit;
-    }
-
-    &:nth-child(2) {
-      width: 1.5em;
-      align-self: flex-end;
+      a {
+        width: fit-content;
+        color: $color-link;
+        font-weight: bold;
+        // border: 1px solid $color-hover;
+      }
     }
   }
 }
