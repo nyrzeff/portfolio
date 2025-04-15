@@ -1,5 +1,4 @@
 import { type ReactNode, useState } from "react";
-import { createPortal } from "react-dom";
 import { Header, SideMenu, Footer } from "@components";
 import styles from "./Layout.module.scss";
 
@@ -19,12 +18,9 @@ export const Layout = ({ children }: LayoutProps) => {
         <main className={styles["content"]}>{children}</main>
         <Footer />
       </div>
-
-      {menuOpen &&
-        createPortal(
-          <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />,
-          document.getElementById("menu-root"),
-        )}
+      {/* SideMenu needs to be outside of layout-wrapper to avoid
+       * inheriting its styles (opacity, pointer-events) when it is open */}
+      <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />,
     </>
   );
 };

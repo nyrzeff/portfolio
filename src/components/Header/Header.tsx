@@ -22,14 +22,6 @@ export const Header: React.FC<HeaderProps> = ({
         />
       </a>
       <nav>
-        <button
-          className={`${styles["batatas"]} ${menuOpen ? styles["open"] : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </nav>
     </header>
   );

@@ -16,3 +16,7 @@ $color-border:               color.adjust($color-monster, $lightness: 0%);
 $color-surface:              color.adjust($color-alien, $lightness: 5%);
 $color-background:           $color-alien;
 $color-background-gradient:  radial-gradient(circle, $color-alien, black);
+
+// sizes
+$header-height:               50px;
+$side-menu-width:             85vw;
