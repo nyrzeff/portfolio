@@ -12,15 +12,10 @@ export const SideMenu = ({ isOpen, setIsOpen }: SideMenuProps) => {
 
   return (
     <aside className={`${styles["side-menu"]} ${isOpen ? styles["open"] : ""}`}>
-      <button
-        className={`${styles["batatas"]} ${isOpen ? styles["open"] : ""}`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <ul>
+        <li onClick={closeMenu}>
+          <a href="#home">Home</a>
+        </li>
         <li onClick={closeMenu}>
           <a href="#intro">Intro</a>
         </li>

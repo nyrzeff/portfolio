@@ -1,13 +1,16 @@
 @use "../../styles/variables" as *;
 
 .layout-wrapper {
-  position: relative;
   background: $color-background-gradient;
 }
 
-.menu-open {
-  opacity: 0.3;
-  pointer-events: none;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100vw;
+  background: rgba(0,0,0,0.7);
 }
 
 .content {

@@ -11,16 +11,21 @@ export const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <div
-        className={`${styles["layout-wrapper"]} ${menuOpen ? styles["menu-open"] : ""}`}
-      >
-        <Header />
+      <div className={styles["layout-wrapper"]}>
+        <Header
+          isOpen={menuOpen}
+          setIsOpen={setMenuOpen}
+        />
+          <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />
+        {menuOpen && (
+          <div
+            className={styles["overlay"]}
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
         <main className={styles["content"]}>{children}</main>
         <Footer />
       </div>
-      {/* SideMenu needs to be outside of layout-wrapper to avoid
-       * inheriting its styles (opacity, pointer-events) when it is open */}
-      <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />,
     </>
   );
 };

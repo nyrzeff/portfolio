@@ -1,4 +1,5 @@
 @use "../../styles/variables" as *;
+@use "sass:color";
 
 .side-menu {
   display: flex;
@@ -11,47 +12,13 @@
   position: fixed;
   top: -($header-height);
   right: -($side-menu-width);
-  background: rgba($color-surface,0.5);
+  background: rgba($color-background,0.5);
   backdrop-filter: blur(10px);
   padding: 0 1rem 0 3rem;
-  border-left: 1px solid $color-border;
-  z-index: 100;
+  z-index: 1;
   transition: transform 0.3s ease;
   transform: translateX(0);
   overflow: visible;
-
-  /* 🍟 */
-  .batatas {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    top: 15px;
-    right: 85px;
-    width: 2em;
-    height: 1.5em;
-    cursor: pointer;
-    color: $color-link;
-
-    span {
-      display: block;
-      height: 3px;
-      background: currentColor;
-      border-radius: 1rem;
-      padding: 1px 0;
-
-      &:nth-child(1),
-      &:nth-child(3) {
-        width: inherit;
-      }
-
-      &:nth-child(2) {
-        width: 1.5em;
-        align-self: flex-end;
-      }
-    }
-  }
 
   ul {
     display: flex;
@@ -60,20 +27,16 @@
     align-items: stretch;
     width: 100%;
     gap: 10px;
-    padding-top: 1rem;
+    padding-top: $header-height;
   }
 
   ul li {
-    background: linear-gradient(to left, $color-surface, $color-background);
-    border: 1px solid $color-border;
-    border-radius: 1rem;
+    background: linear-gradient(to left, $color-primary, color.adjust($color-primary, $lightness: -50%));
+    border-radius: 10px;
     padding: 1rem;
     text-align: right;
     font-weight: bold;
-
-    &:last-child {
-      background: linear-gradient(to left, $color-heading, $color-link);
-    }
+    cursor: pointer;
 
     &:hover {
       border: 1px solid $color-hover;
