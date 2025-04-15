@@ -1,6 +1,14 @@
 import styles from "./Header.module.scss";
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  isOpen,
+  setIsOpen,
+}: HeaderProps) => {
   const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
 
   return (
@@ -13,6 +21,17 @@ export const Header: React.FC = () => {
         />
       </a>
       <nav>
+          <button
+            className={`${styles["batatas"]} ${isOpen ? styles["open"] : ""}`}
+            onClick={() => setIsOpen(!isOpen)}
+            style={{
+              zIndex: 100,
+            }}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
       </nav>
     </header>
   );

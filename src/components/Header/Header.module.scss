@@ -8,7 +8,7 @@ header {
   width: auto;
   height: $header-height;
   padding: 0 1rem;
-  z-index: 0;
+  z-index: 100;
 
   a {
     display: flex;
@@ -43,9 +43,38 @@ header {
 
       a {
         width: fit-content;
-        color: $color-link;
+        color: $color-secondary;
         font-weight: bold;
-        // border: 1px solid $color-hover;
+      }
+    }
+
+    /* 🍟 */
+    .batatas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 2em;
+      height: 1.5em;
+      cursor: pointer;
+      color: $color-primary;
+
+      span {
+        display: block;
+        height: 3px;
+        background: currentColor;
+        border-radius: 10px;
+        padding: 1px 0;
+
+        &:nth-child(1),
+        &:nth-child(3) {
+          width: inherit;
+        }
+
+        &:nth-child(2) {
+          width: 1.5em;
+          align-self: flex-end;
+        }
       }
     }
   }
