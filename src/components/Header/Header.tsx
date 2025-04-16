@@ -5,15 +5,15 @@ interface HeaderProps {
   isLandscapeOrWide: boolean;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  imagePath: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   isLandscapeOrWide,
   isOpen,
   setIsOpen,
+  imagePath,
 }: HeaderProps) => {
-  const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
-
   return (
     <>
       {isLandscapeOrWide ? (

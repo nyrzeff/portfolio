@@ -9,6 +9,7 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLandscapeOrWide, setIsLandscapeOrWide] = useState(false);
+  const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
 
   useLayoutEffect(() => {
     const isLandscape = window.matchMedia("(orientation: landscape)");
@@ -36,6 +37,7 @@ export const Layout = ({ children }: LayoutProps) => {
           isLandscapeOrWide={isLandscapeOrWide}
           isOpen={menuOpen}
           setIsOpen={setMenuOpen}
+          imagePath={imagePath}
         />
         {!isLandscapeOrWide && (
           <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />
@@ -47,7 +49,7 @@ export const Layout = ({ children }: LayoutProps) => {
           />
         )}
         <main className={styles["content"]}>{children}</main>
-        <Footer />
+        <Footer imagePath={imagePath} />
       </div>
     </>
   );
