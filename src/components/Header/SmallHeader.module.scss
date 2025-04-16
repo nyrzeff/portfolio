@@ -1,17 +1,20 @@
 @use "../../styles/variables" as *;
 
-header {
+.small-header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   width: auto;
   height: $header-height;
   padding: 0 1rem;
   z-index: 100;
 
-  a {
+  .hero-image-container {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     width: 50px;
     height: inherit;
 
@@ -23,30 +26,12 @@ header {
     }
   }
 
-  nav {
+  .batatas-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     margin-left: auto;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-
-    .link-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-
-      a {
-        width: fit-content;
-        color: $color-secondary;
-        font-weight: bold;
-      }
-    }
 
     /* 🍟 */
     .batatas {
@@ -57,9 +42,9 @@ header {
       width: 2em;
       height: 1.5em;
       cursor: pointer;
-      color: $color-primary;
+      color: $color-link;
 
-      span {
+      .batatinhas {
         display: block;
         height: 3px;
         background: currentColor;
