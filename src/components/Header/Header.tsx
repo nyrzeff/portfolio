@@ -1,38 +1,30 @@
-import styles from "./Header.module.scss";
+import { BigHeader } from "./BigHeader";
+import { SmallHeader } from "./SmallHeader";
 
 interface HeaderProps {
+  isLandscapeOrWide: boolean;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
+  isLandscapeOrWide,
   isOpen,
   setIsOpen,
 }: HeaderProps) => {
   const imagePath = "/src/assets/images/eye-of-nyrzeff.svg";
 
   return (
-    <header className={styles["header"]}>
-      <a href="#">
-        <img
-          src={imagePath}
-          alt="Eye of Nyrzeff"
-          className={styles["hero-image"]}
+    <>
+      {isLandscapeOrWide ? (
+        <BigHeader imagePath={imagePath} />
+      ) : (
+        <SmallHeader
+          imagePath={imagePath}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
-      </a>
-      <nav>
-          <button
-            className={`${styles["batatas"]} ${isOpen ? styles["open"] : ""}`}
-            onClick={() => setIsOpen(!isOpen)}
-            style={{
-              zIndex: 100,
-            }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-      </nav>
-    </header>
+      )}
+    </>
   );
 };
