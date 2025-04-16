@@ -26,3 +26,4 @@ dist-ssr
 # Others
 .vimspector.json
 **/*scratchpad*
+tsconfig.tsbuildinfo
