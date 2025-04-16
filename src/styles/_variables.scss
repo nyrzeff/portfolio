@@ -21,13 +21,19 @@ $color-background: #0f0f0f; // deep space black
 // fury
 $color-danger: #ef4444; // laser red
 
-// semantic roles 
-$color-border:               color.adjust($color-neutral, $lightness: 5%);
-$color-surface:              color.adjust($color-background, $lightness: 5%);
-$color-background-gradient:  radial-gradient(circle, $color-neutral, $color-background);
-$color-warning:              $color-danger;
-$color-text:                 #ffffff;
+// semantic roles
+$color-border: color.adjust($color-neutral, $lightness: 5%);
+$color-surface: color.adjust($color-background, $lightness: 5%);
+$color-background-gradient: radial-gradient(
+  circle,
+  $color-neutral,
+  $color-background
+);
+$color-default: color.adjust($color-neutral, $lightness: 10%);
+$color-warning: $color-danger;
+$color-link: color.adjust($color-hover, $lightness: -10%);
+$color-text: #ffffff;
 
 // sizes
-$header-height:              50px;
-$side-menu-width:            85vw;
+$header-height: 50px;
+$side-menu-width: 85vw;
