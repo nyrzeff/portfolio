@@ -7,7 +7,8 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 5dvw;
+  width: 100dvw;
+  padding: 0 5dvw;
 
   & * {
     color: $color-text;
@@ -18,7 +19,9 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     margin-bottom: 10px;
+    padding: 0 5dvw;
 
     & > figure {
       display: flex;
@@ -27,9 +30,8 @@ footer {
       align-items: center;
 
       & > img {
-        width: 100px;
-        height: 100px;
-        height: fit-content;
+        width: clamp(100px, 150px, 300px);
+        height: clamp(100px, 150px, 300px);
       }
 
       .caption-container {
@@ -37,9 +39,15 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+
+        & > figcaption {
+          font-size: 15px;
+          white-space: pre-line;
+        }
 
         & > span {
-          font-size: 15px;
+          font-size: 13px;
 
           strong {
             color: $color-secondary;
@@ -122,15 +130,11 @@ footer {
     flex-wrap: nowrap;
     width: 100%;
     text-align: center;
-    padding: 0 5dvw 1dvh 5dvw;
+    margin-bottom: 10px;
+    padding: 0 5dvw;
     color: $color-text;
 
-    & > span:first-child {
-      margin-bottom: 10px;
-      font-size: 10px;
-    }
-
-    & > span:nth-child(2) {
+    & > span {
       font-size: 10px;
     }
   }

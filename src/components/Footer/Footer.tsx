@@ -25,9 +25,13 @@ export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
         <figure>
           <img src={imagePath} alt="Eye of Nyrzeff" />
           <div className={styles["caption-container"]}>
-            <figcaption>Felipe Ferreira, aka Nyrzeff </figcaption>
+            <figcaption>
+              Real Name: Felipe Ferreira{"\n"}Pseudonym: <b>Nyrzeff</b>
+            </figcaption>
             <span>
-              Guided by <strong>The Elemental Septet</strong>
+              <em>
+                Guided by <strong>The Elemental Septet</strong>
+              </em>
             </span>
           </div>
         </figure>
@@ -77,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
         </span>
         <span>
           {" "}
-          Crafted with ⚡ by <i>Nyrzeff</i>. Powered by React, Vite and
+          Crafted with ⚡ by <b>Nyrzeff</b>. Powered by React, Vite and
           TypeScript.
         </span>
       </div>
