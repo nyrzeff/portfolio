@@ -7,7 +7,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background: color.adjust($color-background, $lightness: -5%);
+  padding: 5dvw;
 
   & * {
     color: $color-text;
@@ -18,13 +18,13 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90dvw;
-    margin: 0 auto;
-    padding-top: 1rem;
+    margin-bottom: 10px;
 
     & > figure {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       & > img {
         width: 100px;
@@ -34,8 +34,9 @@ footer {
 
       .caption-container {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         & > span {
           font-size: 15px;
@@ -52,34 +53,65 @@ footer {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
     width: 100%;
     padding: 0 5dvw;
-    gap: 3rem;
+    gap: 1rem;
+    font-size: clamp(0.8rem, 1vh, 1.6rem);
 
-    .nav-container {
+    & a,
+    span {
+      color: color.adjust($color-text, $lightness: -20%);
+    }
+
+    %shared-container {
       display: flex;
       flex-direction: column;
-      grid-row: 2;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .nav-container {
+      @extend %shared-container;
+      grid-row: 1;
       grid-column: 1;
     }
 
     .social-container {
-      display: flex;
-      flex-direction: column;
-      grid-row: 2;
+      @extend %shared-container;
+      grid-row: 1;
       grid-column: 2;
+
+      .icon-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 5px;
+
+        & > svg {
+          width: 1rem;
+          height: 1rem;
+          stroke: color.adjust($color-text, $lightness: -20%);
+        }
+      }
     }
 
     h2 {
-      color: $color-default;
       font-size: clamp(1rem, 3vh, 3rem);
+      font-weight: bold;
     }
   }
 
-  hr {
-    width: 100%;
+  .footer-line {
+    width: 85dvw;
     height: 1px;
-    color: $color-danger;
+    background-color: color.adjust($color-danger, $lightness: -30%);
+
+    &:first-of-type {
+      background-color: $color-border;
+    }
   }
 
   .footer-bottom {
@@ -88,8 +120,9 @@ footer {
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
+    width: 100%;
     text-align: center;
-    padding: 0 5dvw 2dvh 5dvw;
+    padding: 0 5dvw 1dvh 5dvw;
     color: $color-text;
 
     & > span:first-child {
