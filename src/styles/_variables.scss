@@ -26,8 +26,8 @@ $color-border: color.adjust($color-neutral, $lightness: 5%);
 $color-surface: color.adjust($color-background, $lightness: 5%);
 $color-background-gradient: radial-gradient(
   circle,
-  $color-neutral,
-  $color-background
+  color.adjust($color-background, $lightness: 5%),
+  black
 );
 $color-default: color.adjust($color-neutral, $lightness: 10%);
 $color-warning: $color-danger;
