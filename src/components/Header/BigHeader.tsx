@@ -1,20 +1,13 @@
+import { icons } from "@assets/icons";
 import styles from "./BigHeader.module.scss";
 
-interface BigHeaderProps {
-  imagePath: string;
-}
+export const BigHeader: ReactFC = () => {
+  const Eye = icons["eye"];
 
-export const BigHeader: ReactFC<BigHeaderProps> = ({
-  imagePath,
-}): BigHeaderProps => {
   return (
     <header className={styles["big-header"]}>
       <div className={styles["banner"]}>
-        <img
-          src={imagePath}
-          alt="Eye of Nyrzeff"
-          className={styles["hero-image"]}
-        />
+        <Eye alt="Eye of Nyrzeff" className={styles["hero-image"]} />
       </div>
       <div className={styles["nav-link-container"]}>
         <a href="#home">Home</a>

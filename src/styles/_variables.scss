@@ -22,7 +22,7 @@ $color-background: #0f0f0f; // deep space black
 $color-danger: #ef4444; // laser red
 
 // semantic roles
-$color-border: color.adjust($color-neutral, $lightness: 5%);
+$color-border: color.adjust($color-neutral, $lightness: 30%);
 $color-surface: color.adjust($color-background, $lightness: 5%);
 $color-background-gradient: radial-gradient(
   circle,

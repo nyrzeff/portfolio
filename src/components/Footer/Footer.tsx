@@ -1,11 +1,13 @@
-import { Contact, Mail, Github, MapPin } from "lucide-react";
+import { icons } from "@assets/icons";
 import styles from "./Footer.module.scss";
 
 interface FooterProps {
-  imagePath: string;
+  isLandscapeOrWide: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
+export const Footer: React.FC<FooterProps> = ({
+  isLandscapeOrWide,
+}): FooterProps => {
   const getUtcOffset = () => {
     const options = {
       timeZone: "Europe/Lisbon",
@@ -18,13 +20,27 @@ export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
     return parts.find((p) => p.type === "timeZoneName")?.value || "GMT+0";
   };
 
+  const Eye = icons["eye"];
+  const ChevronRight = icons["chevronRight"];
+  const Contact = icons["contact"];
+  const Mail = icons["mail"];
+  const Github = icons["github"];
+  const MapPin = icons["mapPin"];
+
   return (
     <footer className={styles["footer"]}>
-      <div className={styles["footer-line"]}></div>
+      {!isLandscapeOrWide && (
+        <div className={styles["footer-fancy-divider"]}>
+          <div className={styles["line"]}></div>
+          <Eye alt="Eye of Nyrzeff" />
+          <div className={styles["line"]}></div>
+        </div>
+      )}
+      <div className={styles["footer-simple-divider"]}></div>
       <div className={styles["footer-main"]}>
         <div className={styles["footer-top"]}>
           <figure>
-            <img src={imagePath} alt="Eye of Nyrzeff" />
+            <Eye alt="Eye of Nyrzeff" />
             <div className={styles["caption-container"]}>
               <figcaption>
                 Pseudonym: <b>Nyrzeff</b>
@@ -39,17 +55,32 @@ export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
         <nav className={styles["footer-middle"]}>
           <div className={styles["nav-container"]}>
             <h2>Navigation</h2>
-            <a href="#home">Home</a>
-            <a href="#intro">Intro</a>
-            <a href="#blog">Blog</a>
-            <a href="#stack">Stack</a>
-            <a href="#projects">Projects</a>
+            <a href="#home" className={styles["icon-container"]}>
+              <ChevronRight />
+              <span>Home</span>
+            </a>
+            <a href="#intro" className={styles["icon-container"]}>
+              <ChevronRight />
+              <span>Intro</span>
+            </a>
+            <a href="#blog" className={styles["icon-container"]}>
+              <ChevronRight />
+              <span>Blog</span>
+            </a>
+            <a href="#stack" className={styles["icon-container"]}>
+              <ChevronRight />
+              <span>Stack</span>
+            </a>
+            <a href="#projects" className={styles["icon-container"]}>
+              <ChevronRight />
+              <span>Projects</span>
+            </a>
           </div>
           <div className={styles["social-container"]}>
             <h2>Social</h2>
             <a href="#contact" className={styles["icon-container"]}>
               <Contact />
-              <span>Contact me</span>
+              <span>Contact</span>
             </a>
             <a
               href="mailto:nyrghzef@keemail.me"
@@ -74,7 +105,7 @@ export const Footer: React.FC<FooterProps> = ({ imagePath }): FooterProps => {
           </div>
         </nav>
       </div>
-      <div className={styles["footer-line"]}></div>
+      <div className={styles["footer-simple-divider"]}></div>
       <div className={styles["footer-bottom"]}>
         <span>
           2025. All code and content freely available under the CC0 License. No
