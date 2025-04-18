@@ -1,24 +1,21 @@
+import { icons } from "@assets/icons";
 import styles from "./SmallHeader.module.scss";
 
 interface SmallHeaderProps {
-  imagePath: string;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
 export const SmallHeader: ReactFC<SmallHeaderProps> = ({
-  imagePath,
   isOpen,
   setIsOpen,
 }): SmallHeaderProps => {
+  const Eye = icons["eye"];
+
   return (
     <header className={styles["small-header"]}>
       <a href="#" className={styles["hero-image-container"]}>
-        <img
-          src={imagePath}
-          alt="Eye of Nyrzeff"
-          className={styles["hero-image"]}
-        />
+        <Eye alt="Eye of Nyrzeff" className={styles["hero-image"]} />
       </a>
       <div className={styles["batatas-container"]}>
         <button

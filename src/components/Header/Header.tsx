@@ -5,25 +5,19 @@ interface HeaderProps {
   isLandscapeOrWide: boolean;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
-  imagePath: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   isLandscapeOrWide,
   isOpen,
   setIsOpen,
-  imagePath,
 }: HeaderProps) => {
   return (
     <>
       {isLandscapeOrWide ? (
-        <BigHeader imagePath={imagePath} />
+        <BigHeader />
       ) : (
-        <SmallHeader
-          imagePath={imagePath}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+        <SmallHeader isOpen={isOpen} setIsOpen={setIsOpen} />
       )}
     </>
   );
