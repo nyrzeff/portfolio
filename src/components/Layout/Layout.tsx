@@ -1,12 +1,9 @@
 import { type ReactNode, useState, useLayoutEffect } from "react";
 import { Header, SideMenu, Footer } from "@components";
+import { ScreenProvider } from "@/context/ScreenContext";
 import styles from "./Layout.module.scss";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLandscapeOrWide, setIsLandscapeOrWide] = useState(false);
 
@@ -30,13 +27,9 @@ export const Layout = ({ children }: LayoutProps) => {
   }, []);
 
   return (
-    <>
+    <ScreenProvider isLandscapeOrWide={isLandscapeOrWide}>
       <div className={styles["layout-wrapper"]}>
-        <Header
-          isLandscapeOrWide={isLandscapeOrWide}
-          isOpen={menuOpen}
-          setIsOpen={setMenuOpen}
-        />
+        <Header isOpen={menuOpen} setIsOpen={setMenuOpen} />
         {!isLandscapeOrWide && (
           <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />
         )}
@@ -47,8 +40,8 @@ export const Layout = ({ children }: LayoutProps) => {
           />
         )}
         <main className={styles["content"]}>{children}</main>
-        <Footer isLandscapeOrWide={isLandscapeOrWide} />
+        <Footer />
       </div>
-    </>
+    </ScreenProvider>
   );
 };
