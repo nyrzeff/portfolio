@@ -21,17 +21,13 @@ $color-background: #0f0f0f; // deep space black
 // fury
 $color-danger: #ef4444; // laser red
 
-// semantic roles
-$color-border: color.adjust($color-neutral, $lightness: 30%);
-$color-surface: color.adjust($color-background, $lightness: 5%);
+// useful defaults
 $color-background-gradient: radial-gradient(
   circle,
   color.adjust($color-background, $lightness: 5%),
   black
 );
 $color-default: color.adjust($color-neutral, $lightness: 10%);
-$color-warning: $color-danger;
-$color-link: color.adjust($color-hover, $lightness: -10%);
 $color-text: #ffffff;
 
 // sizes
