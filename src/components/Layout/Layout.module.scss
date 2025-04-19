@@ -10,7 +10,11 @@
   left: 0;
   height: 100dvh;
   width: 100vw;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+:global(html.menu-open) {
+  overflow: hidden;
 }
 
 .content {

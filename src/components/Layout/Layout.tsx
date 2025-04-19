@@ -1,4 +1,4 @@
-import { type ReactNode, useState, useLayoutEffect } from "react";
+import { type ReactNode, useState, useEffect, useLayoutEffect } from "react";
 import { Header, SideMenu, Footer } from "@components";
 import { ScreenProvider } from "@/context/ScreenContext";
 import styles from "./Layout.module.scss";
@@ -25,6 +25,15 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
       isWide.removeEventListener("change", updateState);
     };
   }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+
+    if (menuOpen) html.classList.add("menu-open");
+    else html.classList.remove("menu-open");
+
+    return () => html.classList.remove("menu-open");
+  }, [menuOpen]);
 
   return (
     <ScreenProvider isLandscapeOrWide={isLandscapeOrWide}>
