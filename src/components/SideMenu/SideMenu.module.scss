@@ -12,7 +12,7 @@
   position: fixed;
   top: -($header-height);
   right: -($side-menu-width);
-  background: rgba($color-surface, 0.5);
+  background: rgba($color-background, 0.95);
   backdrop-filter: blur(10px);
   padding: 0 1rem 0 3rem;
   z-index: 1;
