@@ -12,7 +12,7 @@
   position: fixed;
   top: -($header-height);
   right: -($side-menu-width);
-  background: rgba($color-surface,0.5);
+  background: rgba($color-surface, 0.5);
   backdrop-filter: blur(10px);
   padding: 0 1rem 0 3rem;
   z-index: 1;
@@ -32,7 +32,11 @@
   }
 
   ul li {
-    background: linear-gradient(to left, $color-default, color.adjust($color-default, $lightness: -10%));
+    background: linear-gradient(
+      to left,
+      $color-default,
+      color.adjust($color-default, $lightness: -10%)
+    );
     border-radius: 10px;
     padding: 1rem;
     margin-right: 1rem;
@@ -41,8 +45,20 @@
     cursor: pointer;
 
     &:hover {
-      background: linear-gradient(to left, $color-link, color.adjust($color-link, $lightness: -10%));
+      background: linear-gradient(
+        to left,
+        color.adjust($color-hover, $lightness: -30%),
+        $color-hover
+      );
       transform: scale(1.05);
+    }
+
+    &:last-child:hover {
+      background: linear-gradient(
+        to left,
+        color.adjust($color-primary, $lightness: -30%),
+        $color-primary
+      );
     }
   }
 
