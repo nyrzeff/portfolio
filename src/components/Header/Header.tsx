@@ -1,17 +1,18 @@
+import { useScreen } from "@/context/ScreenContext";
 import { BigHeader } from "./BigHeader";
 import { SmallHeader } from "./SmallHeader";
 
 interface HeaderProps {
-  isLandscapeOrWide: boolean;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  isLandscapeOrWide,
   isOpen,
   setIsOpen,
 }: HeaderProps) => {
+  const { isLandscapeOrWide } = useScreen();
+
   return (
     <>
       {isLandscapeOrWide ? (

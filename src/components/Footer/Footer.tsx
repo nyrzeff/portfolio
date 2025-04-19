@@ -1,13 +1,10 @@
+import { useScreen } from "@/context/ScreenContext";
 import { icons } from "@assets/icons";
 import styles from "./Footer.module.scss";
 
-interface FooterProps {
-  isLandscapeOrWide: boolean;
-}
+export const Footer: React.FC = () => {
+  const { isLandscapeOrWide } = useScreen();
 
-export const Footer: React.FC<FooterProps> = ({
-  isLandscapeOrWide,
-}): FooterProps => {
   const getUtcOffset = () => {
     const options = {
       timeZone: "Europe/Lisbon",
