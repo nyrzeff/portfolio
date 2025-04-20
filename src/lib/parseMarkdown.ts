@@ -2,7 +2,9 @@ import { type GrayMatterFile, default as matter } from "gray-matter";
 import type { MarkdownFile } from "@/types/markdown";
 
 export const parseMarkdown = (raw: string): MarkdownFile => {
-  const { data: frontmatter, content } = matter(raw);
+  const { data, content } = matter(raw);
+  const frontmatter = data as Frontmatter;
+
   return {
     frontmatter,
     content,
@@ -11,8 +13,8 @@ export const parseMarkdown = (raw: string): MarkdownFile => {
 
 // all .md files are inside the same directory anyway,
 // so no problem in setting a static path
-export const parseMarkdownFromDir = async (): MarkdownFile[] => {
-  const modules = import.meta.glob("/src/content/*.md", {
+export const parseMarkdownFromDir = async (): Promise<MarkdownFile[]> => {
+  const modules = import.meta.glob("/src/content/projects/*.md", {
     query: "?raw",
     import: "default",
   });
