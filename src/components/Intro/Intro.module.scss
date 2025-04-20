@@ -143,6 +143,12 @@ section {
   height: 100%;
   padding: 1rem;
   font-size: 1.3em;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   h1 {
     border-radius: 0;
@@ -219,7 +225,7 @@ section {
     footer {
       grid-row: 2;
       grid-column: 2;
-      gap: 1rem;
+      gap: 3px;
 
       width: fit-content;
       height: 100%;
