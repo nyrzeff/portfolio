@@ -23,6 +23,12 @@ export const Intro: React.FC = () => {
             <span>
               Pseudonym: <strong>Nyrzeff</strong>
             </span>
+            <q className={styles["message"]}>
+              <em>
+                Code to save, protect, secure, prevent, anticipate, nullify,
+                maximize, enhance, increase, evolve
+              </em>
+            </q>
             <p>
               Fullstack web dev / software engineer
               {"\n"}

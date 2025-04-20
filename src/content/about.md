@@ -18,6 +18,8 @@ This section will be updated whenever I acquire new skills or improve existing o
 
 #### 💻 Development environment
 
+<br />
+
 - **Operating system:** Arch Linux
 - **Shell:** Bash
 - **Tiling window manager:** Sway
@@ -27,6 +29,8 @@ This section will be updated whenever I acquire new skills or improve existing o
 - **Version control:** git (with a custom alias + bare repo at $HOME)
 - **Package managers:** pacman, pnpm, cargo, pip, brew, flatpak
 - **Fonts:** Nimbus Sans, Monocraft, ComicMono (😁)
+
+<br />
 
 #### 📝 Skill table
 
