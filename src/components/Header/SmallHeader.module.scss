@@ -26,6 +26,15 @@
     }
   }
 
+  .header-message {
+    font-size: 7px;
+    color: $color-default;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
   .batatas-container {
     display: flex;
     flex-direction: row;
