@@ -1,7 +1,7 @@
 @use "../../styles/variables.scss" as *;
 @use "sass:color";
 
-article {
+section {
   margin: 3rem auto;
   width: 85dvw;
   height: 85dvh;
@@ -18,7 +18,6 @@ article {
   width: 100%;
   height: 100%;
   color: $color-text;
-  // box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   font-size: clamp(10px, 2vw + 5px, 20px);
   cursor: pointer;
 
@@ -27,10 +26,6 @@ article {
   transform-style: preserve-3d;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-
-  &:hover {
-    // border: 1px solid $color-primary;
-  }
 }
 
 .flipped {
@@ -111,11 +106,10 @@ article {
 }
 
 .back {
-  display: grid;
-  grid-template-rows: 3fr 1fr;
-  grid-template-columns: 1fr 1.5fr;
-  justify-content: start;
-  justify-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   overflow: hidden;
   z-index: 1;
@@ -139,42 +133,59 @@ article {
   }
 }
 
-// h1 {
-//   align-self: start;
-//   grid-row: 1;
-//   grid-column: 1;
+.about {
+  flex-grow: 1;
 
-//   font-weight: bold;
-//   color: $color-primary;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  font-size: 1.3em;
 
-//   background: rgba($color-background, 0.5);
-//   border-radius: 30px;
-//   padding: 1rem;
-// }
+  h1 {
+    border-radius: 0;
+    background: linear-gradient(
+      to right,
+      color.adjust($color-primary, $lightness: 20%),
+      color.adjust($color-primary, $lightness: -10%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-// .introduction {
-//   align-self: start;
-//   grid-row: 1;
-//   grid-column: 1;
-//   padding: 1rem 0;
+  h3 {
+    padding-top: clamp(1rem, 5vw, 3rem);
+  }
 
-//   white-space: pre-line;
+  h4 {
+    padding-top: clamp(0.7rem, 5vw, 2rem);
+  }
 
-//   p {
-//     // color: $color-primary;
+  table {
+    font-size: clamp(5px, 1vw + 1px, 15px);
 
-//     a {
-//       &:hover {
-//         color: red;
-//       }
-//     }
-//   }
-// }
+    // headers (vertical and horizontal, respectively)
+    th:first-child,
+    tr:first-child > th {
+      background: color.adjust($color-accent, $lightness: -10%);
+      border: 1px solid $color-accent;
+      font-weight: bold;
+    }
 
-// .description {
-//   align-self: center;
-//   grid-row: 2;
-//   grid-column: 1 / 3;
+    // hide the first cell
+    tr:first-of-type > th:first-of-type {
+      border: 0;
+      background: none;
+    }
 
-//   backdrop-filter: blur(10px);
-// }
+    th,
+    td {
+      border: 1px solid $color-accent;
+      border-radius: 10px;
+      padding: 0.2rem;
+      background-color: $color-neutral;
+    }
+  }
+}
