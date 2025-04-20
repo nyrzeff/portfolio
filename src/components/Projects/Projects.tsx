@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
-import { type GrayMatterFile, default as matter } from "gray-matter";
+import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
+import type { MarkdownFile } from "@/types/markdown";
 import { Card } from "@components";
 
-interface Frontmatter {
-  id: string;
-  title: string;
-  subtitle: string;
-  tags: string[];
-  stack: string[];
-}
-
-interface Project {
-  frontmatter: Frontmatter;
-  content: string;
+export interface Project extends MarkdownFile {
   images: string[];
 }
 
@@ -32,23 +23,12 @@ const getProjectImages = async (projectId: string): Promise<string[]> => {
 };
 
 const importProjects = async () => {
-  const modules = import.meta.glob("/src/content/*.md", {
-    query: "?raw",
-    import: "default",
-  });
+  const files = await parseMarkdownFromDir();
 
   const projects = await Promise.all(
-    Object.entries(modules).map(async ([, loader]) => {
-      const rawContent = (await loader()) as GrayMatterFile<string>;
-      const { data, content } = matter(rawContent);
-      const frontmatter = data as Frontmatter;
-      const images = await getProjectImages(frontmatter.id);
-
-      return {
-        frontmatter,
-        content,
-        images,
-      };
+    files.map(async (file) => {
+      const images = await getProjectImages(file.frontmatter.id);
+      return { ...file, images };
     }),
   );
 
