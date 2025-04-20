@@ -1,11 +1,14 @@
 // import { useScreen } from "@/context/ScreenContext";
+import Markdown from "react-markdown";
+import about from "@/content/about.md?raw";
+import rehypeRaw from "rehype-raw";
 import styles from "./Intro.module.scss";
 
 export const Intro: React.FC = () => {
   // const { isLandscapeOrWide } = useScreen();
 
   return (
-    <article>
+    <section>
       <div
         className={styles["card"]}
         onClick={(e) =>
@@ -28,17 +31,11 @@ export const Intro: React.FC = () => {
           </footer>
         </div>
         <div className={`${styles["back"]} ${styles["face"]}`}>
-          <article className={styles["description"]}>
-            <p>
-              What thrills me? Just imagine building 1000 projects. More than
-              1000 projects. Thousands upon thousands of commits and
-              contributions! Robust, scalable, extensible, maintainable,
-              beneficial tools and systems for everyone! Undeniable mastery of
-              the science, art and craft of software design and development!
-            </p>
+          <article className={styles["about"]}>
+            <Markdown rehypePlugins={[rehypeRaw]}>{about}</Markdown>
           </article>
         </div>
       </div>
-    </article>
+    </section>
   );
 };
