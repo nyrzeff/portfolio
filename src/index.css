@@ -1,4 +1,4 @@
-/* truly global resets and styles must be put here, not in Layout.tsx */
+/* truly global resets and styles must be put here, not in Layout.module.scss */
 * {
   margin: 0;
   padding: 0;
