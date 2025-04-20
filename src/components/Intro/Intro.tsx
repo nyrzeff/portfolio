@@ -1,12 +1,9 @@
-// import { useScreen } from "@/context/ScreenContext";
 import Markdown from "react-markdown";
 import about from "@/content/about.md?raw";
 import rehypeRaw from "rehype-raw";
 import styles from "./Intro.module.scss";
 
 export const Intro: React.FC = () => {
-  // const { isLandscapeOrWide } = useScreen();
-
   return (
     <section>
       <div
