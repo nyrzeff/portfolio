@@ -1,32 +1,14 @@
 @use "sass:color";
 
-// mastery
-$color-primary: #3a86ff; // electric blue
-
-// technology
-$color-secondary: #b6ff00; // lime plasma
-
-// creativity
-$color-accent: #2de2e6; // neon teal
-
-// humanity
-$color-hover: #a16ae8; // iridescent violet
-
-// rationality
-$color-neutral: #1e1e1e; // graphite gray
-
-// curiosity
-$color-background: #0f0f0f; // deep space black
-
-// fury
-$color-danger: #ef4444; // laser red
+$color-primary: #3a86ff;      // mastery: electric blue
+$color-secondary: #2de2e6;    // creativity: neon teal
+$color-accent: #b6ff00;       // technology: lime plasma
+$color-hover: #a16ae8;        // humanity: iridescent violet
+$color-neutral: #1e1e1e;      // rationality: graphite gray
+$color-background: #0f0f0f;   // curiosity: deep space black
+$color-danger: #ef4444;       // fury: laser red
 
 // useful defaults
-$color-background-gradient: radial-gradient(
-  circle,
-  color.adjust($color-background, $lightness: 5%),
-  black
-);
 $color-default: color.adjust($color-neutral, $lightness: 10%);
 $color-text: #ffffff;
 
