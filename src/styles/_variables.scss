@@ -1,15 +1,15 @@
 @use "sass:color";
 
-$color-primary: #3a86ff;      // mastery: electric blue
-$color-secondary: #2de2e6;    // creativity: neon teal
-$color-accent: #b6ff00;       // technology: lime plasma
-$color-hover: #a16ae8;        // humanity: iridescent violet
-$color-neutral: #1e1e1e;      // rationality: graphite gray
-$color-background: #0f0f0f;   // curiosity: deep space black
-$color-danger: #ef4444;       // fury: laser red
+$color-core: #4d94ff;
+$color-highlight: #2de2e6;
+$color-interaction: #ff4d94;
+$color-spark: #94ff4d;
+$color-base: #1e1e1e;
+$color-canvas: #0f0f0f;
+$color-critical: #ef4444;
 
 // useful defaults
-$color-default: color.adjust($color-neutral, $lightness: 10%);
+$color-default: color.adjust($color-base, $lightness: 10%);
 $color-text: #ffffff;
 
 // sizes

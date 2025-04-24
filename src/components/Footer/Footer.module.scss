@@ -58,7 +58,7 @@ footer {
           font-size: 13px;
 
           strong {
-            color: $color-accent;
+            color: $color-spark;
           }
         }
       }
@@ -138,7 +138,7 @@ footer {
   .line {
     flex-grow: 1;
     height: 1px;
-    background-color: $color-neutral;
+    background-color: $color-base;
   }
 
   & > svg {
@@ -146,7 +146,7 @@ footer {
     height: auto;
     flex-shrink: 0;
 
-    $eye-color: $color-neutral;
+    $eye-color: $color-base;
 
     path {
       stroke: $eye-color;
@@ -161,10 +161,10 @@ footer {
 .footer-simple-divider {
   width: 85dvw;
   height: 1px;
-  background-color: $color-danger;
+  background-color: $color-critical;
 
   &:first-of-type {
-    background-color: $color-neutral;
+    background-color: $color-base;
   }
 
   &:nth-child(2) {
