@@ -41,8 +41,8 @@
     height: auto;
     background: linear-gradient(
       to top,
-      $color-background,
-      color.adjust($color-background, $lightness: -50%)
+      $color-canvas,
+      color.adjust($color-canvas, $lightness: -50%)
     );
 
     & > a {
@@ -51,7 +51,7 @@
       font-size: clamp(1rem, 1.5vw, 2rem);
 
       &:hover {
-        color: $color-hover;
+        color: $color-interaction;
       }
     }
   }

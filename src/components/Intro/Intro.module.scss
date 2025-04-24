@@ -50,7 +50,7 @@ section {
   text-align: center;
 
   background:
-    linear-gradient(rgba($color-primary, 0.1), rgba($color-primary, 0.3)),
+    linear-gradient(rgba($color-core, 0.1), rgba($color-core, 0.3)),
     url("../../assets/images/me.png");
   background-size: cover;
   background-position: left;
@@ -65,7 +65,7 @@ section {
     gap: 0;
 
     padding: 1rem;
-    background: rgba($color-background, 0.6);
+    background: rgba($color-canvas, 0.6);
     backdrop-filter: blur(10px);
 
     > span,
@@ -80,22 +80,22 @@ section {
         white-space: nowrap;
         background: linear-gradient(
           to right,
-          color.adjust($color-primary, $lightness: 10%),
-          color.adjust($color-primary, $lightness: -10%)
+          color.adjust($color-core, $lightness: 10%),
+          color.adjust($color-core, $lightness: -10%)
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
 
       em {
-        color: $color-primary;
+        color: $color-core;
       }
     }
 
     span:first-of-type {
       white-space: nowrap;
       font-size: 1.3em;
-      border-bottom: 1px solid rgba($color-primary, 0.3);
+      border-bottom: 1px solid rgba($color-core, 0.3);
       border-radius: 0;
       width: 85%;
       text-align: center;
@@ -122,7 +122,7 @@ section {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(45deg, $color-neutral, $color-background);
+    background: linear-gradient(45deg, $color-base, $color-canvas);
 
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
@@ -153,8 +153,8 @@ section {
     border-radius: 0;
     background: linear-gradient(
       to right,
-      color.adjust($color-primary, $lightness: 20%),
-      color.adjust($color-primary, $lightness: -10%)
+      color.adjust($color-core, $lightness: 20%),
+      color.adjust($color-core, $lightness: -10%)
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -174,8 +174,8 @@ section {
     // headers (vertical and horizontal, respectively)
     th:first-child,
     tr:first-child > th {
-      background: color.adjust($color-secondary, $lightness: -10%);
-      border: 1px solid $color-secondary;
+      background: color.adjust($color-highlight, $lightness: -10%);
+      border: 1px solid $color-highlight;
       font-weight: bold;
       font-size: 1.5em;
     }
@@ -188,10 +188,10 @@ section {
 
     th,
     td {
-      border: 1px solid $color-secondary;
+      border: 1px solid $color-highlight;
       border-radius: 10px;
       padding: 0.2rem;
-      background-color: $color-neutral;
+      background-color: $color-base;
     }
   }
 }
@@ -213,8 +213,8 @@ section {
     background:
       radial-gradient(
         circle,
-        rgba($color-primary, 0.3),
-        rgba($color-background, 0.9)
+        rgba($color-core, 0.3),
+        rgba($color-canvas, 0.9)
       ),
       url("../../assets/images/me.png");
     background-size: cover;
@@ -228,7 +228,7 @@ section {
 
       width: fit-content;
       height: 100%;
-      background: rgba($color-background, 0);
+      background: rgba($color-canvas, 0);
       backdrop-filter: blur(30px);
 
       > span * {

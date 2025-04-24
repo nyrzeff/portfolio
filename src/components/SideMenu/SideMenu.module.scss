@@ -12,7 +12,7 @@
   position: fixed;
   top: -($header-height);
   right: -($side-menu-width);
-  background: rgba($color-background, 0.95);
+  background: rgba($color-canvas, 0.95);
   backdrop-filter: blur(10px);
   padding: 0 1rem 0 3rem;
   z-index: 1;
@@ -47,8 +47,8 @@
     &:hover {
       background: linear-gradient(
         to left,
-        color.adjust($color-hover, $lightness: -30%),
-        $color-hover
+        color.adjust($color-interaction, $lightness: -30%),
+        $color-interaction
       );
       transform: scale(1.05);
     }
@@ -56,8 +56,8 @@
     &:last-child:hover {
       background: linear-gradient(
         to left,
-        color.adjust($color-primary, $lightness: -30%),
-        $color-primary
+        color.adjust($color-core, $lightness: -30%),
+        $color-core
       );
     }
   }
