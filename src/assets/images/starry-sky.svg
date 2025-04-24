@@ -6,10 +6,10 @@
       numOctaves="2"
       stitchTiles="stitch"
     />
-    <feColorMatrix values="0 0 0 9 -6 
+    <feColorMatrix values="0 0 0 9 -6
                            0 0 0 9 -6
                            0 0 0 9 -6
-                           0 0 0 0 1" 
+                           0 0 0 0 1"
     />
     <feBlend mode="screen" />
   </filter>
