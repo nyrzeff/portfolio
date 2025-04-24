@@ -19,8 +19,8 @@
     aspect-ratio: 5 / 1;
     background: linear-gradient(
       to bottom right,
-      rgba($color-default, 0.8),
-      rgba(color.adjust($color-default, $lightness: 30%), 0.8)
+      $color-default,
+      color.adjust($color-default, $lightness: 30%),
     );
 
     .hero-image {
