@@ -17,12 +17,6 @@ export const SmallHeader: ReactFC<SmallHeaderProps> = ({
       <a href="#" className={styles["hero-image-container"]}>
         <Eye alt="Eye of Nyrzeff" className={styles["hero-image"]} />
       </a>
-      <q className={styles["message"]}>
-        <em>
-          Code to save, protect, secure, prevent, anticipate, nullify, maximize,
-          enhance, increase, evolve
-        </em>
-      </q>
       <div className={styles["batatas-container"]}>
         <button
           className={`${styles["batatas"]} ${isOpen ? styles["open"] : ""}`}
