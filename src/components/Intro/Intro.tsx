@@ -5,7 +5,7 @@ import styles from "./Intro.module.scss";
 
 export const Intro: React.FC = () => {
   return (
-    <section>
+    <section className={styles["intro-section"]}>
       <div
         className={styles["card"]}
         onClick={(e) =>
