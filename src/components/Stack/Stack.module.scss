@@ -2,12 +2,27 @@
 @use "sass:color";
 
 #stack {
+  background: linear-gradient(137deg,
+      $color-canvas 30%,
+      rgba($color-core, 0.1),
+      rgba($color-highlight, 0.1),
+      $color-canvas 70%);
   color: $color-text;
   height: fit-content;
+  max-height: 70vh;
   width: 85dvw;
   margin: 3rem auto;
   padding: 1rem;
   border-radius: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .stack-list {
@@ -18,9 +33,16 @@
   align-items: center;
   gap: 30px;
 
-  padding: 1rem;
+  padding: 1rem 0;
+  overflow-y: visible;
 
   i {
     padding-right: 0.5rem;
+  }
+}
+
+@media (orientation: landscape) or (min-width: 768px) {
+  #stack {
+    width: 70dvw;
   }
 }

@@ -3,14 +3,17 @@ import styles from "./Stack.module.scss";
 
 export const Stack: React.FC = () => {
   return (
-    <section id={styles["stack"]}>
+    <section
+      tabIndex={0}
+      id={styles["stack"]}
+    >
       <h2>Stack (languages, libraries, frameworks, tools)</h2>
-      <p>These are some of the technologies I've worked with, hover over them to see my current level of experience on each of them:</p>
+      <p>These are some of the technologies I've worked with, tap / hover over them for more information:</p>
       <ul className={styles["stack-list"]}>
         {Object.entries(devicons).map((item, index) => (
           <li key={index}>
             <i className={item[1]}></i>
-            <span>{item[0]}</span>
+            <span><b>{item[0]}</b></span>
           </li>
         ))}
       </ul>
