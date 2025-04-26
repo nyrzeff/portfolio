@@ -1,10 +1,10 @@
 @use "../../styles/variables.scss" as *;
 @use "sass:color";
 
-.intro-section {
+#intro {
   margin: 3rem auto;
   width: 85dvw;
-  height: 85dvh;
+  height: 85vh;
 
   &,
   & * {

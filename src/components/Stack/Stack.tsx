@@ -3,7 +3,7 @@ import styles from "./Stack.module.scss";
 
 export const Stack: React.FC = () => {
   return (
-    <section className={styles["stack-section"]}>
+    <section id={styles["stack"]}>
       <h2>Stack (languages, libraries, frameworks, tools)</h2>
       <p>These are some of the technologies I've worked with, hover over them to see my current level of experience on each of them:</p>
       <ul className={styles["stack-list"]}>
