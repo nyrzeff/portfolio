@@ -1,0 +1,27 @@
+@use "../../styles/variables" as *;
+@use "sass:color";
+
+.stack-section {
+  background: $color-canvas;
+  color: $color-text;
+  height: fit-content;
+  width: 85dvw;
+  margin: 3rem auto;
+  padding: 1rem;
+  border-radius: 30px;
+}
+
+.stack-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  padding: 1rem;
+
+  i {
+    padding-right: 0.5rem;
+  }
+}
