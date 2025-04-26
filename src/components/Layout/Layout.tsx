@@ -12,7 +12,7 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
     const isWide = window.matchMedia("(min-width: 768px)");
 
     const updateState = () => {
-      setIsLandscapeOrWide(isLandscape.matches || isWide.matches);
+      setIsLandscapeOrWide(isLandscape.matches && isWide.matches);
     };
 
     updateState();
@@ -39,9 +39,7 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
     <ScreenProvider isLandscapeOrWide={isLandscapeOrWide}>
       <div className={styles["layout-wrapper"]}>
         <Header isOpen={menuOpen} setIsOpen={setMenuOpen} />
-        {!isLandscapeOrWide && (
-          <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />
-        )}
+        <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />
         {menuOpen && (
           <div
             className={styles["overlay"]}

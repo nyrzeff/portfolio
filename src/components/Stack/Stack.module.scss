@@ -17,6 +17,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 
@@ -33,7 +34,7 @@
   align-items: center;
   gap: 30px;
 
-  padding: 1rem 0;
+  padding: 1rem;
   overflow-y: visible;
 
   i {
@@ -41,8 +42,14 @@
   }
 }
 
-@media (orientation: landscape) or (min-width: 768px) {
+@media (orientation: landscape) and (min-width: 768px) {
   #stack {
     width: 70dvw;
+    font-size: clamp(1rem, 5vw + 5px, 1.5rem);
+  }
+
+  .stack-list {
+    padding: 3rem;
+    gap: 50px;
   }
 }

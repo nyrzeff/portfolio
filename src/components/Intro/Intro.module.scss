@@ -199,7 +199,7 @@
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (min-width: 768px) {
   #intro {
     width: 70dvw;
     height: 70dvh;
