@@ -1,8 +1,7 @@
 @use "../../styles/variables" as *;
 @use "sass:color";
 
-.stack-section {
-  background: $color-canvas;
+#stack {
   color: $color-text;
   height: fit-content;
   width: 85dvw;

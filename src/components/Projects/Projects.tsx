@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
 import type { MarkdownFile } from "@/types/markdown";
 import { Card } from "@components";
+import styles from "./Projects.module.scss";
 
 export interface Project extends MarkdownFile {
   images: string[];
@@ -49,7 +50,7 @@ export const Projects: React.FC = () => {
   if (!projects) return <p>Loading...</p>;
 
   return (
-    <div>
+    <section id={styles["projects"]}>
       {projects.map((project) => (
         <Card
           key={project.frontmatter.id}
@@ -59,6 +60,6 @@ export const Projects: React.FC = () => {
           images={project.images}
         />
       ))}
-    </div>
+    </section>
   );
 };
