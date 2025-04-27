@@ -8,7 +8,7 @@ export const Stack: React.FC = () => {
       id={styles["stack"]}
     >
       <h2>Stack (languages, libraries, frameworks, tools)</h2>
-      <p>These are some of the technologies I've worked with, tap / hover over them for more information:</p>
+      <p>These are some of the technologies I've worked with:</p>
       <ul className={styles["stack-list"]}>
         {Object.entries(devicons).map((item, index) => (
           <li key={index}>
