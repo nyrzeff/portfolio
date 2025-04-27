@@ -8,8 +8,6 @@ interface SideMenuProps {
 export const SideMenu = ({ isOpen, setIsOpen }: SideMenuProps) => {
   const closeMenu = () => setIsOpen(false);
 
-  console.log(`Is open? ${isOpen}`);
-
   return (
     <aside className={`${styles["side-menu"]} ${isOpen ? styles["open"] : ""}`}>
       <ul>
