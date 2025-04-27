@@ -1,4 +1,4 @@
-import { ImageGallery } from "@components";
+import { ImageGallery } from "@components/projects";
 import Markdown from "react-markdown";
 import styles from "./Card.module.scss";
 

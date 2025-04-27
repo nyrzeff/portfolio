@@ -1,10 +1,5 @@
-export { Layout } from "./Layout";
-export { Header } from "./Header";
-export { SideMenu } from "./SideMenu";
+export { Layout } from "./layout";
 export { Intro } from "./Intro";
 export { Stack } from "./Stack";
-export { Projects } from "./Projects";
-export { Card } from "./Card";
-export { ImageGallery } from "./ImageGallery";
+export { Projects } from "./projects";
 export { Contact } from "./Contact";
-export { Footer } from "./Footer";

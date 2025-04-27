@@ -1,4 +1,4 @@
-@use "../../styles/variables" as *;
+@use "../../../styles/variables" as *;
 @use "sass:color";
 
 .side-menu {
@@ -32,11 +32,9 @@
   }
 
   ul li {
-    background: linear-gradient(
-      to left,
-      $color-default,
-      color.adjust($color-default, $lightness: -10%)
-    );
+    background: linear-gradient(to left,
+        $color-default,
+        color.adjust($color-default, $lightness: -10%));
     border-radius: 10px;
     padding: 1rem;
     margin-right: 1rem;
@@ -45,20 +43,16 @@
     cursor: pointer;
 
     &:hover {
-      background: linear-gradient(
-        to left,
-        color.adjust($color-interaction, $lightness: -30%),
-        $color-interaction
-      );
+      background: linear-gradient(to left,
+          color.adjust($color-interaction, $lightness: -30%),
+          $color-interaction );
       transform: scale(1.05);
     }
 
     &:last-child:hover {
-      background: linear-gradient(
-        to left,
-        color.adjust($color-core, $lightness: -30%),
-        $color-core
-      );
+      background: linear-gradient(to left,
+          color.adjust($color-core, $lightness: -30%),
+          $color-core );
     }
   }
 
