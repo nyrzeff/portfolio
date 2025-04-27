@@ -3,7 +3,7 @@ import { icons } from "@assets/icons";
 import styles from "./Footer.module.scss";
 
 export const Footer: React.FC = () => {
-  const { isLandscapeOrWide } = useScreen();
+  const { isDesktopExperience } = useScreen();
 
   const getUtcOffset = () => {
     const options = {
@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={styles["footer"]}>
-      {!isLandscapeOrWide && (
+      {!isDesktopExperience && (
         <div className={styles["footer-fancy-divider"]}>
           <div className={styles["line"]}></div>
           <Eye alt="Eye of Nyrzeff" />

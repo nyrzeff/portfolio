@@ -5,23 +5,35 @@ import styles from "./Layout.module.scss";
 
 export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLandscapeOrWide, setIsLandscapeOrWide] = useState(false);
+  const [isTouchscreen, setIsTouchscreen] = useState(false);
+  const [isDesktopExperience, setIsDesktopExperience] = useState(false);
 
-  useLayoutEffect(() => {
-    const isLandscape = window.matchMedia("(orientation: landscape)");
-    const isWide = window.matchMedia("(min-width: 768px)");
+  useEffect(() => {
+    const onFirstTouch = () => {
+      setIsTouchscreen(true);
+      window.removeEventListener("touchstart", onFirstTouch);
+    };
+
+    window.addEventListener("touchstart", onFirstTouch);
+
+    return () => {
+      window.removeEventListener("touchstart", onFirstTouch);
+    };
+  }, []);
+
+  useEffect(() => {
+    const isTouch = isTouchscreen || window.matchMedia(`(pointer: coarse)`).matches || "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isWide = window.matchMedia(`(min-width: 768px)`);
 
     const updateState = () => {
-      setIsLandscapeOrWide(isLandscape.matches && isWide.matches);
+      setIsDesktopExperience(isWide.matches && !isTouch);
     };
 
     updateState();
 
-    isLandscape.addEventListener("change", updateState);
     isWide.addEventListener("change", updateState);
 
     return () => {
-      isLandscape.removeEventListener("change", updateState);
       isWide.removeEventListener("change", updateState);
     };
   }, []);
@@ -36,7 +48,7 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [menuOpen]);
 
   return (
-    <ScreenProvider isLandscapeOrWide={isLandscapeOrWide}>
+    <ScreenProvider isDesktopExperience={isDesktopExperience}>
       <div className={styles["layout-wrapper"]}>
         <Header isOpen={menuOpen} setIsOpen={setMenuOpen} />
         <SideMenu isOpen={menuOpen} setIsOpen={setMenuOpen} />

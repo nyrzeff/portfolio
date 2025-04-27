@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 interface ScreenContext {
-  isLandscapeOrWide: boolean;
+  isDesktopExperience: boolean;
 }
 
 const ScreenContext = createContext<ScreenContextType | undefined>(undefined);
@@ -13,10 +13,10 @@ export const useScreen = () => {
 };
 
 export const ScreenProvider: React.FC<{
-  isLandscapeOrWide: boolean;
+  isDesktopExperience: boolean;
   children: ReactNode;
-}> = ({ isLandscapeOrWide, children }) => (
-  <ScreenContext.Provider value={{ isLandscapeOrWide }}>
+}> = ({ isDesktopExperience, children }) => (
+  <ScreenContext.Provider value={{ isDesktopExperience }}>
     {children}
   </ScreenContext.Provider>
 );
