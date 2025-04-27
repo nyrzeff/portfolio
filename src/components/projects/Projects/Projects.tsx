@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
 import type { MarkdownFile } from "@/types/markdown";
-import { Card } from "@components";
+import { Card } from "@components/projects";
 import styles from "./Projects.module.scss";
 
 export interface Project extends MarkdownFile {

@@ -1,5 +1,5 @@
 import { type ReactNode, useState, useEffect, useLayoutEffect } from "react";
-import { Header, SideMenu, Footer } from "@components";
+import { Header, SideMenu, Footer } from "@components/layout";
 import { ScreenProvider } from "@/context/ScreenContext";
 import styles from "./Layout.module.scss";
 
