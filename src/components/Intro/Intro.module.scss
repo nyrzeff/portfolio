@@ -51,7 +51,7 @@
 
   background:
     linear-gradient(rgba($color-core, 0.1), rgba($color-core, 0.3)),
-    url("../../assets/images/me.png");
+    url("/src/assets/images/me.png");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
@@ -213,7 +213,7 @@
       radial-gradient(circle,
         rgba($color-core, 0.3),
         rgba($color-canvas, 0.9)),
-      url("../../assets/images/me.png");
+      url("/src/assets/images/me.png");
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
