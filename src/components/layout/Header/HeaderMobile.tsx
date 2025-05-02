@@ -1,21 +1,21 @@
 import { icons } from "@assets/icons";
 import styles from "./HeaderMobile.module.scss";
 
-interface HeaderMobile {
+interface HeaderMobileProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
-export const HeaderMobile: React.FC<HeaderMobile> = ({
+export const HeaderMobile: React.FC<HeaderMobileProps> = ({
   isOpen,
   setIsOpen,
-}: HeaderProps) => {
+}: HeaderMobileProps) => {
   const Eye = icons["eye"];
 
   return (
     <header className={styles["header"]}>
       <a href="#" className={styles["hero-image-container"]}>
-        <Eye alt="Eye of Nyrzeff" className={styles["hero-image"]} />
+        <Eye title="Eye of Nyrzeff" className={styles["hero-image"]} />
       </a>
       <div className={styles["batatas-container"]}>
         <button

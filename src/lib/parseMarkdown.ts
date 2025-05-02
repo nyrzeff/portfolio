@@ -1,5 +1,5 @@
 import { type GrayMatterFile, default as matter } from "gray-matter";
-import type { MarkdownFile } from "@/types/markdown";
+import type { Frontmatter, MarkdownFile } from "@/types/markdown";
 
 export const parseMarkdown = (raw: string): MarkdownFile => {
   const { data, content } = matter(raw);
