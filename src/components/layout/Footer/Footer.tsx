@@ -6,12 +6,11 @@ export const Footer: React.FC = () => {
   const { isDesktopExperience } = useScreen();
 
   const getUtcOffset = () => {
-    const options = {
+    const formatter = new Intl.DateTimeFormat("en-US", {
       timeZone: "Europe/Lisbon",
       timeZoneName: "shortOffset",
-    };
+    });
 
-    const formatter = new Intl.DateTimeFormat("en-US", options);
     const parts = formatter.formatToParts(new Date());
 
     return parts.find((p) => p.type === "timeZoneName")?.value || "GMT+0";
@@ -29,7 +28,7 @@ export const Footer: React.FC = () => {
       {!isDesktopExperience && (
         <div className={styles["footer-fancy-divider"]}>
           <div className={styles["line"]}></div>
-          <Eye alt="Eye of Nyrzeff" />
+          <Eye title="Eye of Nyrzeff" />
           <div className={styles["line"]}></div>
         </div>
       )}
@@ -37,7 +36,7 @@ export const Footer: React.FC = () => {
       <div className={styles["footer-main"]}>
         <div className={styles["footer-top"]}>
           <figure>
-            <Eye alt="Eye of Nyrzeff" />
+            <Eye title="Eye of Nyrzeff" />
             <div className={styles["caption-container"]}>
               <figcaption>
                 Pseudonym: <b>Nyrzeff</b>

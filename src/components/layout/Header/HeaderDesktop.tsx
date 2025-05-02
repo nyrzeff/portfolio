@@ -1,13 +1,13 @@
 import { icons } from "@assets/icons";
 import styles from "./HeaderDesktop.module.scss";
 
-export const HeaderDesktop: ReactFC = () => {
+export const HeaderDesktop = () => {
   const Eye = icons["eye"];
 
   return (
     <header className={styles["header-desktop"]}>
       <a href="#" className={styles["hero-image-container"]}>
-        <Eye alt="Eye of Nyrzeff" className={styles["hero-image"]} />
+        <Eye title="Eye of Nyrzeff" className={styles["hero-image"]} />
       </a>
       <div className={styles["nav-link-container"]}>
         <a href="#home">Home</a>
