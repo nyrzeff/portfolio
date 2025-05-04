@@ -27,3 +27,4 @@ dist-ssr
 .vimspector.json
 **/*scratchpad*
 tsconfig.tsbuildinfo
+.vercel

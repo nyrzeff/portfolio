@@ -74,7 +74,7 @@ textarea {
   font-size: 1em;
 }
 
-input[type="submit"] {
+button {
   background: linear-gradient(90deg, $color-core, $color-highlight);
   color: white;
   border: none;
@@ -85,7 +85,7 @@ input[type="submit"] {
   height: fit-content;
 }
 
-input[type="submit"]:hover {
+button:hover {
   background: linear-gradient(90deg, $color-interaction, $color-core);
   cursor: pointer;
 }
