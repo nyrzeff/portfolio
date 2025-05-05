@@ -9,6 +9,41 @@
   margin: 3rem auto;
   padding: 1rem;
   border-radius: 30px;
+
+  input[type="text"],
+  textarea {
+    background: $color-base;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    height: fit-content;
+    font-size: 1em;
+  }
+
+  textarea {
+    height: 100%;
+    resize: none;
+    font-size: 1em;
+  }
+
+  button {
+    background: linear-gradient(90deg, $color-core, $color-highlight);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    height: fit-content;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, $color-interaction, $color-core);
+    cursor: pointer;
+  }
 }
 
 .form {
@@ -53,41 +88,6 @@
     grid-area: send;
     margin-left: auto;
   }
-}
-
-input[type="text"],
-textarea {
-  background: $color-base;
-  color: white;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
-  height: fit-content;
-  font-size: 1em;
-}
-
-textarea {
-  height: 100%;
-  resize: none;
-  font-size: 1em;
-}
-
-button {
-  background: linear-gradient(90deg, $color-core, $color-highlight);
-  color: white;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  padding: 10px;
-  width: 100%;
-  height: fit-content;
-}
-
-button:hover {
-  background: linear-gradient(90deg, $color-interaction, $color-core);
-  cursor: pointer;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
