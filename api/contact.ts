@@ -1,4 +1,4 @@
-export default async function handler(request, response) {
+export default async function handler(request: Request) {
   if (request.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
