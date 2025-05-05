@@ -33,7 +33,7 @@ async function sendEmail(body: Body) {
 
   (async function () {
     const { data, error } = await resend.emails.send({
-      from: `${name} <${email}>`,
+      from: "contact@nyrzeff.dev",
       to: "nyghzef@keemail.me",
       subject: "Test",
       html: `${message}`,
