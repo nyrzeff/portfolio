@@ -44,7 +44,7 @@ export const Contact: React.FC = () => {
         return "Sent!";
         break;
       case "error":
-        return "Something went wrong";
+        return "Something went wrong!";
         break;
       default:
         return "Send";
@@ -53,44 +53,47 @@ export const Contact: React.FC = () => {
 
   return (
     <section id={styles["contact"]}>
-      <h2>Contact me!</h2>
+      <h2>Contact me</h2>
       <p>No need for formalities, whether you want to hire me, discuss a project/idea or simply talk, just drop a message below:</p>
       <form onSubmit={handleSubmit} className={styles["form"]}>
-        <label className={styles["name"]}>Name
+        <div className={styles["name-wrapper"]}>
+          <label>Name</label>
           <input
             name="name"
-            placeholder="Your name/username/handle"
+            placeholder="Your name"
             value={formData.name}
             onChange={handleChange}
             required
             type="text"
           />
-        </label>
-        <label className={styles["email"]}>Email
+        </div>
+        <div className={styles["email-wrapper"]}>
+          <label>Email</label>
           <input
             name="email"
-            placeholder="Your email"
+            placeholder="example@domain.com"
             value={formData.email}
             onChange={handleChange}
             required
             type="text"
           />
-        </label>
-        <label className={styles["message"]}>Message
+        </div>
+        <div className={styles["message-wrapper"]}>
+          <label>Message</label>
           <textarea
             name="message"
-            placeholder="Your message"
+            placeholder="Hey, are you interested in a project..."
             value={formData.message}
             onChange={handleChange}
             required
           />
-        </label>
+        </div>
         <button
           type="submit"
           value="Send"
-          className={styles["send"]}
+          className={`${styles["send"]} ${styles[status]}`}
         >
-          {setText(status)}
+          <strong>{setText(status)}</strong>
         </button>
       </form>
     </section>

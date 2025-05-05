@@ -9,6 +9,17 @@
   margin: 3rem auto;
   padding: 1rem;
   border-radius: 30px;
+  font-size: clamp(1rem, 5vw + 1px, 2rem);
+
+  label {
+    display: inline;
+    font-weight: bold;
+  }
+
+  label:after {
+    content: " *";
+    color: $color-critical;
+  }
 
   input[type="text"],
   textarea {
@@ -21,12 +32,20 @@
     width: 100%;
     height: fit-content;
     font-size: 1em;
+
+    &:focus {
+      outline: 1px solid $color-interaction;
+    }
+
+    &::placeholder {
+      font-style: italic;
+      opacity: 0.5;
+    }
   }
 
   textarea {
-    height: 100%;
+    height: 30vh;
     resize: none;
-    font-size: 1em;
   }
 
   button {
@@ -35,14 +54,33 @@
     border: none;
     outline: none;
     border-radius: 10px;
-    padding: 10px;
-    width: 100%;
+    padding: 10px 30px;
+    width: fit-content;
     height: fit-content;
-  }
+    transition: transform 0.1s ease;
+    font-size: 1em;
 
-  button:hover {
-    background: linear-gradient(90deg, $color-interaction, $color-core);
-    cursor: pointer;
+    &.sending {
+      background: linear-gradient(90deg, $color-highlight, $color-interaction);
+    }
+
+    &.success {
+      background: linear-gradient(90deg, $color-spark, $color-highlight);
+    }
+
+    &.error {
+      background: linear-gradient(90deg, $color-critical, $color-interaction);
+    }
+
+    &:hover {
+      box-shadow: 0 0 0.5rem 0.1rem $color-interaction;
+      transform: scale(1.03);
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 1px solid $color-interaction;
+    }
   }
 }
 
@@ -60,7 +98,7 @@
   width: 100%;
   height: 100%;
 
-  >label {
+  >div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,20 +106,16 @@
     gap: 3px 0;
   }
 
-  .name {
+  .name-wrapper {
     grid-area: name;
   }
 
-  .email {
+  .email-wrapper {
     grid-area: email;
   }
 
-  .message {
+  .message-wrapper {
     grid-area: message;
-
-    textarea {
-      align-self: stretch;
-    }
   }
 
   .send {
@@ -90,8 +124,23 @@
   }
 }
 
+@media (max-width: 768px) {
+  #contact {
+    font-size: clamp(0.5rem, 5vw + 1px, 1rem);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+  }
+}
+
 @media (orientation: landscape) and (min-width: 768px) {
   #contact {
     width: 70dvw;
+    font-size: clamp(1rem, 5vw + 5px, 1.5rem);
   }
 }
