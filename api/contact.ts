@@ -28,8 +28,8 @@ async function sendEmail(body: FormData) {
     to: "nyrghzef@keemail.me",
     subject: `New message from ${name}`,
     html: `
-      Name: ${name}
-      Email: ${email}
+      Name: ${name} <br />
+      Email: ${email} <br />
       Message: ${message}
     `,
   });
