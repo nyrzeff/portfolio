@@ -34,7 +34,7 @@ async function sendEmail(body: Body) {
   (async function () {
     const { data, error } = await resend.emails.send({
       from: "contact@nyrzeff.dev",
-      to: "nyghzef@keemail.me",
+      to: "nyrghzef@keemail.me",
       subject: "Test",
       html: `${message}`,
     });
