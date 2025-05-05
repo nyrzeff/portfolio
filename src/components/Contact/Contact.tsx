@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import type { FormData, FormStatus } from "@/types/contact";
 import styles from "./Contact.module.scss";
 
 export const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
 
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<FormStatus>("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,6 +33,22 @@ export const Contact: React.FC = () => {
       console.error(err);
       setStatus("error");
     }
+  };
+
+  const setText = (status: FormStatus) => {
+    switch(status) {
+      case "sending":
+        return "Sending...";
+        break;
+      case "success":
+        return "Sent!";
+        break;
+      case "error":
+        return "Something went wrong";
+        break;
+      default:
+        return "Send";
+    };
   };
 
   return (
@@ -73,10 +90,8 @@ export const Contact: React.FC = () => {
           value="Send"
           className={styles["send"]}
         >
-          {status === "sending" ? "Sending..." : "Send message"}
+          {setText(status)}
         </button>
-        {status === "success" && <p>Message sent!</p>}
-        {status === "error" && <p>Looks like something went wrong...</p>}
       </form>
     </section>
   );
