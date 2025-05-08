@@ -36,7 +36,7 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
     return () => {
       isWide.removeEventListener("change", updateState);
     };
-  }, []);
+  }, [isTouchscreen]);
 
   useEffect(() => {
     const html = document.documentElement;

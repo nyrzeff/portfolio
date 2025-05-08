@@ -1,16 +1,5 @@
-import { createContext, useContext, type ReactNode } from "react";
-
-interface ScreenContextType {
-  isDesktopExperience: boolean;
-}
-
-const ScreenContext = createContext<ScreenContextType | undefined>(undefined);
-
-export const useScreen = () => {
-  const context = useContext(ScreenContext);
-  if (!context) throw new Error("useScreen must be used within ScreenProvider");
-  return context;
-};
+import { type ReactNode } from "react";
+import { ScreenContext } from "@/types/screen";
 
 export const ScreenProvider: React.FC<{
   isDesktopExperience: boolean;

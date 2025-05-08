@@ -1,4 +1,4 @@
-import { useScreen } from "@/context/ScreenContext";
+import { useScreen } from "@/hooks/useScreen";
 import { icons } from "@assets/icons";
 import styles from "./Footer.module.scss";
 

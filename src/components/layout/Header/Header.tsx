@@ -1,4 +1,4 @@
-import { useScreen } from "@/context/ScreenContext";
+import { useScreen } from "@/hooks/useScreen";
 import { HeaderMobile } from "./HeaderMobile";
 import { HeaderDesktop } from "./HeaderDesktop";
 
