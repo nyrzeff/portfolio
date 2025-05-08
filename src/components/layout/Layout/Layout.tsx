@@ -22,7 +22,11 @@ export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const isTouch = isTouchscreen || window.matchMedia(`(pointer: coarse)`).matches || "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isTouch =
+      isTouchscreen ||
+      window.matchMedia(`(pointer: coarse)`).matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
     const isWide = window.matchMedia(`(min-width: 768px)`);
 
     const updateState = () => {

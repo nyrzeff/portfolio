@@ -68,7 +68,7 @@
     background: rgba($color-canvas, 0.6);
     backdrop-filter: blur(10px);
 
-    >span,
+    > span,
     p {
       white-space: pre-line;
       width: 100%;
@@ -76,9 +76,11 @@
 
       strong {
         white-space: nowrap;
-        background: linear-gradient(to right,
-            color.adjust($color-core, $lightness: 10%),
-            color.adjust($color-core, $lightness: -10%));
+        background: linear-gradient(
+          to right,
+          color.adjust($color-core, $lightness: 10%),
+          color.adjust($color-core, $lightness: -10%)
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -99,7 +101,6 @@
     }
 
     q {
-
       align-self: center;
 
       em {
@@ -156,9 +157,11 @@
 
   h1 {
     border-radius: 0;
-    background: linear-gradient(to right,
-        color.adjust($color-core, $lightness: 20%),
-        color.adjust($color-core, $lightness: -10%));
+    background: linear-gradient(
+      to right,
+      color.adjust($color-core, $lightness: 20%),
+      color.adjust($color-core, $lightness: -10%)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -176,7 +179,7 @@
 
     // headers (vertical and horizontal, respectively)
     th:first-child,
-    tr:first-child>th {
+    tr:first-child > th {
       background: color.adjust($color-highlight, $lightness: -10%);
       border: 1px solid $color-highlight;
       font-weight: bold;
@@ -184,7 +187,7 @@
     }
 
     // hide the first cell
-    tr:first-of-type>th:first-of-type {
+    tr:first-of-type > th:first-of-type {
       border: 0;
       background: none;
     }
@@ -210,9 +213,7 @@
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 70% 30%;
     background:
-      radial-gradient(circle,
-        rgba($color-core, 0.3),
-        rgba($color-canvas, 0.9)),
+      radial-gradient(circle, rgba($color-core, 0.3), rgba($color-canvas, 0.9)),
       url("/src/assets/images/me.png");
     background-size: cover;
     background-position: top;
@@ -227,7 +228,7 @@
       background: rgba($color-canvas, 0);
       backdrop-filter: blur(30px);
 
-      >span * {
+      > span * {
         white-space: normal;
       }
     }

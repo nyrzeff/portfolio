@@ -10,7 +10,13 @@ import reactHooks from "eslint-plugin-react-hooks";
 export default tseslint.config(
   { files: ["src/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"] },
   {
-    ignores: ["dist", "**/*scratchpad*", "eslint.config.*js", "vite.config.ts", "api"],
+    ignores: [
+      "dist",
+      "**/*scratchpad*",
+      "eslint.config.*js",
+      "vite.config.ts",
+      "api",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.strict,

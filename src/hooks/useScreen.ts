@@ -6,4 +6,3 @@ export const useScreen = () => {
   if (!context) throw new Error("useScreen must be used within ScreenProvider");
   return context;
 };
-

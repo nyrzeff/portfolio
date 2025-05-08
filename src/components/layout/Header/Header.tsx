@@ -17,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       {isDesktopExperience ? (
         <HeaderDesktop />
-      ): (
+      ) : (
         <HeaderMobile isOpen={isOpen} setIsOpen={setIsOpen} />
       )}
     </>

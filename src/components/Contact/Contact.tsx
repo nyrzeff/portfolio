@@ -11,11 +11,13 @@ export const Contact: React.FC = () => {
 
   const [status, setStatus] = useState<FormStatus>("idle");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
 
@@ -26,7 +28,7 @@ export const Contact: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      if(!res.ok) throw new Error("Failed to send message");
+      if (!res.ok) throw new Error("Failed to send message");
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
@@ -36,7 +38,7 @@ export const Contact: React.FC = () => {
   };
 
   const setText = (status: FormStatus) => {
-    switch(status) {
+    switch (status) {
       case "sending":
         return "Sending...";
         break;
@@ -48,13 +50,16 @@ export const Contact: React.FC = () => {
         break;
       default:
         return "Send";
-    };
+    }
   };
 
   return (
     <section id={styles["contact"]}>
       <h2>Contact me</h2>
-      <p>No need for formalities, whether you want to hire me, discuss a project/idea or simply talk, just drop a message below:</p>
+      <p>
+        No need for formalities, whether you want to hire me, discuss a
+        project/idea or simply talk, just drop a message below:
+      </p>
       <form onSubmit={handleSubmit} className={styles["form"]}>
         <div className={styles["name-wrapper"]}>
           <label>Name</label>

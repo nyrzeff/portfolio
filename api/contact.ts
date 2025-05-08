@@ -34,7 +34,7 @@ async function sendEmail(body: FormData) {
     `,
   });
 
-  if(error) {
+  if (error) {
     return console.error({ error });
   }
 

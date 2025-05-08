@@ -41,7 +41,7 @@
     height: auto;
     margin-left: auto;
 
-    &>a {
+    & > a {
       color: $color-text;
       font-weight: bold;
       font-size: clamp(0.5rem, 5vw + 0.5rem, 1rem);
