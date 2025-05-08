@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./ImageGallery.module.scss";
 
 interface ImageData {
@@ -6,15 +5,12 @@ interface ImageData {
 }
 
 export const ImageGallery: React.FC<ImageData> = ({ images }: ImageData) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
   return (
     <div className={styles["image-container"]}>
       {images.map((image, index) => (
         <div
           key={index}
           className={styles["image"]}
-          onClick={() => setSelectedImage(image)}
         >
           <img src={image ?? ""} alt={`Image ${index + 1}`} />
         </div>
