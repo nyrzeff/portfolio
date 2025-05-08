@@ -1,5 +1,21 @@
+@use "/src/styles/variables.scss" as *;
+@use "sass:color";
+
 #projects {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+
   width: 85dvw;
   margin: 3rem auto;
   border-radius: 30px;
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+  #projects {
+    width: 70dvw;
+  }
 }
