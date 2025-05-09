@@ -5,24 +5,27 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+
   width: auto;
-  height: $header-height;
+  height: 50px;
   padding: 0 1rem;
   z-index: 100;
+  font-size: 1rem;
 
   .hero-image-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+
     width: 50px;
-    height: inherit;
+    height: 50px;
 
     .hero-image {
+      align-self: center;
       width: auto;
       height: 80%;
       aspect-ratio: 1 / 1;
-      align-self: center;
     }
   }
 
@@ -31,6 +34,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+
     margin-left: auto;
 
     /* 🍟 */
@@ -39,6 +43,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+
       width: 2em;
       height: 1.5em;
       cursor: pointer;

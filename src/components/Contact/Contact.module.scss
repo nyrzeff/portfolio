@@ -4,12 +4,12 @@
 #contact {
   color: white;
   background: $color-canvas;
-  width: 85dvw;
+  width: 90dvw;
   height: fit-content;
   margin: 3rem auto;
-  padding: 1rem;
+  padding: 3rem;
   border-radius: 30px;
-  font-size: clamp(1rem, 5vw + 1px, 2rem);
+  font-size: 2em;
 
   label {
     display: inline;
@@ -93,12 +93,12 @@
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
   gap: 1rem;
-  padding: 1rem 0;
 
+  padding: 1rem 0;
   width: 100%;
   height: 100%;
 
-  > div {
+  >div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -125,10 +125,6 @@
 }
 
 @media (max-width: 768px) {
-  #contact {
-    font-size: clamp(0.5rem, 5vw + 1px, 1rem);
-  }
-
   .form {
     display: flex;
     flex-direction: column;
@@ -141,6 +137,5 @@
 @media (orientation: landscape) and (min-width: 768px) {
   #contact {
     width: 70dvw;
-    font-size: clamp(1rem, 5vw + 5px, 1.5rem);
   }
 }

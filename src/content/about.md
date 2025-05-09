@@ -2,11 +2,13 @@
 
 ### 🎯 Mission
 
+<br />
 What thrills me? Just imagine building 1000 projects...! More than 1000 projects!
 Thousands upon thousands of commits and contributions! Robust, scalable, extensible, maintainable, beneficial tools and systems for everyone! Undeniable mastery of the science, art and craft of software design and development!
 
 ### 👤 Identity
 
+<br />
 Mostly an autodidact, curious, methodical and obsessed with mastery. Guided by **_The Elemental Septet_** and focused on crafting software that promotes maxium benefit. Particularly enthusiastic about open-source software, data-driven systems, distributed networks and information security.
 
 <br />
@@ -14,6 +16,7 @@ In order to achieve my goal of becoming one of the greatest software engineers t
 
 ### ⚒️ Skills / stack
 
+<br />
 This section will be updated whenever I acquire new skills or improve existing ones. See more _below_.
 
 #### 💻 Development environment
@@ -33,6 +36,8 @@ This section will be updated whenever I acquire new skills or improve existing o
 <br />
 
 #### 📝 Skill table
+
+<br />
 
 <table>
     <tr>
@@ -88,6 +93,7 @@ This section will be updated whenever I acquire new skills or improve existing o
 
 ### ⚙️ Engineering approach
 
+<br />
 I chiefly care about secure coding, system architecture and software quality. Conventions, standards and best practices are essential, and must be evaluated when devising workflows.
 
 <br />
@@ -96,4 +102,5 @@ Designing with built-in security, using the right tool for the job and following
 
 ### 🎨 Interests / hobbies
 
+<br />
 When not designing and crafting software, I'm walking, reading, having conversations, working out, listening to music, playing electric guitar, learning about typology or studying Japanese. I also love various kinds of entertainment (including books, movies, anime and videogames), history, economic theory, financial literacy and self-care. Oh, and of course, coffee ☕ is indispensable to the software craftsperson (well, at least to this one here).

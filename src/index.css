@@ -6,17 +6,18 @@
   font-family: system-ui, sans-serif;
 }
 
+:root {
+  line-height: 1.5;
+  background-color: black;
+  font-size: clamp(0.1rem, 0.5vw + 0.3rem, 2rem);
+}
+
 html,
 body {
   min-height: 100vh;
   min-width: 100vw;
   margin: 0;
   overflow-x: hidden;
-}
-
-:root {
-  line-height: 1.5;
-  background-color: black;
 }
 
 ul {
