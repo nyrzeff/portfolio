@@ -6,59 +6,53 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+
   margin-top: 50px;
-  width: $side-menu-width;
-  height: 100vh;
+  width: 85dvw;
+  height: 100dvh;
+  font-size: 1rem;
+
   position: fixed;
-  top: -($header-height);
-  right: -($side-menu-width);
-  background: rgba($color-canvas, 0.95);
+  top: -(50px);
+  right: -(85dvw);
+
+  background: rgba($color-canvas, 0.9);
   backdrop-filter: blur(10px);
   padding: 0 1rem 0 3rem;
   z-index: 1;
   transition: transform 0.3s ease;
   transform: translateX(0);
-  overflow: visible;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+
     width: 100%;
     gap: 10px;
-    padding-top: $header-height;
+    padding-top: 50px;
     margin-top: 10px;
   }
 
   ul li {
-    background: linear-gradient(
-      to left,
-      $color-default,
-      color.adjust($color-default, $lightness: -10%)
-    );
+    background: linear-gradient(to left,
+        $color-core,
+        $color-highlight);
     border-radius: 10px;
     padding: 1rem;
     margin-right: 1rem;
     text-align: right;
     font-weight: bold;
+    font-size: 2em;
     cursor: pointer;
+    line-height: 3;
 
     &:hover {
-      background: linear-gradient(
-        to left,
-        color.adjust($color-interaction, $lightness: -30%),
-        $color-interaction
-      );
-      transform: scale(1.05);
-    }
-
-    &:last-child:hover {
-      background: linear-gradient(
-        to left,
-        color.adjust($color-core, $lightness: -30%),
-        $color-core
-      );
+      transform: scale(1.03);
+      cursor: pointer;
     }
   }
 

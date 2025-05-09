@@ -2,22 +2,21 @@
 @use "sass:color";
 
 #stack {
-  background: linear-gradient(
-    137deg,
-    $color-canvas 30%,
-    rgba($color-core, 0.1),
-    rgba($color-highlight, 0.1),
-    $color-canvas 70%
-  );
+  background: linear-gradient(137deg,
+      $color-canvas 30%,
+      rgba($color-core, 0.1),
+      rgba($color-highlight, 0.1),
+      $color-canvas 70%);
   color: $color-text;
   height: fit-content;
   max-height: 70vh;
-  width: 85dvw;
-  margin: 3rem auto;
+  width: 90dvw;
+  margin: 1rem auto;
   padding: 1rem;
   border-radius: 30px;
   overflow-y: auto;
   overflow-x: hidden;
+  font-size: 2rem;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -33,7 +32,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  margin-top: 1rem;
+  gap: 3rem;
 
   padding: 1rem;
   overflow-y: visible;
@@ -46,11 +46,9 @@
 @media (orientation: landscape) and (min-width: 768px) {
   #stack {
     width: 70dvw;
-    font-size: clamp(1rem, 5vw + 5px, 1.5rem);
   }
 
   .stack-list {
     padding: 3rem;
-    gap: 50px;
   }
 }

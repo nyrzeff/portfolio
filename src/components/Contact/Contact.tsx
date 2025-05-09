@@ -41,13 +41,10 @@ export const Contact: React.FC = () => {
     switch (status) {
       case "sending":
         return "Sending...";
-        break;
       case "success":
         return "Sent!";
-        break;
       case "error":
         return "Something went wrong!";
-        break;
       default:
         return "Send";
     }

@@ -1,14 +1,19 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
+$main-width: 70dvw;
+
 footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
+
+  background: black;
   width: 100dvw;
   padding: 0 5dvw;
+  font-size: 1.5rem;
 
   & * {
     color: $color-text;
@@ -21,7 +26,9 @@ footer {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+
   white-space: nowrap;
+  padding: 1rem 0;
 }
 
 .footer-top {
@@ -29,16 +36,16 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100dvw;
-  padding: 0 5dvw;
 
-  & > figure {
+  width: 100%;
+
+  &>figure {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    & > svg {
+    &>svg {
       width: 100px;
       height: 100px;
     }
@@ -48,15 +55,13 @@ footer {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       text-align: center;
 
-      & > figcaption {
-        font-size: 15px;
+      &>figcaption {
         white-space: pre-line;
 
-        & > em {
-          font-size: 13px;
-
+        &>em {
           strong {
             color: $color-spark;
           }
@@ -73,14 +78,13 @@ footer {
   justify-content: start;
   justify-items: start;
   align-items: start;
+
   width: 100%;
-  gap: clamp(3rem, 2vw + 1rem, 9rem);
-  font-size: clamp(0.5rem, 2vw + 0.3rem, 1rem);
+  gap: clamp(1rem, 5vw + 1rem, 5rem);
 
   h2 {
     color: color.adjust($color-default, $lightness: 50%);
-    font-size: clamp(1rem, 2vw + 0.3rem, 1.2rem);
-    font-weight: bold;
+    font-size: 1.5em;
   }
 
   & a,
@@ -91,28 +95,37 @@ footer {
   .nav-container {
     grid-row: 1;
     grid-column: 1;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(2, 1fr);
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    justify-items: start;
     align-items: center;
     gap: 1rem;
 
+    text-align: center;
+
     h2 {
-      grid-row: 1;
-      grid-column: 1 / 3;
+      width: 100%;
     }
   }
 
   .social-container {
     grid-row: 1;
     grid-column: 2;
+
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 1rem;
+
+    text-align: center;
+
+    h2 {
+      width: 100%;
+    }
   }
 }
 
@@ -124,8 +137,12 @@ footer {
   flex-wrap: nowrap;
   gap: 5px;
 
-  & > svg {
+  font-size: 1.25em;
+
+  &>svg {
     flex-shrink: 0;
+    width: 1em;
+    height: 1em;
   }
 }
 
@@ -133,7 +150,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 85dvw;
+  width: 90dvw;
 
   .line {
     flex-grow: 1;
@@ -141,9 +158,9 @@ footer {
     background-color: $color-base;
   }
 
-  & > svg {
-    width: 24px;
-    height: auto;
+  &>svg {
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
 
     $eye-color: $color-base;
@@ -159,7 +176,7 @@ footer {
 }
 
 .footer-simple-divider {
-  width: 85dvw;
+  width: 90dvw;
   height: 1px;
   background-color: $color-critical;
 
@@ -178,14 +195,15 @@ footer {
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+
   width: 100%;
   text-align: center;
   margin-bottom: 10px;
   padding: 0 5dvw;
+  font-size: 0.75em;
 
   span {
     color: color.adjust($color-default, $lightness: 20%);
-    font-size: 10px;
 
     b {
       color: color.adjust($color-default, $lightness: 30%);
@@ -194,15 +212,18 @@ footer {
 }
 
 svg {
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
   box-sizing: content-box;
   stroke: color.adjust($color-default, $lightness: 30%);
 }
 
 @media (orientation: landscape) or (min-width: 768px) {
   footer {
+    width: 70dvw;
     align-items: center;
+    margin: 0 auto;
+    background: none;
 
     .footer-main {
       flex-direction: row;
@@ -212,11 +233,12 @@ svg {
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
+
         margin-bottom: 0;
         padding: 0;
         width: 100%;
 
-        & > figure {
+        &>figure {
           flex-direction: row;
 
           .caption-container {
@@ -229,11 +251,20 @@ svg {
       .footer-middle {
         padding: 1rem 0;
         gap: clamp(5rem, 5vw + 5rem, 20rem);
+
+        h2 {
+          font-size: 1em;
+        }
       }
+    }
+
+    .icon-container {
+      font-size: 0.75em;
     }
 
     .footer-simple-divider {
       display: inline;
+      width: $main-width;
     }
   }
 }
