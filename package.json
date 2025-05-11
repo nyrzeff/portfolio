@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@vercel/node": "^5.1.15",
+    "@vercel/node": "^5.1.16",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.488.0",
     "react": "^19.1.0",
@@ -21,7 +21,7 @@
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
     "resend": "^4.5.1",
-    "sass": "^1.87.0"
+    "sass": "^1.88.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
@@ -32,10 +32,10 @@
     "@typescript-eslint/parser": "^8.32.0",
     "@vitejs/plugin-react-swc": "^3.9.0",
     "eslint": "^9.26.0",
-    "eslint-config-prettier": "^10.1.4",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-config-react-app": "^7.0.1",
     "eslint-import-resolver-typescript": "^4.3.4",
-    "eslint-plugin-import-x": "^4.11.0",
+    "eslint-plugin-import-x": "^4.11.1",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
