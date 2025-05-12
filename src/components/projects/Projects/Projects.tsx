@@ -51,7 +51,7 @@ export const Projects: React.FC = () => {
   if (!projects) return <p>Loading...</p>;
 
   return (
-    <section id={styles["projects"]}>
+    <section id="projects" className={styles["projects"]}>
       {projects.map((project) => (
         <Card
           key={project.frontmatter.id}

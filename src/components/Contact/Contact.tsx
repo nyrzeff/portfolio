@@ -51,7 +51,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id={styles["contact"]}>
+    <section id="contact" className={styles["contact"]}>
       <h2>Contact me</h2>
       <p>
         No need for formalities, whether you want to hire me, discuss a

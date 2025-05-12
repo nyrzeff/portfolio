@@ -1,7 +1,7 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-#intro {
+.intro {
   margin: 3rem auto;
   width: 90dvw;
   height: 90vh;
@@ -174,7 +174,7 @@
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  #intro {
+  .intro {
     width: 70dvw;
   }
 

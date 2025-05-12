@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
         <nav className={styles["footer-middle"]}>
           <div className={styles["nav-container"]}>
             <h2>Navigation</h2>
-            <a href="#home" className={styles["icon-container"]}>
+            <a href="#" className={styles["icon-container"]}>
               <ChevronRight />
               <span>Home</span>
             </a>
@@ -59,7 +59,10 @@ export const Footer: React.FC = () => {
               <ChevronRight />
               <span>Intro</span>
             </a>
-            <a href="#blog" className={styles["icon-container"]}>
+            <a
+              href="#blog"
+              className={`${styles["icon-container"]} ${styles["blog-link"]}`}
+            >
               <ChevronRight />
               <span>Blog</span>
             </a>
@@ -109,8 +112,8 @@ export const Footer: React.FC = () => {
         </span>
         <span>
           {" "}
-          Crafted with ⚡ by <b>Nyrzeff</b>. Powered by React, Vite and
-          TypeScript.
+          Crafted with ⚡ by <b>Nyrzeff</b>. Powered by React, Vite, TypeScript
+          and Vercel.
         </span>
       </div>
     </footer>

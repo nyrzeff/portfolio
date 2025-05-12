@@ -1,7 +1,9 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-$main-width: 70dvw;
+$desktop-width: 70dvw;
+$navlink-color: #616262;
+$color-canvas-shade: #0a0b0b;
 
 footer {
   display: flex;
@@ -10,7 +12,7 @@ footer {
   align-items: center;
   gap: 1rem;
 
-  background: black;
+  background: $color-canvas-shade;
   width: 100dvw;
   padding: 0 5dvw;
   font-size: 1.5rem;
@@ -61,10 +63,9 @@ footer {
       & > figcaption {
         white-space: pre-line;
 
-        & > em {
-          strong {
-            color: $color-spark;
-          }
+        & > em strong {
+          color: $color-spark;
+          cursor: help;
         }
       }
     }
@@ -83,13 +84,13 @@ footer {
   gap: clamp(1rem, 5vw + 1rem, 5rem);
 
   h2 {
-    color: color.adjust($color-default, $lightness: 50%);
+    color: white;
     font-size: 1.5em;
   }
 
   & a,
   span {
-    color: color.adjust($color-default, $lightness: 30%);
+    color: $navlink-color;
   }
 
   .nav-container {
@@ -126,6 +127,10 @@ footer {
     h2 {
       width: 100%;
     }
+
+    div:last-of-type {
+      pointer-events: none;
+    }
   }
 }
 
@@ -136,6 +141,7 @@ footer {
   align-items: center;
   flex-wrap: nowrap;
   gap: 5px;
+  padding: 0.5rem;
 
   font-size: 1.25em;
 
@@ -144,6 +150,22 @@ footer {
     width: 1em;
     height: 1em;
   }
+
+  &:hover {
+    background: $color-interaction;
+    border-radius: 10px;
+
+    * {
+      color: white;
+      stroke: white;
+    }
+  }
+}
+
+.blog-link {
+  pointer-events: none;
+  background: none;
+  color: $navlink-color;
 }
 
 .footer-fancy-divider {
@@ -215,7 +237,7 @@ svg {
   width: 1em;
   height: 1em;
   box-sizing: content-box;
-  stroke: color.adjust($color-default, $lightness: 30%);
+  stroke: $navlink-color;
 }
 
 @media (orientation: landscape) or (min-width: 768px) {
@@ -223,7 +245,11 @@ svg {
     width: 70dvw;
     align-items: center;
     margin: 0 auto;
-    background: none;
+    background: radial-gradient(
+      circle,
+      $color-canvas-shade,
+      rgba($color-canvas-shade, 0.7) 90%
+    );
 
     .footer-main {
       flex-direction: row;
@@ -264,7 +290,7 @@ svg {
 
     .footer-simple-divider {
       display: inline;
-      width: $main-width;
+      width: $desktop-width;
     }
   }
 }

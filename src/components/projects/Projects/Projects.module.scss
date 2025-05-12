@@ -1,7 +1,7 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-#projects {
+.projects {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,7 +15,7 @@
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  #projects {
+  .projects {
     width: 70dvw;
   }
 }
