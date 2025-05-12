@@ -71,7 +71,7 @@
     backdrop-filter: blur(10px);
     border-radius: 30px;
 
-    >span,
+    > span,
     p {
       white-space: pre-line;
       width: 100%;
@@ -79,9 +79,11 @@
 
       strong {
         white-space: nowrap;
-        background: linear-gradient(to right,
-            color.adjust($color-core, $lightness: 10%),
-            color.adjust($color-core, $lightness: -10%));
+        background: linear-gradient(
+          to right,
+          color.adjust($color-core, $lightness: 10%),
+          color.adjust($color-core, $lightness: -10%)
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -153,9 +155,11 @@
   }
 
   h1 {
-    background: linear-gradient(to right,
-        color.adjust($color-core, $lightness: 20%),
-        color.adjust($color-core, $lightness: -10%));
+    background: linear-gradient(
+      to right,
+      color.adjust($color-core, $lightness: 20%),
+      color.adjust($color-core, $lightness: -10%)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -194,7 +198,7 @@
       background: rgba($color-canvas, 0);
       backdrop-filter: blur(30px);
 
-      >span * {
+      > span * {
         white-space: normal;
       }
     }

@@ -32,7 +32,7 @@ In order to achieve my goal of becoming one of the greatest software engineers t
 - **Version control:** git (with a custom alias + bare repo at $HOME)
 - **Package managers:** pacman, pnpm, cargo, pip, brew, flatpak
 - **Fonts:** Nimbus Sans, Monocraft, ComicMono (😁)
-<br />
+  <br />
 
 ## ⚙️ Engineering approach
 
