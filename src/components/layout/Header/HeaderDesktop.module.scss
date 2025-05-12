@@ -47,7 +47,7 @@
     margin-left: auto;
     font-size: 1.5em;
 
-    &>a {
+    & > a {
       color: $color-text;
       font-weight: bold;
       padding: clamp(5px, 5vw + 5px, 15px);

@@ -7,11 +7,12 @@ $color-canvas-shade: #0a0b0b;
   $color-core-tone: #5c8ed9;
   $color-highlight-tone: #46c5c7;
 
-  background: radial-gradient(circle,
-      rgba($color-core-tone, 0.15) 30%,
-      rgba($color-highlight-tone, 0.15) 70%,
-      rgba($color-canvas-shade, 0.7) 90%,
-    );
+  background: radial-gradient(
+    circle,
+    rgba($color-core-tone, 0.15) 30%,
+    rgba($color-highlight-tone, 0.15) 70%,
+    rgba($color-canvas-shade, 0.7) 90%
+  );
 
   color: $color-text;
   height: fit-content;
@@ -118,7 +119,7 @@ $color-canvas-shade: #0a0b0b;
     left: 0;
     z-index: 1;
 
-    >b {
+    > b {
       white-space: wrap;
     }
   }
