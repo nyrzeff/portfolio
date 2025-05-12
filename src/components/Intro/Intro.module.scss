@@ -2,7 +2,7 @@
 @use "sass:color";
 
 #intro {
-  margin: 1rem auto;
+  margin: 3rem auto;
   width: 90dvw;
   height: 90vh;
   font-size: 1rem;
@@ -64,7 +64,8 @@
     align-items: center;
     gap: 0;
 
-    padding: 1rem;
+    width: 100%;
+    padding: 2rem;
     font-size: 1.75em;
     background: rgba($color-canvas, 0.6);
     backdrop-filter: blur(10px);
@@ -159,42 +160,12 @@
     -webkit-text-fill-color: transparent;
   }
 
-  h3 {
+  h2 {
     padding-top: clamp(1rem, 5vw, 3rem);
   }
 
-  h4 {
+  h3 {
     padding-top: clamp(0.7rem, 5vw, 2rem);
-  }
-
-  table {
-    font-size: clamp(5px, 1vw + 1px, 15px);
-
-    &* {
-      border-radius: 0px;
-    }
-
-    // headers (vertical and horizontal, respectively)
-    th:first-child,
-    tr:first-child>th {
-      background: color.adjust($color-highlight, $lightness: -10%);
-      border: 1px solid $color-highlight;
-      font-weight: bold;
-      font-size: 1.5em;
-    }
-
-    // hide the first cell
-    tr:first-of-type>th:first-of-type {
-      border: 0;
-      background: none;
-    }
-
-    th,
-    td {
-      border: 1px solid $color-highlight;
-      padding: 0.2rem;
-      background-color: $color-base;
-    }
   }
 }
 
@@ -231,14 +202,5 @@
 
   .about {
     padding: 3rem;
-
-    table {
-      font-size: clamp(10px, 1vw + 3px, 15px);
-
-      th,
-      td {
-        padding: 0.5rem;
-      }
-    }
   }
 }
