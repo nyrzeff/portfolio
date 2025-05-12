@@ -44,6 +44,7 @@ export const Projects: React.FC = () => {
       const data = await importProjects();
       setProjects(data);
     };
+
     fetchData();
   }, []);
 

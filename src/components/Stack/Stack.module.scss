@@ -1,18 +1,25 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
+$color-canvas-shade: #0a0b0b;
+
 #stack {
-  background: linear-gradient(137deg,
-      $color-canvas 30%,
-      rgba($color-core, 0.1),
-      rgba($color-highlight, 0.1),
-      $color-canvas 70%);
+  $color-core-tone: #5c8ed9;
+  $color-highlight-tone: #46c5c7;
+
+  background: radial-gradient(circle,
+      rgba($color-core-tone, 0.15) 30%,
+      rgba($color-highlight-tone, 0.15) 70%,
+      rgba($color-canvas-shade, 0.7) 90%,
+    );
+
   color: $color-text;
   height: fit-content;
-  max-height: 70vh;
+  max-height: 90vh;
   width: 90dvw;
-  margin: 1rem auto;
-  padding: 1rem;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 1px solid $color-canvas-shade;
   border-radius: 30px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -26,21 +33,101 @@
   }
 }
 
+.stack-header {
+  margin: 0 auto;
+  width: 90%;
+  padding: 0 1rem;
+
+  p,
+  fieldset {
+    margin-top: 1rem;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+
+    background: rgba($color-canvas-shade, 0.7);
+    border-radius: 10px;
+    padding: 1em;
+
+    legend {
+      margin: 0 auto;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    span {
+      white-space: normal;
+      font-size: 1em;
+    }
+  }
+}
+
 .stack-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
   gap: 3rem;
 
-  padding: 1rem;
+  padding: 2rem;
+  margin-top: 3rem;
   overflow-y: visible;
+  font-size: 1em;
 
   i {
     padding-right: 0.5rem;
+    font-size: 1em;
   }
+}
+
+.stack-list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  position: relative;
+}
+
+.tooltip {
+  flex: 1;
+
+  display: inline-block;
+  font-size: 0.85em;
+  position: relative;
+  width: 100%;
+
+  .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+
+    min-width: min-content;
+    width: 100%;
+    max-width: fit-content;
+    background: $color-canvas;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    >b {
+      white-space: wrap;
+    }
+  }
+}
+
+.stack-list-item:active .tooltip-text,
+.stack-list-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
