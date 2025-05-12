@@ -3,7 +3,7 @@
 
 $color-canvas-shade: #0a0b0b;
 
-#stack {
+.stack {
   $color-core-tone: #5c8ed9;
   $color-highlight-tone: #46c5c7;
 
@@ -132,7 +132,7 @@ $color-canvas-shade: #0a0b0b;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  #stack {
+  .stack {
     width: 70dvw;
   }
 

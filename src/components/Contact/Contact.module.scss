@@ -1,7 +1,7 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-#contact {
+.contact {
   color: white;
   background: $color-canvas;
   width: 90dvw;
@@ -135,7 +135,7 @@
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  #contact {
+  .contact {
     width: 70dvw;
   }
 }

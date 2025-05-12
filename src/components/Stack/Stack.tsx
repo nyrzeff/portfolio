@@ -20,7 +20,7 @@ const Tooltip: React.FC<TooltipProps> = ({ item }: TooltipProps) => {
 
 export const Stack: React.FC = () => {
   return (
-    <section tabIndex={0} id={styles["stack"]}>
+    <section tabIndex={0} id="stack" className={styles["stack"]}>
       <header className={styles["stack-header"]}>
         <h2>Stack</h2>
         <p>
