@@ -8,6 +8,13 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   assetsInclude: ["**/*.md"],
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: `assets/[name].[ext]`
+      },
+    },
+  },
   optimizeDeps: {
     esbuildOptions: {
       define: {
