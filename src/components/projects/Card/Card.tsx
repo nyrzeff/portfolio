@@ -18,16 +18,11 @@ export const Card: React.FC<CardProps> = ({
 }: CardProps) => {
   return (
     <article className={styles["card"]}>
-      <header className={styles["card-header"]}>
-        <h2 className={styles["card-title"]}>
-          {title} - {subtitle}
-        </h2>
-      </header>
+      <div className={styles["card-image"]}>
+        <ImageGallery title={title} subtitle={subtitle} images={images} />
+      </div>
       <div className={styles["card-content"]}>
         <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
-      </div>
-      <div className={styles["card-image"]}>
-        <ImageGallery images={images} />
       </div>
     </article>
   );
