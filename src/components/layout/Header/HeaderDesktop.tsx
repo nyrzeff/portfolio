@@ -18,6 +18,9 @@ export const HeaderDesktop = () => {
       <nav className={styles["nav-link-container"]}>
         <a href="#">Home</a>
         <a href="#intro">Intro</a>
+        <a href="#stack">Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
         <a
           href="#blog"
           onMouseEnter={() => setIsHovered(true)}
@@ -26,9 +29,6 @@ export const HeaderDesktop = () => {
         >
           {isHovered ? displayMessage() : "Blog"}
         </a>
-        <a href="#stack">Stack</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
       </nav>
     </header>
   );

@@ -17,9 +17,6 @@ export const SideMenu = ({ isOpen, setIsOpen }: SideMenuProps) => {
         <li onClick={closeMenu}>
           <a href="#intro">Intro</a>
         </li>
-        <li className={styles["blog"]} onClick={closeMenu}>
-          <a href="#blog">Blog (coming soon...)</a>
-        </li>
         <li onClick={closeMenu}>
           <a href="#stack">Stack</a>
         </li>
@@ -28,6 +25,9 @@ export const SideMenu = ({ isOpen, setIsOpen }: SideMenuProps) => {
         </li>
         <li onClick={closeMenu}>
           <a href="#contact">Contact me!</a>
+        </li>
+        <li className={styles["blog"]} onClick={closeMenu}>
+          <a href="#blog">Blog (coming soon...)</a>
         </li>
       </ul>
     </aside>
