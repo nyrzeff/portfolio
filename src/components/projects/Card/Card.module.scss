@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 
   color: white;
   border-radius: 30px;
@@ -24,6 +24,23 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+
+    border-radius: 30px;
+    background: black;
+    padding: 1.5em;
+
+    legend {
+      margin: 0 auto;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
   }
 }
 
@@ -48,6 +65,20 @@
 
   &:hover {
     transform: scale(1.03);
+  }
+}
+
+.stack-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin: 0 auto;
+
+  i {
+    font-size: 3em;
   }
 }
 

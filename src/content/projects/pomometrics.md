@@ -10,15 +10,16 @@ tags:
   - Refactoring
 stack:
   - HTML
-  - CSS
+  - CSS3
   - JavaScript
   - Chart.js
-  - Vim/Neovim
+  - Vim
+  - Neovim
   - ESLint
   - Prettier
-  - pnpm
-  - vite
-  - mocha
+  - PNPM
+  - Vite
+  - Mocha
 ---
 
 I wanted to visualize my Pomodoro sessions so I built Pomometrics, a simple, static, customizable Pomodoro breakdown visualization tool using HTML, CSS, JavaScript and Chart.js.
