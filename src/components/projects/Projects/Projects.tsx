@@ -57,6 +57,7 @@ export const Projects: React.FC = () => {
           key={project.frontmatter.id}
           title={project.frontmatter.title}
           subtitle={project.frontmatter.subtitle}
+          stack={project.frontmatter.stack}
           content={project.content}
           images={project.images}
         />
