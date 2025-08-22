@@ -26,7 +26,7 @@ export const Card: React.FC<CardProps> = ({
     <article className={styles["card"]}>
       <fieldset>
         <legend>{title}</legend>
-        <div className={styles["card-stack"]}>
+        <div className={styles["project-stack"]}>
           <ul className={styles["stack-list"]}>
             {items.map((item: StackItem, index) => (
               <li key={index} className={styles["stack-list-item"]}>
@@ -36,11 +36,11 @@ export const Card: React.FC<CardProps> = ({
           </ul>
         </div>
       </fieldset>
-      <div className={styles["card-image"]}>
-        <ImageGallery title={title} subtitle={subtitle} images={images} />
-      </div>
-      <div className={styles["card-content"]}>
+      <div className={styles["project-content"]}>
         <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+      </div>
+      <div className={styles["project-images"]}>
+        <ImageGallery title={title} subtitle={subtitle} images={images} />
       </div>
     </article>
   );
