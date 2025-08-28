@@ -11,24 +11,24 @@ export const SideMenu = ({ isOpen, setIsOpen }: SideMenuProps) => {
   return (
     <aside className={`${styles["side-menu"]} ${isOpen ? styles["open"] : ""}`}>
       <ul>
-        <li onClick={closeMenu}>
-          <a href="#">Home</a>
-        </li>
-        <li onClick={closeMenu}>
-          <a href="#intro">Intro</a>
-        </li>
-        <li onClick={closeMenu}>
-          <a href="#stack">Stack</a>
-        </li>
-        <li onClick={closeMenu}>
-          <a href="#projects">Projects</a>
-        </li>
-        <li onClick={closeMenu}>
-          <a href="#contact">Contact me!</a>
-        </li>
-        <li className={styles["blog"]} onClick={closeMenu}>
-          <a href="#blog">Blog (coming soon...)</a>
-        </li>
+        <a href="#">
+          <li onClick={closeMenu}>Home</li>
+        </a>
+        <a href="#intro">
+          <li onClick={closeMenu}>Intro</li>
+        </a>
+        <a href="#stack">
+          <li onClick={closeMenu}>Stack</li>
+        </a>
+        <a href="#projects">
+          <li onClick={closeMenu}>Projects</li>
+        </a>
+        <a href="#contact">
+          <li onClick={closeMenu}>Contact me!</li>
+        </a>
+        <a href="#blog">
+          <li className={styles["blog"]} onClick={closeMenu}>Blog (coming soon...)</li>
+        </a>
       </ul>
     </aside>
   );
