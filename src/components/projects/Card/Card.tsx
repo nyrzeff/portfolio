@@ -24,24 +24,28 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <article className={styles["card"]}>
-      <fieldset>
-        <legend>{title}</legend>
-        <div className={styles["project-stack"]}>
-          <ul className={styles["stack-list"]}>
-            {items.map((item: StackItem, index) => (
-              <li key={index} className={styles["stack-list-item"]}>
-                <i className={item.devicon}></i>
-              </li>
-            ))}
-          </ul>
+      <details>
+        <summary>
+          {title}
+        </summary>
+        <div className={styles["project-content"]}>
+          <div className={styles["project-stack"]}>
+            <ul className={styles["stack-list"]}>
+              {items.map((item: StackItem, index) => (
+                <li key={index} className={styles["stack-list-item"]}>
+                  <i className={item.devicon}></i>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles["project-text"]}>
+            <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+          </div>
+          <div className={styles["project-images"]}>
+            <ImageGallery title={title} subtitle={subtitle} images={images} />
+          </div>
         </div>
-      </fieldset>
-      <div className={styles["project-content"]}>
-        <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
-      </div>
-      <div className={styles["project-images"]}>
-        <ImageGallery title={title} subtitle={subtitle} images={images} />
-      </div>
+      </details>
     </article>
   );
 };
