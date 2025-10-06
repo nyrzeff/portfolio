@@ -13,8 +13,24 @@ export const icons = {
 
 export const stackItems: StackItem[] = [
   {
+    title: ".NET Core",
+    devicon: "devicon-dotnetcore-plain colored",
+    additionalInfo: {
+      skillLevel: SkillLevel.Proficient,
+      isActivelyLearning: true,
+    },
+  },
+  {
     title: "React",
     devicon: "devicon-react-plain colored",
+    additionalInfo: {
+      skillLevel: SkillLevel.Proficient,
+      isActivelyLearning: true,
+    },
+  },
+  {
+    title: "C#",
+    devicon: "devicon-csharp-plain colored",
     additionalInfo: {
       skillLevel: SkillLevel.Proficient,
       isActivelyLearning: true,
@@ -60,7 +76,6 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-rust-plain",
     additionalInfo: {
       skillLevel: SkillLevel.Novice,
-      isActivelyLearning: true,
     },
   },
   {
@@ -132,7 +147,21 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-mongodb-plain colored",
     additionalInfo: {
       skillLevel: SkillLevel.Familiar,
+    },
+  },
+  {
+    title: "PostgreSQL",
+    devicon: "devicon-postgresql-plain colored",
+    additionalInfo: {
+      skillLevel: SkillLevel.Novice,
       isActivelyLearning: true,
+    },
+  },
+  {
+    title: "Microsoft SQL Server",
+    devicon: "devicon-microsoftsqlserver-plain colored",
+    additionalInfo: {
+      skillLevel: SkillLevel.Competent,
     },
   },
   {
@@ -147,7 +176,6 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-express-original",
     additionalInfo: {
       skillLevel: SkillLevel.Novice,
-      isActivelyLearning: true,
     },
   },
   {
@@ -253,7 +281,6 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-nextjs-plain",
     additionalInfo: {
       skillLevel: SkillLevel.Novice,
-      isActivelyLearning: true,
     },
   },
   {
@@ -303,7 +330,6 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-lua-plain colored",
     additionalInfo: {
       skillLevel: SkillLevel.Novice,
-      isActivelyLearning: true,
     },
   },
   {
@@ -311,14 +337,6 @@ export const stackItems: StackItem[] = [
     devicon: "devicon-markdown-plain",
     additionalInfo: {
       skillLevel: SkillLevel.Competent,
-    },
-  },
-  {
-    title: "MaterialUI",
-    devicon: "devicon-materialui-plain colored",
-    additionalInfo: {
-      skillLevel: SkillLevel.Novice,
-      isActivelyLearning: true,
     },
   },
   {
