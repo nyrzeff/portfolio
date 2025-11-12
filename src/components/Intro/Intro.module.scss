@@ -39,7 +39,6 @@
   backface-visibility: hidden;
   overflow: hidden;
   padding: 0.5rem;
-  border-radius: 30px;
 }
 
 .front {
@@ -69,9 +68,8 @@
     font-size: 1.75em;
     background: rgba($color-canvas, 0.6);
     backdrop-filter: blur(10px);
-    border-radius: 30px;
 
-    > span,
+    >span,
     p {
       white-space: pre-line;
       width: 100%;
@@ -79,11 +77,9 @@
 
       strong {
         white-space: nowrap;
-        background: linear-gradient(
-          to right,
-          color.adjust($color-core, $lightness: 10%),
-          color.adjust($color-core, $lightness: -10%)
-        );
+        background: linear-gradient(to right,
+            color.adjust($color-core, $lightness: 10%),
+            color.adjust($color-core, $lightness: -10%));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -96,7 +92,6 @@
     span:first-of-type {
       font-size: 1.3em;
       border-bottom: 1px solid rgba($color-core, 0.3);
-      border-radius: 0;
       width: 100%;
       text-align: center;
       margin: 0 auto;
@@ -155,11 +150,9 @@
   }
 
   h1 {
-    background: linear-gradient(
-      to right,
-      color.adjust($color-core, $lightness: 20%),
-      color.adjust($color-core, $lightness: -10%)
-    );
+    background: linear-gradient(to right,
+        color.adjust($color-core, $lightness: 20%),
+        color.adjust($color-core, $lightness: -10%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -198,7 +191,7 @@
       background: rgba($color-canvas, 0);
       backdrop-filter: blur(30px);
 
-      > span * {
+      >span * {
         white-space: normal;
       }
     }
