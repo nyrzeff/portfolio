@@ -35,30 +35,6 @@ $color-canvas-shade: #0a0b0b;
   margin: 0 auto;
   width: 90%;
   padding: 0 1rem;
-
-  p,
-  fieldset {
-    margin-top: 1rem;
-  }
-
-  fieldset {
-    display: flex;
-    flex-direction: column;
-
-    background: rgba($color-canvas-shade, 0.7);
-    padding: 1em;
-
-    legend {
-      margin: 0 auto;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    span {
-      white-space: normal;
-      font-size: 1em;
-    }
-  }
 }
 
 .stack-list {
@@ -70,7 +46,7 @@ $color-canvas-shade: #0a0b0b;
   gap: 3rem;
 
   padding: 2rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   overflow-y: visible;
   font-size: 1em;
 
@@ -87,43 +63,6 @@ $color-canvas-shade: #0a0b0b;
   align-items: flex-start;
 
   position: relative;
-}
-
-.tooltip {
-  flex: 1;
-
-  display: inline-block;
-  font-size: 0.85em;
-  position: relative;
-  width: 100%;
-
-  .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-
-    min-width: min-content;
-    width: 100%;
-    max-width: fit-content;
-    background: $color-canvas;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-
-    >b {
-      white-space: wrap;
-    }
-  }
-}
-
-.stack-list-item:active .tooltip-text,
-.stack-list-item:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
