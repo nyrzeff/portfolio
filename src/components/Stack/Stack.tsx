@@ -1,10 +1,6 @@
+import type { StackItem } from "@/types/stack";
 import { stackItems } from "@assets/icons";
 import styles from "./Stack.module.scss";
-
-interface StackItem {
-  title: string;
-  devicon: string;
-}
 
 export const Stack: React.FC = () => {
   return (

@@ -1,4 +1,4 @@
-import { SkillLevel, type StackItem } from "@/types/stack";
+import type { StackItem } from "@/types/stack";
 import Eye from "./eye-of-nyrzeff.svg?react";
 import { ChevronRight, Contact, Mail, Github, MapPin } from "lucide-react";
 
