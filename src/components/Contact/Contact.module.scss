@@ -10,6 +10,10 @@
   padding: 3rem;
   font-size: 2em;
 
+  p {
+    padding: 1rem;
+  }
+
   label {
     display: inline;
     font-weight: bold;
@@ -70,7 +74,6 @@
     }
 
     &:hover {
-      box-shadow: 0 0 0.5rem 0.1rem $color-interaction;
       transform: scale(1.03);
       cursor: pointer;
     }

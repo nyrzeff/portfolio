@@ -54,8 +54,7 @@ export const Contact: React.FC = () => {
     <section id="contact" className={styles["contact"]}>
       <h2>Contact me</h2>
       <p>
-        No need for formalities, whether you want to hire me, discuss a
-        project/idea or simply talk, just drop a message below:
+        Interested in my services? Feel free to send a message!
       </p>
       <form onSubmit={handleSubmit} className={styles["form"]}>
         <div className={styles["name-wrapper"]}>
@@ -84,7 +83,7 @@ export const Contact: React.FC = () => {
           <label>Message</label>
           <textarea
             name="message"
-            placeholder="Hey, are you interested in a project..."
+            placeholder="Hey, I want to discuss project X..."
             value={formData.message}
             onChange={handleChange}
             required

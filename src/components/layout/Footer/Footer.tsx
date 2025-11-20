@@ -6,14 +6,12 @@ export const Footer: React.FC = () => {
   const { isDesktopExperience } = useScreen();
 
   const getUtcOffset = () => {
-    const formatter = new Intl.DateTimeFormat("en-US", {
+    const parts = new Intl.DateTimeFormat("en-US", {
       timeZone: "Europe/Lisbon",
       timeZoneName: "shortOffset",
-    });
+    }).formatToParts(new Date());
 
-    const parts = formatter.formatToParts(new Date());
-
-    return parts.find((p) => p.type === "timeZoneName")?.value || "GMT+0";
+    return parts.find((p) => p.type === "timeZoneName")?.value;
   };
 
   const Eye = icons["eye"];
