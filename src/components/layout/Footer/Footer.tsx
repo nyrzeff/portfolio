@@ -107,12 +107,7 @@ export const Footer: React.FC = () => {
       <div className={styles["footer-simple-divider"]}></div>
       <div className={styles["footer-bottom"]}>
         <span>
-          2025. All code and content freely available under the CC0 License. No
-          rights reserved. Identity and likeness remain protected.
-        </span>
-        <span>
-          {" "}
-          Crafted with ⚡ by <b>Nyrzeff</b>. Powered by React, Vite, TypeScript
+          Crafted by <b>Nyrzeff</b>. Powered by React, Vite, TypeScript
           and Vercel.
         </span>
       </div>
