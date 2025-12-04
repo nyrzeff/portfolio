@@ -1,0 +1,28 @@
+@use "/src/styles/variables.scss" as *;
+
+.timeline {
+  background: $color-canvas;
+  margin: 3rem auto;
+  width: 90dvw;
+  max-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  padding: 1.5rem 0;
+  font-size: 2rem;
+}
+
+.timeline-header {
+  margin: 0 auto;
+  width: 90%;
+  padding: 0 1rem;
+}
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .timeline {
+    width: 70dvw;
+    height: 100vh;
+  }
+}
