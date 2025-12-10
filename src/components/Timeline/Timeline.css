@@ -1,12 +1,20 @@
 #gantt {
-  width: auto;
-  height: 1000px;
-  stroke: none;
-  padding: 3rem;
+    width: auto;
+    height: 1000px;
+    stroke: none;
+    padding: 3rem;
 
-  text {
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-  }
+    text {
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .tooltip {
+        pointer-events: none;
+    }
+
+    .project {
+        cursor: help;
+    }
 }
