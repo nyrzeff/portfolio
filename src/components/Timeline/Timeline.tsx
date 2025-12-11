@@ -5,14 +5,15 @@ import "./Timeline.css";
 
 interface Project {
     title: string;
-    dateStart: string;
-    dateEnd: string;
+    startDate: string;
+    endDate: string;
     description: string;
     technologies: string;
 };
 
 export const Timeline: React.FC = () => {
     let [tooltip, setTooltip] = useState<SVGGElement>();
+    const initialX = 200;
 
     let projects: Project[] = json.projects;
 
@@ -23,11 +24,11 @@ export const Timeline: React.FC = () => {
         setTooltip(tt);
     });
 
-    const oldestProjectStartDate = new Date(projects.at(0)!.dateStart);
+    const oldestProjectStartDate = new Date(projects.at(0)!.startDate);
 
     const latestProject = projects.at(projects.length - 1)
-    const latestProjectEndDate = latestProject!.dateEnd == "Present"
-        ? new Date(Date.now()) : new Date(latestProject!.dateEnd);
+    const latestProjectEndDate = latestProject!.endDate == "Present"
+        ? new Date(Date.now()) : new Date(latestProject!.endDate);
     // const lastQuarter = Math.ceil(actualDate.getMonth() / 3);
 
     let dates = [];
@@ -47,13 +48,16 @@ export const Timeline: React.FC = () => {
         return chunks[1] + " " + chunks[3];
     };
 
-    const getAmountOfDays = (dateStart: Date, dateEnd: Date) => {
-        // console.log(`End: ${dateEnd}\nStart: ${dateStart}`);
-        // console.log((dateEnd.getTime() - dateStart.getTime()) / (1000 * 60 * 60 * 24));
-        return (dateEnd.getTime() - dateStart.getTime()) / (1000 * 60 * 60 * 24);
+    const getAmountOfDays = (startDate: Date, endDate: Date) => {
+        // console.log(`End: ${endDate}\nStart: ${startDate}`);
+        // console.log((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+        return (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
     };
 
-    const initialX = 200;
+    const beautify = (str: string) => {
+        return str.replace(str.charAt(0), str.charAt(0).toUpperCase())
+            .replace(/([A-Z])/g, " $1").trim();
+    };
 
     function createTooltip(): SVGGElement {
         const tooltip =
@@ -65,9 +69,7 @@ export const Timeline: React.FC = () => {
         const rectangle =
             document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
-        rectangle.style.fill = "#2de2e6";
-        rectangle.style.width = "50";
-        rectangle.style.height = "50";
+        rectangle.style.fill = "#4d94ff";
 
         const text =
             document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -98,16 +100,18 @@ export const Timeline: React.FC = () => {
 
         tooltip.style.display = "block";
 
+        const padding = 10;
+
         const containerX = (initialX + getAmountOfDays(oldestProjectStartDate,
-            new Date(project.dateStart)));
-        const containerY = (90 + (70 * i));
+            new Date(project.startDate))) - padding;
+        const containerY = (90 + (70 * i)) - padding;
 
         tooltip.setAttribute("x", containerX.toString());
         tooltip.setAttribute("y", containerY.toString());
 
         const textX =
             (initialX + getAmountOfDays(oldestProjectStartDate,
-                new Date(project.dateStart)));
+                new Date(project.startDate)));
         const textY = 100 + 70 * i;
 
         tooltip.insertAdjacentElement("beforeend", tooltipContainer);
@@ -116,14 +120,17 @@ export const Timeline: React.FC = () => {
         let textFragments = tooltipText.children;
 
         for (let i = 0; i < Object.keys(project).length; i++) {
-            textFragments[i].innerHTML = Object.entries(project)[i][1];
+            const property = Object.entries(project)[i];
+
+            textFragments[i].innerHTML =
+                `${beautify(property[0])}: ${property[1]}`;
             textFragments[i].setAttribute("x", textX.toString());
             textFragments[i].setAttribute("y", (textY + (20 * i)).toString());
         }
 
         const textDimensions = tooltipText.getBoundingClientRect();
-        const x = textDimensions.width;
-        const y = textDimensions.height;
+        const x = textDimensions.width + padding * 2;
+        const y = textDimensions.height + padding * 2;
 
         tooltipContainer.setAttribute("x", containerX.toString());
         tooltipContainer.setAttribute("y", containerY.toString());
@@ -173,13 +180,13 @@ export const Timeline: React.FC = () => {
                             fill="#4d94ff"
                             x={initialX + getAmountOfDays(
                                 oldestProjectStartDate,
-                                new Date(project.dateStart))}
+                                new Date(project.startDate))}
                             y={100 + (70 * i)}
                             width={getAmountOfDays(new Date(
-                                project.dateStart),
-                                project.dateEnd === "Present"
+                                project.startDate),
+                                project.endDate === "Present"
                                     ? new Date(Date.now())
-                                    : new Date(project.dateEnd))}
+                                    : new Date(project.endDate))}
                             height="30"
                             onMouseEnter={() => {
                                 displayTooltip(project, i)
