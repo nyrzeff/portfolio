@@ -2,36 +2,36 @@
     "projects": [
         {
             "title": "Pomometrics",
-            "dateStart": "2024-09-22",
-            "dateEnd": "2025-04-30",
+            "startDate": "2024-09-22",
+            "endDate": "2025-04-30",
             "description": "Responsive Pomodoro visualization tool",
             "technologies": "HTML, CSS, JavaScript, Chart.js"
         },
         {
             "title": "Portfolio",
-            "dateStart": "2025-02-26",
-            "dateEnd": "2025-05-12",
+            "startDate": "2025-02-26",
+            "endDate": "2025-05-12",
             "description": "My online portfolio, updated as needed",
             "technologies": "React, Vite, TypeScript, SCSS, Vercel"
         },
         {
             "title": "Chromokinesis",
-            "dateStart": "2025-09-06",
-            "dateEnd": "Present",
+            "startDate": "2025-09-06",
+            "endDate": "Present",
             "description": "CLI tool to quickly generate color palettes",
             "technologies": "Node.js, JavaScript, Clack"
         },
         {
             "title": "Bubblyous",
-            "dateStart": "2025-09-19",
-            "dateEnd": "Present",
+            "startDate": "2025-09-19",
+            "endDate": "Present",
             "description": "Bubble tea data aggregation, visualization and tracking tool",
             "technologies": "ASP.NET Core Web API, React, C#, TypeScript, GCP, PostgreSQL"
         },
         {
             "title": "Diaphthora",
-            "dateStart": "2025-10-14",
-            "dateEnd": "Present",
+            "startDate": "2025-10-14",
+            "endDate": "Present",
             "description": "Minecraft mod about a conflict between 3 groups - cultists, robots and aliens",
             "technologies": "Java, Blockbench, various image and audio tools"
         }
