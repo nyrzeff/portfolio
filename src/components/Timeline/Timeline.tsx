@@ -168,7 +168,7 @@ export const Timeline: React.FC = () => {
                     Final X: ${tooltipX} | Final Y: ${tooltipY}\n
                     `);
 
-        const textX = tooltipX;
+        const textX = tooltipX + padding;
         let textY = 0;
 
         const tooltipContainer = tooltip.children[0] as HTMLElement;
