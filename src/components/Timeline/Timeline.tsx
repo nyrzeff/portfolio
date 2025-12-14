@@ -11,6 +11,49 @@ interface Project {
     technologies: string;
 };
 
+const getDaysInMonth = (date: Date): number => {
+    const month = date.getMonth();
+    let daysInMonth = -1;
+
+    switch (month) {
+        case 0:
+        case 2:
+        case 4:
+        case 6:
+        case 7:
+        case 9:
+        case 11:
+            daysInMonth = 31;
+            break;
+        case 3:
+        case 5:
+        case 8:
+        case 10:
+            daysInMonth = 30;
+            break;
+        case 1:
+            const year = date.getUTCFullYear();
+
+            if (year % 4 === 0) {
+                if (year % 100 === 0) {
+                    if (year % 400 === 0) {
+                        daysInMonth = 29;
+                    } else {
+                        daysInMonth = 28;
+                    }
+                } else {
+                    daysInMonth = 29;
+                }
+            } else {
+                daysInMonth = 28;
+            }
+            break;
+    };
+
+
+    return daysInMonth;
+};
+
 export const Timeline: React.FC = () => {
     let [tooltip, setTooltip] = useState<SVGGElement>();
     const initialX = 200;
@@ -37,8 +80,18 @@ export const Timeline: React.FC = () => {
     dates.push(date);
 
     while (date < latestProjectEndDate) {
-        date = new Date(date.getFullYear(), date.getMonth() + 3, date.getDate());
+        date = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
         dates.push(date);
+    }
+
+    let dateX = [];
+    let c = 0;
+    const multiplier = 3;
+
+    for (let date of dates) {
+        const d = getDaysInMonth(date) * multiplier;
+        dateX.push(c);
+        c += d;
     }
 
     // console.log(dates);
@@ -51,7 +104,8 @@ export const Timeline: React.FC = () => {
     const getAmountOfDays = (startDate: Date, endDate: Date) => {
         // console.log(`End: ${endDate}\nStart: ${startDate}`);
         // console.log((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-        return (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+        return (endDate.getTime() - startDate.getTime())
+            / (1000 * 60 * 60 * 24);
     };
 
     const beautify = (str: string) => {
@@ -90,57 +144,65 @@ export const Timeline: React.FC = () => {
         return tooltip;
     }
 
-    const displayTooltip = (project: Project, i: number) => {
+    const displayTooltip = (e: any, project: Project) => {
         if (!tooltip) return;
+
+        // console.log(e);
+
+        tooltip.style.display = "block";
+
+        const padding = 10;
+
+        const gantt = e.relatedTarget;
+        const b = gantt.getBoundingClientRect();
+
+        const tooltipX = (e.clientX - b.x) - padding;
+        const tooltipY = (e.clientY - b.y) - padding;
+
+        tooltip.setAttribute("x", tooltipX.toString());
+        tooltip.setAttribute("y", tooltipY.toString());
+
+        console.log(`
+                    Client X: ${e.clientX} | SVG X: ${b.x}\n
+                    Client Y: ${e.clientY} | SVG Y: ${b.y}\n
+                    Final X: ${tooltipX} | Final Y: ${tooltipY}\n
+                    `);
+
+        const textX = tooltipX;
+        let textY = 0;
 
         const tooltipContainer = tooltip.children[0] as HTMLElement;
         const tooltipText = tooltip.children[1] as HTMLElement;
 
         if (!tooltipContainer || !tooltipText) return;
 
-        tooltip.style.display = "block";
-
-        const padding = 10;
-
-        const containerX = (initialX + getAmountOfDays(oldestProjectStartDate,
-            new Date(project.startDate))) - padding;
-        const containerY = (90 + (70 * i)) - padding;
-
-        tooltip.setAttribute("x", containerX.toString());
-        tooltip.setAttribute("y", containerY.toString());
-
-        const textX =
-            (initialX + getAmountOfDays(oldestProjectStartDate,
-                new Date(project.startDate)));
-        const textY = 100 + 70 * i;
-
-        tooltip.insertAdjacentElement("beforeend", tooltipContainer);
-        tooltip.insertAdjacentElement("beforeend", tooltipText);
+        // tooltip.insertAdjacentElement("beforeend", tooltipContainer);
+        // tooltip.insertAdjacentElement("beforeend", tooltipText);
 
         let textFragments = tooltipText.children;
 
         for (let i = 0; i < Object.keys(project).length; i++) {
             const property = Object.entries(project)[i];
 
+            textY = tooltipY + 20 * (i + 1);
+
             textFragments[i].innerHTML =
                 `${beautify(property[0])}: ${property[1]}`;
             textFragments[i].setAttribute("x", textX.toString());
-            textFragments[i].setAttribute("y", (textY + (20 * i)).toString());
+            textFragments[i].setAttribute("y", textY.toString());
         }
 
         const textDimensions = tooltipText.getBoundingClientRect();
         const x = textDimensions.width + padding * 2;
         const y = textDimensions.height + padding * 2;
 
-        tooltipContainer.setAttribute("x", containerX.toString());
-        tooltipContainer.setAttribute("y", containerY.toString());
+        tooltipContainer.setAttribute("x", tooltipX.toString());
+        tooltipContainer.setAttribute("y", tooltipY.toString());
 
         tooltipContainer.setAttribute("width", x.toString());
         tooltipContainer.setAttribute("height", y.toString());
 
-        const gantt = document.getElementById("gantt");
-
-        if (gantt) gantt.appendChild(tooltip);
+        gantt.appendChild(tooltip);
     };
 
     return (
@@ -148,57 +210,72 @@ export const Timeline: React.FC = () => {
             <header className={styles["timeline-header"]}>
                 <h2>Timeline</h2>
             </header>
-            <svg id="gantt">
-                {dates.map((date, i) => (
-                    <>
-                        <rect
-                            fill="white"
-                            x={initialX + (90 * i)}
-                            y="10"
-                            width={90}
-                            height="45"
-                        />
-                        <text
-                            x={(initialX + 10) + (90 * i)}
-                            y="40"
-                        >
-                            {formatQuarter(date)}
-                        </text>
-                    </>
-                ))}
-                {projects.map((project, i) => (
-                    <g className="project-container">
-                        <text
-                            fill="white"
-                            x="10"
-                            y={120 + (70 * i)}
-                        >
-                            {project.title}
-                        </text>
-                        <rect
-                            className="project"
-                            fill="#4d94ff"
-                            x={initialX + getAmountOfDays(
-                                oldestProjectStartDate,
-                                new Date(project.startDate))}
-                            y={100 + (70 * i)}
-                            width={getAmountOfDays(new Date(
-                                project.startDate),
-                                project.endDate === "Present"
-                                    ? new Date(Date.now())
-                                    : new Date(project.endDate))}
-                            height="30"
-                            onMouseEnter={() => {
-                                displayTooltip(project, i)
-                            }}
-                            onMouseLeave={() => {
-                                if (tooltip)
-                                    tooltip.style.display = "none";
-                            }}
-                        />
-                    </g>
-                ))}
-            </svg>
-        </section>
+            <div className="container">
+                <svg
+                    id="gantt"
+                    // width={timescaleWidth * dates.length}
+                    width="2000px"
+                    height={90 * projects.length}
+                >
+                    {dates.map((date, i) => (
+                        <g className="date-container">
+                            <rect
+                                fill="white"
+                                x={initialX + dateX[i]}
+                                y="10"
+                                width={getDaysInMonth(date) * multiplier}
+                                height="45"
+                            />
+                            <text
+                                x={(initialX + 20) + dateX[i]}
+                                y="40"
+                            >
+                                {formatQuarter(date)}
+                            </text>
+                        </g>
+                    ))}
+                    {projects.map((project, i) => (
+                        <g className="project-container">
+                            <text
+                                fill="white"
+                                x="10"
+                                y={120 + (70 * i)}
+                            >
+                                {project.title}
+                            </text>
+                            <rect
+                                className="project"
+                                fill="#4d94ff"
+                                x={initialX + ((getAmountOfDays(
+                                    new Date(
+                                        oldestProjectStartDate.getUTCFullYear(),
+                                        oldestProjectStartDate.getMonth(),
+                                        1,
+                                    ),
+                                    new Date(project.startDate))) *
+                                    multiplier)
+                                }
+                                y={100 + (70 * i)}
+                                width={(getAmountOfDays(new Date(
+                                    project.startDate),
+                                    project.endDate === "Present"
+                                        ? new Date(Date.now())
+                                        : new Date(project.endDate)))
+                                    * multiplier
+                                }
+                                height="30"
+                                onMouseEnter={(e) => {
+                                    displayTooltip(e, project)
+                                }}
+                                onMouseLeave={() => {
+                                    if (tooltip)
+                                        tooltip.style.display = "none";
+                                }}
+                            />
+                        </g>
+                    ))}
+                </svg>
+            </div>
+        </section >
     );
 };
