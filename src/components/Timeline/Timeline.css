@@ -1,12 +1,23 @@
+.container {
+    padding: 3rem;
+    overflow: scroll;
+    width: auto;
+    height: fit-content;
+}
+
 #gantt {
     width: auto;
-    height: 1000px;
+    height: fit-content;
     stroke: none;
-    padding: 3rem;
+    overflow: scroll;
+
+    .date-container {
+        outline: 1px solid black;
+    }
 
     text {
         color: white;
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: bold;
     }
 

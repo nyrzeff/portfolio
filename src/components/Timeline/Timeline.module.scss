@@ -6,17 +6,15 @@
   width: 90dvw;
   max-height: 90vh;
 
-  display: flex;
-  flex-direction: column;
   color: white;
 
   padding: 1.5rem 0;
   font-size: 2rem;
+  overflow-y: scroll;
 }
 
 .timeline-header {
   margin: 0 auto;
-  width: 90%;
   padding: 0 1rem;
 }
 
