@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import json from "../../content/project-timeline.json";
 import styles from "./Timeline.module.scss";
 import "./Timeline.css";
@@ -62,10 +62,10 @@ export const Timeline: React.FC = () => {
 
     if (!projects) return;
 
-    window.addEventListener("load", () => {
+    useEffect(() => {
         const tt = createTooltip();
         setTooltip(tt);
-    });
+    }, []);
 
     const oldestProjectStartDate = new Date(projects.at(0)!.startDate);
 
