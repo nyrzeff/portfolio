@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import json from "../../content/project-timeline.json";
+import json from "@/content/project-timeline.json";
+import {
+    getDaysInMonth,
+    formatDate,
+    getAmountOfDays,
+    beautify
+} from "@/lib/dateUtils";
 import styles from "./Timeline.module.scss";
 import "./Timeline.css";
 
@@ -9,49 +15,6 @@ interface Project {
     endDate: string;
     description: string;
     technologies: string;
-};
-
-const getDaysInMonth = (date: Date): number => {
-    const month = date.getMonth();
-    let daysInMonth = -1;
-
-    switch (month) {
-        case 0:
-        case 2:
-        case 4:
-        case 6:
-        case 7:
-        case 9:
-        case 11:
-            daysInMonth = 31;
-            break;
-        case 3:
-        case 5:
-        case 8:
-        case 10:
-            daysInMonth = 30;
-            break;
-        case 1:
-            const year = date.getUTCFullYear();
-
-            if (year % 4 === 0) {
-                if (year % 100 === 0) {
-                    if (year % 400 === 0) {
-                        daysInMonth = 29;
-                    } else {
-                        daysInMonth = 28;
-                    }
-                } else {
-                    daysInMonth = 29;
-                }
-            } else {
-                daysInMonth = 28;
-            }
-            break;
-    };
-
-
-    return daysInMonth;
 };
 
 export const Timeline: React.FC = () => {
@@ -101,17 +64,7 @@ export const Timeline: React.FC = () => {
         return chunks[1] + " " + chunks[3];
     };
 
-    const getAmountOfDays = (startDate: Date, endDate: Date) => {
-        // console.log(`End: ${endDate}\nStart: ${startDate}`);
-        // console.log((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-        return (endDate.getTime() - startDate.getTime())
-            / (1000 * 60 * 60 * 24);
-    };
 
-    const beautify = (str: string) => {
-        return str.replace(str.charAt(0), str.charAt(0).toUpperCase())
-            .replace(/([A-Z])/g, " $1").trim();
-    };
 
     function createTooltip(): SVGGElement {
         const tooltip =
