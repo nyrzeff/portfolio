@@ -18,53 +18,206 @@ interface Project {
 };
 
 export const Timeline: React.FC = () => {
-    let [tooltip, setTooltip] = useState<SVGGElement>();
-    const initialX = 200;
-
     let projects: Project[] = json.projects;
-
     if (!projects) return;
 
-    useEffect(() => {
-        const tt = createTooltip();
-        setTooltip(tt);
-    }, []);
+    let [tooltip, setTooltip] = useState<SVGGElement>(() => createTooltip());
 
     const oldestProjectStartDate = new Date(projects.at(0)!.startDate);
 
     const latestProject = projects.at(projects.length - 1)
     const latestProjectEndDate = latestProject!.endDate == "Present"
         ? new Date(Date.now()) : new Date(latestProject!.endDate);
-    // const lastQuarter = Math.ceil(actualDate.getMonth() / 3);
 
     let dates = [];
-    let date = new Date(oldestProjectStartDate);
+    let date = oldestProjectStartDate;
 
     dates.push(date);
 
     while (date < latestProjectEndDate) {
-        date = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
+        date = new Date(
+            date.getFullYear(),
+            date.getMonth() + 1,
+            date.getDate());
         dates.push(date);
     }
 
-    let dateX = [];
-    let c = 0;
-    const multiplier = 3;
+    useEffect(() => {
+        createGanttChart(dates);
+    }, []);
 
-    for (let date of dates) {
-        const d = getDaysInMonth(date) * multiplier;
-        dateX.push(c);
-        c += d;
+    function createGanttChart(dates: Date[]): void {
+        const fontSize = 2;
+        const ySpacing = 30;
+
+        const xOffset = 200 + (100 * fontSize);
+        let cellX = xOffset;
+        let multiplier = 1;
+        let textYOffset = 0;
+
+        const gantt = document.getElementById("gantt");
+
+        const dateContainer =
+            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        dateContainer.classList.add("date-container");
+        gantt?.appendChild(dateContainer);
+
+        for (let date of dates) {
+            // console.count("Run");
+            const formattedDate = formatDate(date);
+
+            const dateText =
+                document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+            dateText.style.fontSize = `${fontSize}rem`;
+            dateText.textContent = formattedDate;
+
+            const dateCell =
+                document.createElementNS("http://www.w3.org/2000/svg", "g");
+            dateCell?.appendChild(dateText);
+
+            dateCell.classList.add("date-cell");
+            dateContainer.appendChild(dateCell);
+
+            const days = getDaysInMonth(date);
+            const dateTextDimensions = dateText.getBoundingClientRect();
+            multiplier = Math.ceil(dateTextDimensions.width / days);
+
+            const dateRectangle =
+                document.createElementNS("http://www.w3.org/2000/svg", "rect");
+
+            dateCell?.insertAdjacentElement("afterbegin", dateRectangle);
+
+            dateRectangle.setAttribute("x", `${cellX}`);
+            dateRectangle.setAttribute("y", "0");
+            dateRectangle.setAttribute("width", `${days * multiplier}`);
+            dateRectangle.setAttribute("height", `${dateTextDimensions.height}`);
+            dateRectangle.style.fill = "white";
+
+            const cellDimensions = dateRectangle.getBoundingClientRect();
+
+            const dateTextX = cellX +
+                ((cellDimensions.width - dateTextDimensions.width) / 2);
+            textYOffset = cellDimensions.y - dateTextDimensions.y;
+            const dateTextY = textYOffset;
+
+            // console.group("Date text y");
+            // console.log("Y1");
+            // console.log(cellDimensions.y);
+            // console.log("Y2");
+            // console.log(dateTextDimensions.y);
+            // console.log("Result");
+            // console.log(cellDimensions.y - dateTextDimensions.y);
+            // console.groupEnd();
+
+            // console.group("Text Positioning");
+            // console.log("Calculation: ");
+            // console.log(`${cellX} + (${cellDimensions.width} - ${dateTextDimensions.width}) / 2`);
+            // console.log("Cx1:");
+            // console.log(cellX);
+            // console.log("Cx2:");
+            // console.log(cellX + cellDimensions.width);
+            // console.log("Tx1:");
+            // console.log(textX);
+            // console.log("Tx2:");
+            // console.log(textX + dateTextDimensions.width);
+            // console.log("Veredict: ");
+            // console.log(`Distance between Cx1 and Tx1: ${textX - cellX}`);
+            // console.log(`Distance between Cx2 and Tx2: ${(cellX + cellDimensions.width) - (textX + dateTextDimensions.width)}`);
+            // console.groupEnd();
+
+            dateText.setAttribute("x", `${dateTextX}`);
+            dateText.setAttribute("y", `${dateTextY}`);
+
+            cellX += cellDimensions.width;
+        }
+
+        let projectContainerYOffset =
+            (dateContainer.getBoundingClientRect().height) * 3;
+
+        const ganttWidth = cellX;
+
+        const projectContainer =
+            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        projectContainer.classList.add("project-container");
+        gantt?.appendChild(projectContainer);
+
+        for (let i = 0; i < projects.length; i++) {
+            const project = projects[i];
+
+            const projectTitle =
+                document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+            projectTitle.style.fontSize = `${fontSize}rem`;
+            projectTitle.style.fill = "white";
+            projectTitle.textContent = project.title;
+
+            const projectRow =
+                document.createElementNS("http://www.w3.org/2000/svg", "g");
+            projectRow?.appendChild(projectTitle);
+
+            projectRow.classList.add("project-row");
+            projectContainer.appendChild(projectRow);
+
+            const projectTitleDimensions =
+                projectTitle.getBoundingClientRect();
+
+            projectTitle.setAttribute("x", "0");
+            projectTitle.setAttribute("y",
+                `${projectContainerYOffset +
+                ((projectTitleDimensions.height + ySpacing) * i)
+                }`);
+
+            const projectBar =
+                document.createElementNS("http://www.w3.org/2000/svg", "rect");
+
+            projectRow?.appendChild(projectBar);
+
+            projectBar.classList.add("project-bar");
+            projectBar.style.fill = "#4d94ff";
+
+            projectBar.setAttribute("width", `${(getAmountOfDays(
+                new Date(project.startDate),
+                project.endDate === "Present"
+                    ? new Date(Date.now())
+                    : new Date(project.endDate))) * multiplier
+                } `);
+
+            projectBar.setAttribute("height",
+                `${projectTitleDimensions.height}`);
+
+            projectBar.addEventListener("mouseenter", (e) => {
+                displayTooltip(e, project);
+            });
+
+            projectBar.addEventListener("mouseleave", () => {
+                if (tooltip)
+                    tooltip.style.display = "none";
+            });
+
+            projectBar.setAttribute("x", `${xOffset + ((getAmountOfDays(
+                new Date(
+                    oldestProjectStartDate.getUTCFullYear(),
+                    oldestProjectStartDate.getMonth(),
+                    1,
+                ),
+                new Date(project.startDate))) * multiplier)}`);
+
+            projectBar.setAttribute("y",
+                `${(projectContainerYOffset - textYOffset) +
+                ((projectTitleDimensions.height + ySpacing) * i)}`);
+        }
+
+        const projectContainerHeight =
+            projectContainer?.getBoundingClientRect().height as number;
+        const additionalY =
+            parseInt((projectContainer?.firstChild?.firstChild as HTMLElement)
+                .attributes[2].value);
+
+        gantt?.setAttribute("width", `${ganttWidth} `);
+        gantt?.setAttribute("height",
+            `${projectContainerHeight + additionalY} `);
     }
-
-    // console.log(dates);
-
-    const formatQuarter = (date: Date) => {
-        const chunks = date.toDateString().split(" ");
-        return chunks[1] + " " + chunks[3];
-    };
-
-
 
     function createTooltip(): SVGGElement {
         const tooltip =
@@ -82,6 +235,7 @@ export const Timeline: React.FC = () => {
             document.createElementNS("http://www.w3.org/2000/svg", "text");
 
         text.style.fill = "white";
+        text.style.fontSize = "1rem";
 
         let fragments = [];
 
@@ -97,10 +251,8 @@ export const Timeline: React.FC = () => {
         return tooltip;
     }
 
-    const displayTooltip = (e: any, project: Project) => {
+    const displayTooltip = (e: any, project: Project): void => {
         if (!tooltip) return;
-
-        // console.log(e);
 
         tooltip.style.display = "block";
 
@@ -110,16 +262,11 @@ export const Timeline: React.FC = () => {
         const b = gantt.getBoundingClientRect();
 
         const tooltipX = (e.clientX - b.x) - padding;
-        const tooltipY = (e.clientY - b.y) - padding;
+        // const tooltipY = (e.clientY - b.y) - padding;
+        const tooltipY = (e.clientY - b.y) - 100;
 
         tooltip.setAttribute("x", tooltipX.toString());
         tooltip.setAttribute("y", tooltipY.toString());
-
-        console.log(`
-                    Client X: ${e.clientX} | SVG X: ${b.x}\n
-                    Client Y: ${e.clientY} | SVG Y: ${b.y}\n
-                    Final X: ${tooltipX} | Final Y: ${tooltipY}\n
-                    `);
 
         const textX = tooltipX + padding;
         let textY = 0;
@@ -129,9 +276,6 @@ export const Timeline: React.FC = () => {
 
         if (!tooltipContainer || !tooltipText) return;
 
-        // tooltip.insertAdjacentElement("beforeend", tooltipContainer);
-        // tooltip.insertAdjacentElement("beforeend", tooltipText);
-
         let textFragments = tooltipText.children;
 
         for (let i = 0; i < Object.keys(project).length; i++) {
@@ -139,8 +283,9 @@ export const Timeline: React.FC = () => {
 
             textY = tooltipY + 20 * (i + 1);
 
-            textFragments[i].innerHTML =
-                `${beautify(property[0])}: ${property[1]}`;
+            textFragments[i].textContent =
+                `${beautify(property[0])
+                }: ${property[1]} `;
             textFragments[i].setAttribute("x", textX.toString());
             textFragments[i].setAttribute("y", textY.toString());
         }
@@ -164,70 +309,7 @@ export const Timeline: React.FC = () => {
                 <h2>Timeline</h2>
             </header>
             <div className="container">
-                <svg
-                    id="gantt"
-                    // width={timescaleWidth * dates.length}
-                    width="2000px"
-                    height={90 * projects.length}
-                >
-                    {dates.map((date, i) => (
-                        <g className="date-container">
-                            <rect
-                                fill="white"
-                                x={initialX + dateX[i]}
-                                y="10"
-                                width={getDaysInMonth(date) * multiplier}
-                                height="45"
-                            />
-                            <text
-                                x={(initialX + 20) + dateX[i]}
-                                y="40"
-                            >
-                                {formatQuarter(date)}
-                            </text>
-                        </g>
-                    ))}
-                    {projects.map((project, i) => (
-                        <g className="project-container">
-                            <text
-                                fill="white"
-                                x="10"
-                                y={120 + (70 * i)}
-                            >
-                                {project.title}
-                            </text>
-                            <rect
-                                className="project"
-                                fill="#4d94ff"
-                                x={initialX + ((getAmountOfDays(
-                                    new Date(
-                                        oldestProjectStartDate.getUTCFullYear(),
-                                        oldestProjectStartDate.getMonth(),
-                                        1,
-                                    ),
-                                    new Date(project.startDate))) *
-                                    multiplier)
-                                }
-                                y={100 + (70 * i)}
-                                width={(getAmountOfDays(new Date(
-                                    project.startDate),
-                                    project.endDate === "Present"
-                                        ? new Date(Date.now())
-                                        : new Date(project.endDate)))
-                                    * multiplier
-                                }
-                                height="30"
-                                onMouseEnter={(e) => {
-                                    displayTooltip(e, project)
-                                }}
-                                onMouseLeave={() => {
-                                    if (tooltip)
-                                        tooltip.style.display = "none";
-                                }}
-                            />
-                        </g>
-                    ))}
-                </svg>
+                <svg id="gantt" />
             </div>
         </section >
     );

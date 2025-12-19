@@ -6,18 +6,19 @@
 }
 
 #gantt {
-    width: auto;
+    width: fit-content;
     height: fit-content;
     stroke: none;
     overflow: scroll;
 
-    .date-container {
+    .date-cell {
         outline: 1px solid black;
     }
 
     text {
         color: white;
-        font-size: 0.8rem;
+        font-size: 3rem;
+        /* font-size: 10rem; */
         font-weight: bold;
     }
 
@@ -25,7 +26,7 @@
         pointer-events: none;
     }
 
-    .project {
+    .project-bar {
         cursor: help;
     }
 }
