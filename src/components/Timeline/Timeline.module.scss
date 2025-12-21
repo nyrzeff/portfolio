@@ -13,6 +13,13 @@
   font-size: 2rem;
   overflow-y: scroll;
   outline: 1px solid red;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .timeline-header {
