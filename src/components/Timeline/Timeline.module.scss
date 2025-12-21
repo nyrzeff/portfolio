@@ -4,6 +4,7 @@
   background: $color-canvas;
   margin: 3rem auto;
   width: 90dvw;
+  height: auto;
   max-height: 90vh;
 
   color: white;
@@ -11,6 +12,7 @@
   padding: 1.5rem 0;
   font-size: 2rem;
   overflow-y: scroll;
+  outline: 1px solid red;
 }
 
 .timeline-header {

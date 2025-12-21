@@ -3,22 +3,20 @@
     overflow: scroll;
     width: auto;
     height: fit-content;
+    outline: 1px solid blue;
 }
 
 #gantt {
     width: fit-content;
     height: fit-content;
+    outline: 1px solid green;
     stroke: none;
-    overflow: scroll;
 
-    .date-cell {
-        outline: 1px solid black;
+    .date-rectangle {
+        stroke: red;
     }
 
     text {
-        color: white;
-        font-size: 3rem;
-        /* font-size: 10rem; */
         font-weight: bold;
     }
 
