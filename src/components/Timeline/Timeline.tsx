@@ -163,7 +163,7 @@ export const Timeline: React.FC = () => {
                 document.createElementNS("http://www.w3.org/2000/svg", "rect");
             dateRect.classList.add("date-rect");
             dateRect.setAttribute("x", `${dateRectX}`);
-            dateRect.setAttribute("y", "0");
+            dateRect.setAttribute("y", "1");
             dateRect.setAttribute("width", `${days * multiplier}px`);
             dateRect.setAttribute("height",
                 `${dateTextDim.height * 2}px`);
@@ -181,31 +181,6 @@ export const Timeline: React.FC = () => {
             const dateTextY: number = textYOffset +
                 ((dateRectDim.height -
                     dateTextDim.height) / 2);
-
-            // console.group("Date text y");
-            // console.log("Y1");
-            // console.log(dateRectDim.y);
-            // console.log("Y2");
-            // console.log(dateTextDim.y);
-            // console.log("Result");
-            // console.log(dateRectDim.y - dateTextDim.y);
-            // console.groupEnd();
-            //
-            // console.group("Text Positioning");
-            // console.log("Calculation: ");
-            // console.log(`${dateRectX} + (${dateRectDim.width} - ${dateTextDim.width}) / 2`);
-            // console.log("Cx1:");
-            // console.log(dateRectX);
-            // console.log("Cx2:");
-            // console.log(dateRectX + dateRectDim.width);
-            // console.log("Tx1:");
-            // console.log(dateTextX);
-            // console.log("Tx2:");
-            // console.log(dateTextX + dateTextDim.width);
-            // console.log("Veredict: ");
-            // console.log(`Distance between Cx1 and Tx1: ${dateTextX - dateRectX}`);
-            // console.log(`Distance between Cx2 and Tx2: ${(dateRectX + dateRectDim.width) - (dateTextX + dateTextDim.width)}`);
-            // console.groupEnd();
 
             dateText.setAttribute("x", `${dateTextX}`);
             dateText.setAttribute("y", `${dateTextY}`);
