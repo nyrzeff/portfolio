@@ -1,16 +1,8 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-$color-canvas-shade: #0a0b0b;
-
 .stack {
-  $color-core-tone: #5c8ed9;
-  $color-highlight-tone: #46c5c7;
-
-  background: radial-gradient(circle,
-      rgba($color-core-tone, 0.15) 30%,
-      rgba($color-highlight-tone, 0.15) 70%,
-      rgba($color-canvas-shade, 0.7) 90%);
+  background: linear-gradient(145deg, $color-canvas, #080808);
 
   color: $color-text;
   height: fit-content;
@@ -18,7 +10,6 @@ $color-canvas-shade: #0a0b0b;
   width: 90dvw;
   margin: 3rem auto;
   padding: 1.5rem;
-  border: 1px solid $color-canvas-shade;
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 2rem;

@@ -1,9 +1,8 @@
 @use "/src/styles/variables.scss" as *;
 @use "sass:color";
 
-$desktop-width: 70dvw;
 $navlink-color: #616262;
-$color-canvas-shade: #0a0b0b;
+$color-canvas-shade: #080808;
 
 footer {
   display: flex;
@@ -12,7 +11,6 @@ footer {
   align-items: center;
   gap: 1rem;
 
-  background: $color-canvas-shade;
   width: 100dvw;
   padding: 0 5dvw;
   font-size: 1.5rem;
@@ -244,9 +242,6 @@ svg {
     width: 70dvw;
     align-items: center;
     margin: 0 auto;
-    background: radial-gradient(circle,
-        $color-canvas-shade,
-        rgba($color-canvas-shade, 0.7) 90%);
 
     .footer-main {
       flex-direction: row;
@@ -287,7 +282,7 @@ svg {
 
     .footer-simple-divider {
       display: inline;
-      width: $desktop-width;
+      width: 70dvw;
     }
   }
 }

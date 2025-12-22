@@ -1,7 +1,7 @@
 @use "/src/styles/variables.scss" as *;
 
 .timeline {
-  background: $color-canvas;
+  background: linear-gradient(145deg, $color-canvas, #080808);
   margin: 3rem auto;
   width: 90dvw;
   height: auto;
