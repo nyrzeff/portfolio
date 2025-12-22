@@ -3,7 +3,7 @@
     overflow: scroll;
     width: auto;
     height: fit-content;
-    outline: 1px solid blue;
+    /* outline: 1px solid blue; */
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -16,11 +16,11 @@
 #gantt {
     width: fit-content;
     height: fit-content;
-    outline: 1px solid green;
+    /* outline: 1px solid green; */
     stroke: none;
 
     .date-rectangle {
-        stroke: red;
+        stroke: #4d94ff;
     }
 
     text {

@@ -269,7 +269,7 @@ export const Timeline: React.FC = () => {
             document.createElementNS("http://www.w3.org/2000/svg", "text");
 
         text.style.fill = "white";
-        text.style.fontSize = `${fontSize}em`;
+        text.style.fontSize = `${fontSize / 1.5}em`;
 
         let fragments = [];
 
@@ -292,47 +292,97 @@ export const Timeline: React.FC = () => {
             tooltip.style.display = "block";
         }
 
-        const padding = 10;
+        const padding: number = 10;
 
-        const gantt = e.relatedTarget;
-        const b = gantt.getBoundingClientRect();
+        const gantt: HTMLElement = e.relatedTarget;
 
-        const tooltipX = (e.clientX - b.x) - padding;
-        const tooltipY = (e.clientY - b.y) - 100;
+        if (!gantt) {
+            tooltip.style.display = "none";
+            return;
+        }
 
-        tooltip.setAttribute("x", tooltipX.toString());
-        tooltip.setAttribute("y", tooltipY.toString());
+        const ganttDimensions: DOMRect = gantt.getBoundingClientRect();
 
-        const textX = tooltipX + padding;
+        let tooltipX: number = (e.clientX - ganttDimensions.x) - padding;
+        let tooltipY: number = (e.clientY - ganttDimensions.y) - 100;
 
-        const tooltipContainer = tooltip.children[0] as HTMLElement;
+        let textX: number = tooltipX + padding;
+
+        const tooltipRectangle = tooltip.children[0] as HTMLElement;
         const tooltipText = tooltip.children[1] as HTMLElement;
 
-        if (!tooltipContainer || !tooltipText) return;
+        if (!tooltipRectangle || !tooltipText) return;
 
-        let textFragments = tooltipText.children;
+        let textFragments: HTMLCollection = tooltipText.children;
 
-        for (let i = 0; i < Object.keys(project!).length; i++) {
-            const property = Object.entries(project!)[i];
+        let widestSpanWidth: number = 0;
 
-            const spanDimensions = textFragments[i].getBoundingClientRect()
-            const textY = tooltipY + (spanDimensions.height * (i + 1));
+        const amountOfProperties: number = Object.keys(project).length;
+
+        for (let i = 0; i < amountOfProperties; i++) {
+            const property: [string, any] = Object.entries(project!)[i];
+
+            let spanDimensions: DOMRect =
+                textFragments[i].getBoundingClientRect();
+
+            let textY: number =
+                tooltipY + (spanDimensions.height * (i + 1));
 
             textFragments[i].textContent =
                 `${beautify(property[0])}: ${property[1]}`;
-            textFragments[i].setAttribute("x", textX.toString());
-            textFragments[i].setAttribute("y", textY.toString());
+            textFragments[i].setAttribute("x", `${textX}`);
+            textFragments[i].setAttribute("y", `${textY}`);
+
+            // get freshly computed span dimensions
+            spanDimensions = textFragments[i].getBoundingClientRect();
+
+            if (spanDimensions.width > widestSpanWidth)
+                widestSpanWidth = spanDimensions.width;
+
+            // avoid computing multiple times
+            const estimatedRectangleHeight =
+                spanDimensions.height * amountOfProperties
+                + padding * 2;
+
+            if (tooltipY + estimatedRectangleHeight >
+                ganttDimensions.height) {
+                const visibleRectangleHeight: number =
+                    ganttDimensions.height - tooltipY;
+                const yOffset: number =
+                    estimatedRectangleHeight - visibleRectangleHeight;
+
+                textY -= yOffset;
+                tooltipY -= yOffset;
+
+                textFragments[i].setAttribute("y", `${textY}`);
+            }
         }
 
-        tooltipContainer.setAttribute("x", tooltipX.toString());
-        tooltipContainer.setAttribute("y", tooltipY.toString());
+        widestSpanWidth += padding;
 
-        const textDimensions = tooltipText.getBoundingClientRect();
-        const width = textDimensions.width + padding * 2;
-        const height = textDimensions.height + padding * 2;
+        if (textX + widestSpanWidth > ganttDimensions.width) {
+            for (let i = 0; i < Object.keys(project!).length; i++) {
+                const visibleTextWidth: number =
+                    ganttDimensions.width - textX;
+                const xOffset: number =
+                    widestSpanWidth - visibleTextWidth;
 
-        tooltipContainer.setAttribute("width", `${width}px`);
-        tooltipContainer.setAttribute("height", `${height}px`);
+                textX -= xOffset;
+                tooltipX -= xOffset;
+
+                textFragments[i].setAttribute("x", `${textX}`);
+            }
+        }
+
+        const textDimensions: DOMRect = tooltipText.getBoundingClientRect();
+        const width: number = textDimensions.width + padding * 2;
+        const height: number = textDimensions.height + padding * 2;
+
+        tooltipRectangle.setAttribute("x", `${tooltipX}`);
+        tooltipRectangle.setAttribute("y", `${tooltipY}`);
+
+        tooltipRectangle.setAttribute("width", `${width}px`);
+        tooltipRectangle.setAttribute("height", `${height}px`);
 
         gantt.appendChild(tooltip);
 
