@@ -21,7 +21,10 @@ export const Timeline: React.FC = () => {
     let projects: Project[] = json.projects;
     if (!projects) return;
 
-    let [tooltip, setTooltip] = useState<SVGGElement>(() => createTooltip());
+    let fontSize = 1;
+    let [tooltip] = useState<SVGGElement>(() => createTooltip());
+
+    let hasBeenExecutedOnce = false;
 
     const oldestProjectStartDate = new Date(projects.at(0)!.startDate);
 
@@ -47,7 +50,6 @@ export const Timeline: React.FC = () => {
     }, []);
 
     function createGanttChart(dates: Date[]): void {
-        const fontSize = 3;
         const ySpacing = 30;
 
         const xOffset = fontSize * 100;
@@ -74,7 +76,7 @@ export const Timeline: React.FC = () => {
                 document.createElementNS("http://www.w3.org/2000/svg", "text");
 
             dateText.style.fill = "white";
-            dateText.style.fontSize = `${fontSize}rem`;
+            dateText.style.fontSize = `${fontSize}em`;
             dateText.textContent = formattedDate;
 
             const dateCell =
@@ -101,7 +103,8 @@ export const Timeline: React.FC = () => {
             dateRectangle.setAttribute("y", "0");
             dateRectangle.setAttribute("width", `${days * multiplier}px`);
             dateRectangle
-                .setAttribute("height", `${dateTextDimensions.height}px`);
+                .setAttribute("height",
+                    `${dateTextDimensions.height * 2}px`);
             dateRectangle.style.fill = "#0f0f0f";
 
             const dateRectangleDimensions =
@@ -113,7 +116,8 @@ export const Timeline: React.FC = () => {
                     / 2);
 
             textYOffset = dateRectangleDimensions.y - dateTextDimensions.y;
-            const dateTextY = textYOffset;
+            const dateTextY = textYOffset + ((dateRectangleDimensions.height
+                - dateTextDimensions.height) / 2);
 
             // console.group("Date text y");
             // console.log("Y1");
@@ -162,7 +166,7 @@ export const Timeline: React.FC = () => {
             const projectTitle =
                 document.createElementNS("http://www.w3.org/2000/svg", "text");
 
-            projectTitle.style.fontSize = `${fontSize}rem`;
+            projectTitle.style.fontSize = `${fontSize}em`;
             projectTitle.style.fill = "white";
             projectTitle.textContent = project.title;
 
@@ -190,12 +194,15 @@ export const Timeline: React.FC = () => {
             projectBar.classList.add("project-bar");
             projectBar.style.fill = "#4d94ff";
 
-            projectBar.setAttribute("width", `${(getAmountOfDays(
+            const elapsedDays = getAmountOfDays(
                 new Date(project.startDate),
                 project.endDate === "Present"
                     ? new Date(Date.now())
-                    : new Date(project.endDate))) * multiplier
-                } `);
+                    : new Date(project.endDate)
+            );
+
+            projectBar.setAttribute("width",
+                `${elapsedDays * multiplier}`);
 
             projectBar.setAttribute("height",
                 `${projectTitleDimensions.height}`);
@@ -231,7 +238,7 @@ export const Timeline: React.FC = () => {
         gantt?.setAttribute("width", `${ganttWidth}px`);
         gantt?.setAttribute("height", `${ganttHeight}px`);
 
-        gantt!.style.width = `${ganttWidth}px`;
+        gantt!.style.width = `${ganttWidth + 1}px`;
         gantt!.style.height = `${ganttHeight}px`;
 
         const containerHeight = container?.getBoundingClientRect().height;
@@ -247,11 +254,11 @@ export const Timeline: React.FC = () => {
     }
 
     function createTooltip(): SVGGElement {
-        const tooltip =
+        const tt =
             document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-        tooltip.classList.add("tooltip");
-        tooltip.style.display = "none";
+        tt.classList.add("tooltip");
+        tt.style.display = "none";
 
         const rectangle =
             document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -262,7 +269,7 @@ export const Timeline: React.FC = () => {
             document.createElementNS("http://www.w3.org/2000/svg", "text");
 
         text.style.fill = "white";
-        text.style.fontSize = "1rem";
+        text.style.fontSize = `${fontSize}em`;
 
         let fragments = [];
 
@@ -272,16 +279,18 @@ export const Timeline: React.FC = () => {
             text.appendChild(fragments[i]);
         }
 
-        tooltip.insertAdjacentElement("beforeend", rectangle);
-        tooltip.insertAdjacentElement("beforeend", text);
+        tt.insertAdjacentElement("beforeend", rectangle);
+        tt.insertAdjacentElement("beforeend", text);
 
-        return tooltip;
+        return tt;
     }
 
     const displayTooltip = (e: any, project: Project): void => {
         if (!tooltip) return;
 
-        tooltip.style.display = "block";
+        if (hasBeenExecutedOnce) {
+            tooltip.style.display = "block";
+        }
 
         const padding = 10;
 
@@ -295,7 +304,6 @@ export const Timeline: React.FC = () => {
         tooltip.setAttribute("y", tooltipY.toString());
 
         const textX = tooltipX + padding;
-        let textY = 0;
 
         const tooltipContainer = tooltip.children[0] as HTMLElement;
         const tooltipText = tooltip.children[1] as HTMLElement;
@@ -304,10 +312,11 @@ export const Timeline: React.FC = () => {
 
         let textFragments = tooltipText.children;
 
-        for (let i = 0; i < Object.keys(project).length; i++) {
-            const property = Object.entries(project)[i];
+        for (let i = 0; i < Object.keys(project!).length; i++) {
+            const property = Object.entries(project!)[i];
 
-            textY = tooltipY + 20 * (i + 1);
+            const spanDimensions = textFragments[i].getBoundingClientRect()
+            const textY = tooltipY + (spanDimensions.height * (i + 1));
 
             textFragments[i].textContent =
                 `${beautify(property[0])}: ${property[1]}`;
@@ -326,6 +335,8 @@ export const Timeline: React.FC = () => {
         tooltipContainer.setAttribute("height", `${height}px`);
 
         gantt.appendChild(tooltip);
+
+        hasBeenExecutedOnce = true;
     };
 
     return (
