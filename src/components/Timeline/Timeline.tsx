@@ -250,11 +250,6 @@ export const Timeline: React.FC = () => {
                 ?.getBoundingClientRect().height;
 
         if (containerHeight && timelineHeaderHeight) {
-            console.log("Container height: ");
-            console.log(containerHeight);
-            console.log("Timeline header height: ");
-            console.log(timelineHeaderHeight);
-
             document.getElementById("timeline")!.style.height =
                 `${containerHeight + timelineHeaderHeight}px`;
         }
