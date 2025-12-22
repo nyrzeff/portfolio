@@ -21,19 +21,26 @@ export const Timeline: React.FC = () => {
     let projects: Project[] = json.projects;
     if (!projects) return;
 
-    let fontSize = 1;
+    let fontSize: number = 1;
+    const defaultPadding: number = 50;
+
     let [tooltip] = useState<SVGGElement>(() => createTooltip());
 
-    let hasBeenExecutedOnce = false;
+    let hasBeenExecutedOnce: boolean = false;
 
-    const oldestProjectStartDate = new Date(projects.at(0)!.startDate);
+    const oldestProjectStartDate: Date =
+        new Date(projects.at(0)!.startDate);
 
-    const latestProject = projects.at(projects.length - 1)
-    const latestProjectEndDate = latestProject!.endDate == "Present"
-        ? new Date(Date.now()) : new Date(latestProject!.endDate);
+    const latestProject: Project | undefined =
+        projects.at(projects.length - 1);
 
-    let dates = [];
-    let date = oldestProjectStartDate;
+    if (!latestProject) return;
+
+    const latestProjectEndDate: Date = latestProject.endDate == "Present"
+        ? new Date(Date.now()) : new Date(latestProject.endDate);
+
+    let dates: Date[] = [];
+    let date: Date = oldestProjectStartDate;
 
     dates.push(date);
 
@@ -50,7 +57,7 @@ export const Timeline: React.FC = () => {
     }, []);
 
     function createGanttChart(dates: Date[]): void {
-        const ySpacing: number = 30;
+        const ySpacing: number = defaultPadding;
         let xOffset: number = 0;
         let dateRectX: number = 0;
         let multiplier: number = -1;
@@ -121,19 +128,7 @@ export const Timeline: React.FC = () => {
             });
         }
 
-        const containerHeight: number =
-            container.getBoundingClientRect().height;
-
-        const timelineHeaderHeight: number | undefined =
-            document.querySelector("#timeline > header")
-                ?.getBoundingClientRect().height;
-
-        if (containerHeight && timelineHeaderHeight) {
-            document.getElementById("timeline")!.style.height =
-                `${containerHeight + timelineHeaderHeight}px`;
-        }
-
-        xOffset = dateRectX = widestProjTitleWidth + 30;
+        xOffset = dateRectX = widestProjTitleWidth + defaultPadding;
 
         for (let date of dates) {
             const formattedDate: string = formatDate(date);
@@ -192,7 +187,7 @@ export const Timeline: React.FC = () => {
             dateContainer.getBoundingClientRect();
 
         projContainerYOffset =
-            dateContainerDim.height + textYOffset + 30;
+            dateContainerDim.height + textYOffset + defaultPadding;
 
         const ganttWidth: number = dateRectX;
 
@@ -246,6 +241,23 @@ export const Timeline: React.FC = () => {
 
         gantt.setAttribute("height", `${ganttHeight}px`);
         gantt.style.height = `${ganttHeight}px`;
+
+        const containerHeight: number =
+            container.getBoundingClientRect().height;
+
+        const timelineHeaderHeight: number | undefined =
+            document.querySelector("#timeline > header")
+                ?.getBoundingClientRect().height;
+
+        if (containerHeight && timelineHeaderHeight) {
+            console.log("Container height: ");
+            console.log(containerHeight);
+            console.log("Timeline header height: ");
+            console.log(timelineHeaderHeight);
+
+            document.getElementById("timeline")!.style.height =
+                `${containerHeight + timelineHeaderHeight}px`;
+        }
     }
 
     function createTooltip(): SVGGElement {
