@@ -50,200 +50,81 @@ export const Timeline: React.FC = () => {
     }, []);
 
     function createGanttChart(dates: Date[]): void {
-        const ySpacing = 30;
+        const ySpacing: number = 30;
+        let xOffset: number = 0;
+        let dateRectX: number = 0;
+        let multiplier: number = -1;
+        let textYOffset: number = 0;
 
-        const xOffset = fontSize * 100;
-        let dateRectangleX = xOffset;
-        let multiplier = -1;
-        let textYOffset = 0;
-
-        const gantt =
-            document.getElementById("gantt");
-
-        const container =
+        const container: HTMLElement | null =
             document.querySelector(".container");
 
-        const dateContainer =
+        if (!container) return;
+
+        const gantt: HTMLElement | null =
+            document.getElementById("gantt");
+
+        if (!gantt) return;
+
+        let projContainerYOffset: number = 0;
+
+        const projContainer: SVGGElement =
+            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        projContainer.classList.add("proj-container");
+        gantt.appendChild(projContainer);
+
+        const dateContainer: SVGGElement =
             document.createElementNS("http://www.w3.org/2000/svg", "g");
         dateContainer.classList.add("date-container");
         gantt?.appendChild(dateContainer);
 
-        for (let date of dates) {
-            // console.count("Run");
-            const formattedDate = formatDate(date);
-
-            const dateText =
-                document.createElementNS("http://www.w3.org/2000/svg", "text");
-
-            dateText.style.fill = "white";
-            dateText.style.fontSize = `${fontSize}em`;
-            dateText.textContent = formattedDate;
-
-            const dateCell =
-                document.createElementNS("http://www.w3.org/2000/svg", "g");
-            dateCell?.appendChild(dateText);
-
-            dateCell.classList.add("date-cell");
-            dateContainer.appendChild(dateCell);
-
-            const days = getDaysInMonth(date);
-            const dateTextDimensions = dateText.getBoundingClientRect();
-
-            if (multiplier === -1)
-                multiplier =
-                    (Math.ceil(dateTextDimensions.width / days) * 1.3);
-
-            const dateRectangle =
-                document.createElementNS("http://www.w3.org/2000/svg", "rect");
-
-            dateCell?.insertAdjacentElement("afterbegin", dateRectangle);
-
-            dateRectangle.classList.add("date-rectangle");
-            dateRectangle.setAttribute("x", `${dateRectangleX}`);
-            dateRectangle.setAttribute("y", "0");
-            dateRectangle.setAttribute("width", `${days * multiplier}px`);
-            dateRectangle
-                .setAttribute("height",
-                    `${dateTextDimensions.height * 2}px`);
-            dateRectangle.style.fill = "#0f0f0f";
-
-            const dateRectangleDimensions =
-                dateRectangle.getBoundingClientRect();
-
-            const dateTextX =
-                dateRectangleX
-                + ((dateRectangleDimensions.width - dateTextDimensions.width)
-                    / 2);
-
-            textYOffset = dateRectangleDimensions.y - dateTextDimensions.y;
-            const dateTextY = textYOffset + ((dateRectangleDimensions.height
-                - dateTextDimensions.height) / 2);
-
-            // console.group("Date text y");
-            // console.log("Y1");
-            // console.log(dateRectangleDimensions.y);
-            // console.log("Y2");
-            // console.log(dateTextDimensions.y);
-            // console.log("Result");
-            // console.log(dateRectangleDimensions.y - dateTextDimensions.y);
-            // console.groupEnd();
-            //
-            // console.group("Text Positioning");
-            // console.log("Calculation: ");
-            // console.log(`${dateRectangleX} + (${dateRectangleDimensions.width} - ${dateTextDimensions.width}) / 2`);
-            // console.log("Cx1:");
-            // console.log(dateRectangleX);
-            // console.log("Cx2:");
-            // console.log(dateRectangleX + dateRectangleDimensions.width);
-            // console.log("Tx1:");
-            // console.log(dateTextX);
-            // console.log("Tx2:");
-            // console.log(dateTextX + dateTextDimensions.width);
-            // console.log("Veredict: ");
-            // console.log(`Distance between Cx1 and Tx1: ${dateTextX - dateRectangleX}`);
-            // console.log(`Distance between Cx2 and Tx2: ${(dateRectangleX + dateRectangleDimensions.width) - (dateTextX + dateTextDimensions.width)}`);
-            // console.groupEnd();
-
-            dateText.setAttribute("x", `${dateTextX}`);
-            dateText.setAttribute("y", `${dateTextY}`);
-
-            dateRectangleX += dateRectangleDimensions.width;
-        }
-
-        let projectContainerYOffset =
-            (dateContainer.getBoundingClientRect().height) * 6;
-
-        const ganttWidth = dateRectangleX;
-
-        const projectContainer =
-            document.createElementNS("http://www.w3.org/2000/svg", "g");
-        projectContainer.classList.add("project-container");
-        gantt?.appendChild(projectContainer);
+        let widestProjTitleWidth: number = 0;
 
         for (let i = 0; i < projects.length; i++) {
-            const project = projects[i];
+            const proj: Project = projects[i];
 
-            const projectTitle =
-                document.createElementNS("http://www.w3.org/2000/svg", "text");
-
-            projectTitle.style.fontSize = `${fontSize}em`;
-            projectTitle.style.fill = "white";
-            projectTitle.textContent = project.title;
-
-            const projectRow =
+            const projRow: SVGGElement =
                 document.createElementNS("http://www.w3.org/2000/svg", "g");
-            projectRow?.appendChild(projectTitle);
+            projRow.classList.add("proj-row");
+            projContainer.appendChild(projRow);
 
-            projectRow.classList.add("project-row");
-            projectContainer.appendChild(projectRow);
+            const projTitle: SVGTextElement =
+                document.createElementNS("http://www.w3.org/2000/svg", "text");
+            projTitle.style.fontSize = `${fontSize}em`;
+            projTitle.style.fill = "white";
+            projTitle.textContent = proj.title;
+            projRow.appendChild(projTitle);
 
-            const projectTitleDimensions =
-                projectTitle.getBoundingClientRect();
-
-            projectTitle.setAttribute("x", "0");
-            projectTitle.setAttribute("y",
-                `${projectContainerYOffset +
-                ((projectTitleDimensions.height + ySpacing) * i)
-                }`);
-
-            const projectBar =
+            const projBar: SVGRectElement =
                 document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            projBar.classList.add("proj-bar");
+            projBar.style.fill = "#4d94ff";
+            projRow.appendChild(projBar);
 
-            projectRow?.appendChild(projectBar);
+            const projTitleDim: DOMRect =
+                projTitle.getBoundingClientRect();
 
-            projectBar.classList.add("project-bar");
-            projectBar.style.fill = "#4d94ff";
+            if (projTitleDim.width > widestProjTitleWidth)
+                widestProjTitleWidth = projTitleDim.width;
 
-            const elapsedDays = getAmountOfDays(
-                new Date(project.startDate),
-                project.endDate === "Present"
-                    ? new Date(Date.now())
-                    : new Date(project.endDate)
-            );
+            projTitle.setAttribute("x", "0");
+            projTitle.setAttribute("y",
+                `${(projTitleDim.height + ySpacing) * i}`);
 
-            projectBar.setAttribute("width",
-                `${elapsedDays * multiplier}`);
-
-            projectBar.setAttribute("height",
-                `${projectTitleDimensions.height}`);
-
-            projectBar.addEventListener("mouseenter", (e) => {
-                displayTooltip(e, project);
+            projBar.addEventListener("mouseenter", (e) => {
+                displayTooltip(e, proj);
             });
 
-            projectBar.addEventListener("mouseleave", () => {
+            projBar.addEventListener("mouseleave", () => {
                 if (tooltip)
                     tooltip.style.display = "none";
             });
-
-            projectBar.setAttribute("x", `${xOffset + ((getAmountOfDays(
-                new Date(
-                    oldestProjectStartDate.getUTCFullYear(),
-                    oldestProjectStartDate.getMonth(),
-                    1,
-                ),
-                new Date(project.startDate))) * multiplier)}`);
-
-            projectBar.setAttribute("y",
-                `${(projectContainerYOffset - textYOffset) +
-                ((projectTitleDimensions.height + ySpacing) * i)}`);
         }
 
-        const projectContainerHeight =
-            projectContainer?.getBoundingClientRect().height as number;
+        const containerHeight: number =
+            container.getBoundingClientRect().height;
 
-        const ganttHeight =
-            projectContainerHeight + projectContainerYOffset;
-
-        gantt?.setAttribute("width", `${ganttWidth}px`);
-        gantt?.setAttribute("height", `${ganttHeight}px`);
-
-        gantt!.style.width = `${ganttWidth + 1}px`;
-        gantt!.style.height = `${ganttHeight}px`;
-
-        const containerHeight = container?.getBoundingClientRect().height;
-
-        const timelineHeaderHeight =
+        const timelineHeaderHeight: number | undefined =
             document.querySelector("#timeline > header")
                 ?.getBoundingClientRect().height;
 
@@ -251,6 +132,145 @@ export const Timeline: React.FC = () => {
             document.getElementById("timeline")!.style.height =
                 `${containerHeight + timelineHeaderHeight}px`;
         }
+
+        xOffset = dateRectX = widestProjTitleWidth + 30;
+
+        for (let date of dates) {
+            const formattedDate: string = formatDate(date);
+
+            const dateCell: SVGGElement =
+                document.createElementNS("http://www.w3.org/2000/svg", "g");
+            dateCell.classList.add("date-cell");
+            dateContainer.appendChild(dateCell);
+
+            const dateText: SVGTextElement =
+                document.createElementNS("http://www.w3.org/2000/svg", "text");
+            dateText.style.fill = "white";
+            dateText.style.fontSize = `${fontSize}em`;
+            dateText.textContent = formattedDate;
+            dateCell.appendChild(dateText);
+
+            const days: number = getDaysInMonth(date);
+            const dateTextDim: DOMRect =
+                dateText.getBoundingClientRect();
+
+            // all cells need to be multiplied by the same number
+            if (multiplier === -1)
+                multiplier =
+                    (Math.ceil(dateTextDim.width / days) * 1.3);
+
+            const dateRect: SVGRectElement =
+                document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            dateRect.classList.add("date-rect");
+            dateRect.setAttribute("x", `${dateRectX}`);
+            dateRect.setAttribute("y", "0");
+            dateRect.setAttribute("width", `${days * multiplier}px`);
+            dateRect.setAttribute("height",
+                `${dateTextDim.height * 2}px`);
+            dateRect.style.fill = "#0f0f0f";
+            dateCell.insertAdjacentElement("afterbegin", dateRect);
+
+            const dateRectDim: DOMRect =
+                dateRect.getBoundingClientRect();
+
+            const dateTextX: number = dateRectX +
+                ((dateRectDim.width -
+                    dateTextDim.width) / 2);
+
+            textYOffset = dateRectDim.y - dateTextDim.y;
+            const dateTextY: number = textYOffset +
+                ((dateRectDim.height -
+                    dateTextDim.height) / 2);
+
+            // console.group("Date text y");
+            // console.log("Y1");
+            // console.log(dateRectDim.y);
+            // console.log("Y2");
+            // console.log(dateTextDim.y);
+            // console.log("Result");
+            // console.log(dateRectDim.y - dateTextDim.y);
+            // console.groupEnd();
+            //
+            // console.group("Text Positioning");
+            // console.log("Calculation: ");
+            // console.log(`${dateRectX} + (${dateRectDim.width} - ${dateTextDim.width}) / 2`);
+            // console.log("Cx1:");
+            // console.log(dateRectX);
+            // console.log("Cx2:");
+            // console.log(dateRectX + dateRectDim.width);
+            // console.log("Tx1:");
+            // console.log(dateTextX);
+            // console.log("Tx2:");
+            // console.log(dateTextX + dateTextDim.width);
+            // console.log("Veredict: ");
+            // console.log(`Distance between Cx1 and Tx1: ${dateTextX - dateRectX}`);
+            // console.log(`Distance between Cx2 and Tx2: ${(dateRectX + dateRectDim.width) - (dateTextX + dateTextDim.width)}`);
+            // console.groupEnd();
+
+            dateText.setAttribute("x", `${dateTextX}`);
+            dateText.setAttribute("y", `${dateTextY}`);
+
+            dateRectX += dateRectDim.width;
+        }
+
+        const dateContainerDim: DOMRect =
+            dateContainer.getBoundingClientRect();
+
+        projContainerYOffset =
+            dateContainerDim.height + textYOffset + 30;
+
+        const ganttWidth: number = dateRectX;
+
+        gantt.setAttribute("width", `${ganttWidth}px`);
+        gantt.style.width = `${ganttWidth + 1}px`;
+
+        for (let i = 0; i < projects.length; i++) {
+            const proj: Project = projects[i];
+
+            const projRow = projContainer.children[i] as HTMLElement;
+            const projTitle = projRow.children[0] as HTMLElement;
+            const projBar = projRow.children[1] as HTMLElement;
+
+            const projTitleDim: DOMRect =
+                projTitle.getBoundingClientRect();
+
+            projTitle.setAttribute("y", `${projContainerYOffset +
+                ((projTitleDim.height + ySpacing) * i)}`);
+
+            const elapsedDays: number = getAmountOfDays(
+                new Date(proj.startDate),
+                proj.endDate === "Present"
+                    ? new Date(Date.now())
+                    : new Date(proj.endDate)
+            );
+
+            projBar.setAttribute("width",
+                `${elapsedDays * multiplier}`);
+
+            projBar.setAttribute("height",
+                `${projTitleDim.height}`);
+
+            projBar.setAttribute("x", `${xOffset + ((getAmountOfDays(
+                new Date(
+                    oldestProjectStartDate.getUTCFullYear(),
+                    oldestProjectStartDate.getMonth(),
+                    1,
+                ),
+                new Date(proj.startDate))) * multiplier)}`);
+
+            projBar.setAttribute("y",
+                `${(projContainerYOffset - textYOffset) +
+                ((projTitleDim.height + ySpacing) * i)}`);
+        }
+
+        const projContainerHeight: number =
+            projContainer?.getBoundingClientRect().height;
+
+        const ganttHeight: number =
+            projContainerHeight + projContainerYOffset;
+
+        gantt.setAttribute("height", `${ganttHeight}px`);
+        gantt.style.height = `${ganttHeight}px`;
     }
 
     function createTooltip(): SVGGElement {
@@ -260,10 +280,10 @@ export const Timeline: React.FC = () => {
         tt.classList.add("tooltip");
         tt.style.display = "none";
 
-        const rectangle =
+        const rect =
             document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
-        rectangle.style.fill = "#4d94ff";
+        rect.style.fill = "#4d94ff";
 
         const text =
             document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -279,13 +299,13 @@ export const Timeline: React.FC = () => {
             text.appendChild(fragments[i]);
         }
 
-        tt.insertAdjacentElement("beforeend", rectangle);
+        tt.insertAdjacentElement("beforeend", rect);
         tt.insertAdjacentElement("beforeend", text);
 
         return tt;
     }
 
-    const displayTooltip = (e: any, project: Project): void => {
+    const displayTooltip = (e: any, proj: Project): void => {
         if (!tooltip) return;
 
         if (hasBeenExecutedOnce) {
@@ -301,32 +321,32 @@ export const Timeline: React.FC = () => {
             return;
         }
 
-        const ganttDimensions: DOMRect = gantt.getBoundingClientRect();
+        const ganttDim: DOMRect = gantt.getBoundingClientRect();
 
-        let tooltipX: number = (e.clientX - ganttDimensions.x) - padding;
-        let tooltipY: number = (e.clientY - ganttDimensions.y) - 100;
+        let ttX: number = (e.clientX - ganttDim.x) - padding;
+        let ttY: number = (e.clientY - ganttDim.y) - 100;
 
-        let textX: number = tooltipX + padding;
+        let textX: number = ttX + padding;
 
-        const tooltipRectangle = tooltip.children[0] as HTMLElement;
-        const tooltipText = tooltip.children[1] as HTMLElement;
+        const ttRect = tooltip.children[0] as HTMLElement;
+        const ttText = tooltip.children[1] as HTMLElement;
 
-        if (!tooltipRectangle || !tooltipText) return;
+        if (!ttRect || !ttText) return;
 
-        let textFragments: HTMLCollection = tooltipText.children;
+        let textFragments: HTMLCollection = ttText.children;
 
         let widestSpanWidth: number = 0;
 
-        const amountOfProperties: number = Object.keys(project).length;
+        const amountOfProperties: number = Object.keys(proj).length;
 
         for (let i = 0; i < amountOfProperties; i++) {
-            const property: [string, any] = Object.entries(project!)[i];
+            const property: [string, any] = Object.entries(proj!)[i];
 
-            let spanDimensions: DOMRect =
+            let spanDim: DOMRect =
                 textFragments[i].getBoundingClientRect();
 
             let textY: number =
-                tooltipY + (spanDimensions.height * (i + 1));
+                ttY + (spanDim.height * (i + 1));
 
             textFragments[i].textContent =
                 `${beautify(property[0])}: ${property[1]}`;
@@ -334,25 +354,23 @@ export const Timeline: React.FC = () => {
             textFragments[i].setAttribute("y", `${textY}`);
 
             // get freshly computed span dimensions
-            spanDimensions = textFragments[i].getBoundingClientRect();
+            spanDim = textFragments[i].getBoundingClientRect();
 
-            if (spanDimensions.width > widestSpanWidth)
-                widestSpanWidth = spanDimensions.width;
+            if (spanDim.width > widestSpanWidth)
+                widestSpanWidth = spanDim.width;
 
             // avoid computing multiple times
-            const estimatedRectangleHeight =
-                spanDimensions.height * amountOfProperties
+            const estimatedRectHeight = spanDim.height * amountOfProperties
                 + padding * 2;
 
-            if (tooltipY + estimatedRectangleHeight >
-                ganttDimensions.height) {
-                const visibleRectangleHeight: number =
-                    ganttDimensions.height - tooltipY;
+            if (ttY + estimatedRectHeight >
+                ganttDim.height) {
+                const visibleRectHeight: number = ganttDim.height - ttY;
                 const yOffset: number =
-                    estimatedRectangleHeight - visibleRectangleHeight;
+                    estimatedRectHeight - visibleRectHeight;
 
                 textY -= yOffset;
-                tooltipY -= yOffset;
+                ttY -= yOffset;
 
                 textFragments[i].setAttribute("y", `${textY}`);
             }
@@ -360,29 +378,29 @@ export const Timeline: React.FC = () => {
 
         widestSpanWidth += padding;
 
-        if (textX + widestSpanWidth > ganttDimensions.width) {
-            for (let i = 0; i < Object.keys(project!).length; i++) {
+        if (textX + widestSpanWidth > ganttDim.width) {
+            for (let i = 0; i < Object.keys(proj!).length; i++) {
                 const visibleTextWidth: number =
-                    ganttDimensions.width - textX;
+                    ganttDim.width - textX;
                 const xOffset: number =
                     widestSpanWidth - visibleTextWidth;
 
                 textX -= xOffset;
-                tooltipX -= xOffset;
+                ttX -= xOffset;
 
                 textFragments[i].setAttribute("x", `${textX}`);
             }
         }
 
-        const textDimensions: DOMRect = tooltipText.getBoundingClientRect();
-        const width: number = textDimensions.width + padding * 2;
-        const height: number = textDimensions.height + padding * 2;
+        const textDim: DOMRect = ttText.getBoundingClientRect();
+        const width: number = textDim.width + padding * 2;
+        const height: number = textDim.height + padding * 2;
 
-        tooltipRectangle.setAttribute("x", `${tooltipX}`);
-        tooltipRectangle.setAttribute("y", `${tooltipY}`);
+        ttRect.setAttribute("x", `${ttX}`);
+        ttRect.setAttribute("y", `${ttY}`);
 
-        tooltipRectangle.setAttribute("width", `${width}px`);
-        tooltipRectangle.setAttribute("height", `${height}px`);
+        ttRect.setAttribute("width", `${width}px`);
+        ttRect.setAttribute("height", `${height}px`);
 
         gantt.appendChild(tooltip);
 
