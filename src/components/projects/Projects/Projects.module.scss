@@ -9,13 +9,11 @@
   align-items: flex-start;
   gap: 3rem;
 
-  width: 90dvw;
   height: fit-content;
   margin: 3rem auto;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
   .projects {
-    width: 70dvw;
   }
 }

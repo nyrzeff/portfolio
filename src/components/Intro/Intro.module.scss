@@ -3,7 +3,6 @@
 
 .intro {
   margin: 3rem auto;
-  width: 90dvw;
   height: 90vh;
   font-size: 1rem;
 
@@ -163,8 +162,6 @@
 
 @media (orientation: landscape) and (min-width: 768px) {
   .intro {
-    width: 70dvw;
-  }
 
   .front {
     display: grid;

@@ -26,4 +26,11 @@
   min-width: 100vw;
   min-height: 100vh;
   text-align: center;
+
+  &>* {
+    width: 90dvw;
+    max-width: 90dvw;
+    max-height: 90vh;
+  }
+}
 }

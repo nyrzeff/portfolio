@@ -4,7 +4,6 @@
 .contact {
   color: white;
   background: linear-gradient(145deg, $color-canvas, #080808);
-  width: 90dvw;
   height: fit-content;
   margin: 3rem auto;
   padding: 3rem;
@@ -131,11 +130,5 @@
     justify-content: center;
     align-items: stretch;
     gap: 1rem;
-  }
-}
-
-@media (orientation: landscape) and (min-width: 768px) {
-  .contact {
-    width: 70dvw;
   }
 }

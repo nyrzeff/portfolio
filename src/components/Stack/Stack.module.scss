@@ -6,8 +6,6 @@
 
   color: $color-text;
   height: fit-content;
-  max-height: 90vh;
-  width: 90dvw;
   margin: 3rem auto;
   padding: 1.5rem;
   overflow-y: auto;
@@ -50,10 +48,6 @@
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  .stack {
-    width: 70dvw;
-  }
-
   .stack-list {
     padding: 3rem;
   }
