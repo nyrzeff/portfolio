@@ -9,7 +9,7 @@
   gap: 2rem;
   position: relative;
 
-  color: white;
+  color: $color-text;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -19,7 +19,7 @@
   font-size: 1em;
 
   summary {
-    color: white;
+    color: $color-text;
     font-weight: bold;
     font-size: 2em;
   }
@@ -42,7 +42,7 @@
   right: 0;
 
   fill: none;
-  stroke: white;
+  stroke: $color-text;
 
   width: inherit;
   height: inherit;
@@ -60,7 +60,7 @@
   top: 5vh;
   left: 5vw;
 
-  background-color: #0f0f0f;
+  background-color: $color-canvas;
 }
 
 .project-header-container {
@@ -70,6 +70,7 @@
 
 .project-header {
   position: relative;
+  padding: 1rem;
 }
 
 .project-stack,
@@ -103,7 +104,7 @@
 }
 
 .project-text {
-  color: white;
+  color: $color-text;
   font-size: 1em;
 }
 
@@ -119,10 +120,10 @@
   }
 
   .project-content {
-    max-width: 70dvw;
-    max-height: 70vh;
+    max-width: 80dvw;
+    max-height: 80vh;
 
-    top: 15vh;
-    left: 15vw;
+    top: 10vh;
+    left: 10vw;
   }
 }
