@@ -1,40 +1,47 @@
 /* truly global resets and styles must be put here, not in Layout.module.scss */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 :root {
-  line-height: 1.5;
-  background-color: black;
-  font-size: clamp(0.1rem, 0.5vw + 0.3rem, 2rem);
+    line-height: 1.5;
+    background-color: black;
+    font-size: clamp(0.1rem, 0.5vw + 0.3rem, 2rem);
 }
 
 html,
 body {
-  min-height: 100vh;
-  min-width: 100vw;
-  margin: 0;
-  overflow-x: hidden;
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 button {
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: none;
 }
 
 h1,
@@ -43,29 +50,29 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 h1 {
-  font-size: 2em;
+    font-size: 2em;
 }
 
 h2 {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h3 {
-  font-size: 1.17em;
+    font-size: 1.17em;
 }
 
 h4 {
-  font-size: 1em;
+    font-size: 1em;
 }
 
 h5 {
-  font-size: 0.83em;
+    font-size: 0.83em;
 }
 
 h6 {
-  font-size: 0.75em;
+    font-size: 0.75em;
 }

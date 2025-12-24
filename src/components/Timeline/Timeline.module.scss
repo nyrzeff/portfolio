@@ -12,13 +12,6 @@
   padding: 1.5rem 0;
   font-size: 2rem;
   overflow-y: scroll;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .timeline-header {

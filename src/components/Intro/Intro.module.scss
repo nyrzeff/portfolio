@@ -144,13 +144,6 @@
   padding: 1rem;
   font-size: 2em;
 
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
   h1 {
     background: linear-gradient(to right,
         color.adjust($color-core, $lightness: 20%),

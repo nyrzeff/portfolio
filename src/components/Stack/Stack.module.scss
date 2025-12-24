@@ -13,13 +13,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 2rem;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .stack-header {
