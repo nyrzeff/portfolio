@@ -20,6 +20,9 @@ stack:
   - PNPM
   - Vite
   - Mocha
+colors:
+  - "#f70d1a"
+  - "#006400"
 ---
 
 I wanted to visualize my Pomodoro sessions so I built Pomometrics, a simple, static, customizable Pomodoro breakdown visualization tool using HTML, CSS, JavaScript and Chart.js.
