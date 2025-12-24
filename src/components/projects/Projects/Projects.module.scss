@@ -15,5 +15,6 @@
 
 @media (orientation: landscape) and (min-width: 768px) {
   .projects {
+    grid-column: 1 / 3;
   }
 }

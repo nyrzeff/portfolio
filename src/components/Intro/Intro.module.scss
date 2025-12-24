@@ -162,33 +162,7 @@
 
 @media (orientation: landscape) and (min-width: 768px) {
   .intro {
-
-  .front {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 70% 30%;
-    background:
-      linear-gradient(145deg,
-        rgba($color-core, 0.3),
-        rgba($color-canvas, 0.7)),
-      url("/src/assets/images/me.png");
-    background-size: cover;
-    background-position: left;
-    background-repeat: no-repeat;
-
-    footer {
-      grid-row: 2;
-      grid-column: 2;
-      gap: 10px;
-
-      width: fit-content;
-      background: rgba($color-canvas, 0);
-      backdrop-filter: blur(30px);
-
-      >span * {
-        white-space: normal;
-      }
-    }
+    width: 40dvw;
   }
 
   .about {

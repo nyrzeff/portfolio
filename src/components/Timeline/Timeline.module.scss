@@ -16,3 +16,9 @@
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .timeline {
+    grid-column: 1 / 3;
+  }
+}

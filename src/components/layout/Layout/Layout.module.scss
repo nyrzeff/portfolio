@@ -33,4 +33,9 @@
     max-height: 90vh;
   }
 }
+
+@media (orientation: landscape) and (min-width: 768px) {
+  .content {
+    grid-template-columns: auto auto;
+  }
 }
