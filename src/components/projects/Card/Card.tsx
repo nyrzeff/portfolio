@@ -26,7 +26,12 @@ export const Card: React.FC<CardProps> = ({
     const dialog = useRef<HTMLDialogElement>(null);
     const items = stackItems.filter((item) => stack.includes(item.title));
 
-    const gradient = `linear-gradient(145deg, ${colors[0]}, ${colors[1]})`;
+    const gradient =
+        `linear-gradient(
+            90deg,
+            ${colors[0]},
+            ${colors[1]}
+        )`;
 
     const handleDialog = (show: boolean): void => {
         if (dialog.current instanceof HTMLDialogElement) {
