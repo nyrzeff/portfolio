@@ -1,5 +1,6 @@
 export const getDaysInMonth = (date: Date): number => {
     const month = date.getMonth();
+    const year = date.getUTCFullYear();
     let daysInMonth = -1;
 
     switch (month) {
@@ -19,8 +20,6 @@ export const getDaysInMonth = (date: Date): number => {
             daysInMonth = 30;
             break;
         case 1:
-            const year = date.getUTCFullYear();
-
             if (year % 4 === 0) {
                 if (year % 100 === 0) {
                     if (year % 400 === 0) {

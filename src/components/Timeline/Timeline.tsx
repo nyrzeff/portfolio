@@ -18,18 +18,18 @@ interface Project {
 };
 
 export const Timeline: React.FC = () => {
-    let projects: Project[] = json.projects;
+    const projects: Project[] = json.projects;
     if (!projects) return;
 
-    let fontSize: number = 1;
-    const defaultPadding: number = 50;
+    const fontSize = 1;
+    const defaultPadding = 50;
 
-    let [tooltip] = useState<SVGGElement>(() => createTooltip());
+    const [tooltip] = useState<SVGGElement>(() => createTooltip());
 
-    let hasBeenExecutedOnce: boolean = false;
+    let hasBeenExecutedOnce = false;
 
     const oldestProjectStartDate: Date =
-        new Date(projects.at(0)!.startDate);
+        new Date(projects[0].startDate);
 
     const latestProject: Project | undefined =
         projects.at(projects.length - 1);
@@ -39,7 +39,7 @@ export const Timeline: React.FC = () => {
     const latestProjectEndDate: Date = latestProject.endDate == "Present"
         ? new Date(Date.now()) : new Date(latestProject.endDate);
 
-    let dates: Date[] = [];
+    const dates: Date[] = [];
     let date: Date = oldestProjectStartDate;
 
     dates.push(date);
@@ -58,10 +58,10 @@ export const Timeline: React.FC = () => {
 
     function createGanttChart(dates: Date[]): void {
         const ySpacing: number = defaultPadding;
-        let xOffset: number = 0;
-        let dateRectX: number = 0;
-        let multiplier: number = -1;
-        let textYOffset: number = 0;
+        let xOffset = 0;
+        let dateRectX = 0;
+        let multiplier = -1;
+        let textYOffset = 0;
 
         const container: HTMLElement | null =
             document.querySelector(".container");
@@ -73,7 +73,7 @@ export const Timeline: React.FC = () => {
 
         if (!gantt) return;
 
-        let projContainerYOffset: number = 0;
+        let projContainerYOffset = 0;
 
         const projContainer: SVGGElement =
             document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -85,7 +85,7 @@ export const Timeline: React.FC = () => {
         dateContainer.classList.add("date-container");
         gantt?.appendChild(dateContainer);
 
-        let widestProjTitleWidth: number = 0;
+        let widestProjTitleWidth = 0;
 
         for (let i = 0; i < projects.length; i++) {
             const proj: Project = projects[i];
@@ -130,7 +130,7 @@ export const Timeline: React.FC = () => {
 
         xOffset = dateRectX = widestProjTitleWidth + defaultPadding;
 
-        for (let date of dates) {
+        for (const date of dates) {
             const formattedDate: string = formatDate(date);
 
             const dateCell: SVGGElement =
@@ -250,8 +250,12 @@ export const Timeline: React.FC = () => {
                 ?.getBoundingClientRect().height;
 
         if (containerHeight && timelineHeaderHeight) {
-            document.getElementById("timeline")!.style.height =
-                `${containerHeight + timelineHeaderHeight}px`;
+            const timeline = document.getElementById("timeline");
+
+            if (timeline) {
+                timeline.style.height =
+                    `${containerHeight + timelineHeaderHeight}px`;
+            }
         }
     }
 
@@ -273,7 +277,7 @@ export const Timeline: React.FC = () => {
         text.style.fill = "white";
         text.style.fontSize = `${fontSize / 1.5}em`;
 
-        let fragments = [];
+        const fragments = [];
 
         for (let i = 0; i < Object.keys(projects[0]).length; i++) {
             fragments[i] =
@@ -294,7 +298,7 @@ export const Timeline: React.FC = () => {
             tooltip.style.display = "block";
         }
 
-        const padding: number = 10;
+        const padding = 10;
 
         const gantt: HTMLElement = e.relatedTarget;
 
@@ -315,14 +319,14 @@ export const Timeline: React.FC = () => {
 
         if (!ttRect || !ttText) return;
 
-        let textFragments: HTMLCollection = ttText.children;
+        const textFragments: HTMLCollection = ttText.children;
 
-        let widestSpanWidth: number = 0;
+        let widestSpanWidth = 0;
 
         const amountOfProperties: number = Object.keys(proj).length;
 
         for (let i = 0; i < amountOfProperties; i++) {
-            const property: [string, any] = Object.entries(proj!)[i];
+            const property: [string, any] = Object.entries(proj)[i];
 
             let spanDim: DOMRect =
                 textFragments[i].getBoundingClientRect();
@@ -361,7 +365,7 @@ export const Timeline: React.FC = () => {
         widestSpanWidth += padding;
 
         if (textX + widestSpanWidth > ganttDim.width) {
-            for (let i = 0; i < Object.keys(proj!).length; i++) {
+            for (let i = 0; i < Object.keys(proj).length; i++) {
                 const visibleTextWidth: number =
                     ganttDim.width - textX;
                 const xOffset: number =
