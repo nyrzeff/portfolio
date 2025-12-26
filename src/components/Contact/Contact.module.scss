@@ -4,6 +4,7 @@
 .contact {
   color: $color-text;
   background: linear-gradient(145deg, $color-canvas, #080808);
+  max-height: fit-content;
   height: fit-content;
   margin: 3rem auto;
   padding: 3rem;
