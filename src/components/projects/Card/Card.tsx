@@ -26,12 +26,8 @@ export const Card: React.FC<CardProps> = ({
     const dialog = useRef<HTMLDialogElement>(null);
     const items = stackItems.filter((item) => stack.includes(item.title));
 
-    const gradient =
-        `linear-gradient(
-            90deg,
-            ${colors[0]},
-            ${colors[1]}
-        )`;
+    const gradient = (degrees: number): string =>
+        `linear-gradient(${degrees}deg, ${colors[0]}, ${colors[1]})`;
 
     const handleDialog = (show: boolean): void => {
         if (dialog.current instanceof HTMLDialogElement) {
@@ -71,11 +67,9 @@ export const Card: React.FC<CardProps> = ({
     );
 
     return (
-        <article
-            style={{ background: gradient }}
-            className={styles["card"]}
-        >
+        <article className={styles["card"]}>
             <div className={styles["card-intro"]}>
+                <div style={{ background: gradient(45) }}></div>
                 <summary>{title}</summary>
                 {DialogButton(true)}
             </div>
@@ -84,11 +78,17 @@ export const Card: React.FC<CardProps> = ({
                 ref={dialog}
             >
                 <div className={styles["project-header-container"]}>
-                    <div
-                        style={{ background: gradient }}
-                        className={styles["project-header"]}
-                    >
-                        <summary>{title}</summary>
+                    <div className={styles["project-header"]}>
+                        <summary
+                            style={{
+                                background: gradient(90),
+                                whiteSpace: "nowrap",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                            }}
+                        >
+                            {title}
+                        </summary>
                         {DialogButton(false)}
                     </div>
                 </div>
