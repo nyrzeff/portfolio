@@ -31,13 +31,11 @@ export const Card: React.FC<CardProps> = ({
 
     const handleDialog = (show: boolean): void => {
         if (dialog.current instanceof HTMLDialogElement) {
-            show ? (
-                dialog.current.style.display = "flex",
-                dialog.current.showModal()
-            ) : (
-                dialog.current.style.display = "none",
-                dialog.current.close()
-            );
+            show
+                ? ((dialog.current.style.display = "flex"),
+                  dialog.current.showModal())
+                : ((dialog.current.style.display = "none"),
+                  dialog.current.close());
         }
     };
 
@@ -57,7 +55,8 @@ export const Card: React.FC<CardProps> = ({
                     <line x1="5" y1="25" x2="10" y2="20" />
                     <polyline points="25 25,20 25,25 25,25 20" />
                     <line x1="25" y1="25" x2="20" y2="20" />
-                </svg>) : (
+                </svg>
+            ) : (
                 <svg className={styles["dialog-symbol"]}>
                     <polyline points="5 5,25 25" />
                     <polyline points="5 25,25 5" />
@@ -73,10 +72,7 @@ export const Card: React.FC<CardProps> = ({
                 <summary>{title}</summary>
                 {DialogButton(true)}
             </div>
-            <dialog
-                className={styles["project-content"]}
-                ref={dialog}
-            >
+            <dialog className={styles["project-content"]} ref={dialog}>
                 <div className={styles["project-header-container"]}>
                     <div className={styles["project-header"]}>
                         <summary
@@ -102,9 +98,7 @@ export const Card: React.FC<CardProps> = ({
                     </ul>
                 </div>
                 <div className={styles["project-text"]}>
-                    <Markdown rehypePlugins={[rehypeRaw]}>
-                        {content}
-                    </Markdown>
+                    <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
                 </div>
                 <div className={styles["project-images"]}>
                     <ImageGallery

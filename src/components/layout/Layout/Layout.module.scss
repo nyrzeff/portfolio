@@ -1,41 +1,41 @@
 @use "/src/styles/variables.scss" as *;
 
 .layout-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #020202;
-  z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #020202;
+    z-index: 1;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100dvh;
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 :global(html.menu-open) {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .content {
-  display: grid;
-  min-width: 100vw;
-  min-height: 100vh;
-  text-align: center;
+    display: grid;
+    min-width: 100vw;
+    min-height: 100vh;
+    text-align: center;
 
-  &>* {
-    width: 90dvw;
-    max-width: 90dvw;
-    max-height: 90vh;
-  }
+    & > * {
+        width: 90dvw;
+        max-width: 90dvw;
+        max-height: 90vh;
+    }
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  .content {
-    grid-template-columns: auto auto;
-  }
+    .content {
+        grid-template-columns: auto auto;
+    }
 }

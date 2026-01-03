@@ -4,7 +4,7 @@ import {
     getDaysInMonth,
     formatDate,
     getAmountOfDays,
-    beautify
+    beautify,
 } from "@/lib/dateUtils";
 import styles from "./Timeline.module.scss";
 import "./Timeline.css";
@@ -15,7 +15,7 @@ interface Project {
     endDate: string;
     description: string;
     technologies: string;
-};
+}
 
 export const Timeline: React.FC = () => {
     const projects: Project[] = json.projects;
@@ -28,16 +28,16 @@ export const Timeline: React.FC = () => {
 
     let hasBeenExecutedOnce = false;
 
-    const oldestProjectStartDate: Date =
-        new Date(projects[0].startDate);
+    const oldestProjectStartDate: Date = new Date(projects[0].startDate);
 
-    const latestProject: Project | undefined =
-        projects.at(projects.length - 1);
+    const latestProject: Project | undefined = projects.at(projects.length - 1);
 
     if (!latestProject) return;
 
-    const latestProjectEndDate: Date = latestProject.endDate == "Present"
-        ? new Date(Date.now()) : new Date(latestProject.endDate);
+    const latestProjectEndDate: Date =
+        latestProject.endDate == "Present"
+            ? new Date(Date.now())
+            : new Date(latestProject.endDate);
 
     const dates: Date[] = [];
     let date: Date = oldestProjectStartDate;
@@ -48,7 +48,8 @@ export const Timeline: React.FC = () => {
         date = new Date(
             date.getFullYear(),
             date.getMonth() + 1,
-            date.getDate());
+            date.getDate(),
+        );
         dates.push(date);
     }
 
@@ -68,20 +69,23 @@ export const Timeline: React.FC = () => {
 
         if (!container) return;
 
-        const gantt: HTMLElement | null =
-            document.getElementById("gantt");
+        const gantt: HTMLElement | null = document.getElementById("gantt");
 
         if (!gantt) return;
 
         let projContainerYOffset = 0;
 
-        const projContainer: SVGGElement =
-            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const projContainer: SVGGElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "g",
+        );
         projContainer.classList.add("proj-container");
         gantt.appendChild(projContainer);
 
-        const dateContainer: SVGGElement =
-            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const dateContainer: SVGGElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "g",
+        );
         dateContainer.classList.add("date-container");
         gantt?.appendChild(dateContainer);
 
@@ -90,41 +94,47 @@ export const Timeline: React.FC = () => {
         for (let i = 0; i < projects.length; i++) {
             const proj: Project = projects[i];
 
-            const projRow: SVGGElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "g");
+            const projRow: SVGGElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "g",
+            );
             projRow.classList.add("proj-row");
             projContainer.appendChild(projRow);
 
-            const projTitle: SVGTextElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "text");
+            const projTitle: SVGTextElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text",
+            );
             projTitle.style.fontSize = `${fontSize}em`;
             projTitle.style.fill = "white";
             projTitle.textContent = proj.title;
             projRow.appendChild(projTitle);
 
-            const projBar: SVGRectElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            const projBar: SVGRectElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "rect",
+            );
             projBar.classList.add("proj-bar");
             projBar.style.fill = "#4d94ff";
             projRow.appendChild(projBar);
 
-            const projTitleDim: DOMRect =
-                projTitle.getBoundingClientRect();
+            const projTitleDim: DOMRect = projTitle.getBoundingClientRect();
 
             if (projTitleDim.width > widestProjTitleWidth)
                 widestProjTitleWidth = projTitleDim.width;
 
             projTitle.setAttribute("x", "0");
-            projTitle.setAttribute("y",
-                `${(projTitleDim.height + ySpacing) * i}`);
+            projTitle.setAttribute(
+                "y",
+                `${(projTitleDim.height + ySpacing) * i}`,
+            );
 
             projBar.addEventListener("mouseenter", (e) => {
                 displayTooltip(e, proj);
             });
 
             projBar.addEventListener("mouseleave", () => {
-                if (tooltip)
-                    tooltip.style.display = "none";
+                if (tooltip) tooltip.style.display = "none";
             });
         }
 
@@ -133,49 +143,49 @@ export const Timeline: React.FC = () => {
         for (const date of dates) {
             const formattedDate: string = formatDate(date);
 
-            const dateCell: SVGGElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "g");
+            const dateCell: SVGGElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "g",
+            );
             dateCell.classList.add("date-cell");
             dateContainer.appendChild(dateCell);
 
-            const dateText: SVGTextElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "text");
+            const dateText: SVGTextElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text",
+            );
             dateText.style.fill = "white";
             dateText.style.fontSize = `${fontSize}em`;
             dateText.textContent = formattedDate;
             dateCell.appendChild(dateText);
 
             const days: number = getDaysInMonth(date);
-            const dateTextDim: DOMRect =
-                dateText.getBoundingClientRect();
+            const dateTextDim: DOMRect = dateText.getBoundingClientRect();
 
             // all cells need to be multiplied by the same number
             if (multiplier === -1)
-                multiplier =
-                    (Math.ceil(dateTextDim.width / days) * 1.3);
+                multiplier = Math.ceil(dateTextDim.width / days) * 1.3;
 
-            const dateRect: SVGRectElement =
-                document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            const dateRect: SVGRectElement = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "rect",
+            );
             dateRect.classList.add("date-rect");
             dateRect.setAttribute("x", `${dateRectX}`);
             dateRect.setAttribute("y", "1");
             dateRect.setAttribute("width", `${days * multiplier}px`);
-            dateRect.setAttribute("height",
-                `${dateTextDim.height * 2}px`);
+            dateRect.setAttribute("height", `${dateTextDim.height * 2}px`);
             dateRect.style.fill = "#0f0f0f";
             dateCell.insertAdjacentElement("afterbegin", dateRect);
 
-            const dateRectDim: DOMRect =
-                dateRect.getBoundingClientRect();
+            const dateRectDim: DOMRect = dateRect.getBoundingClientRect();
 
-            const dateTextX: number = dateRectX +
-                ((dateRectDim.width -
-                    dateTextDim.width) / 2);
+            const dateTextX: number =
+                dateRectX + (dateRectDim.width - dateTextDim.width) / 2;
 
             textYOffset = dateRectDim.y - dateTextDim.y;
-            const dateTextY: number = textYOffset +
-                ((dateRectDim.height -
-                    dateTextDim.height) / 2);
+            const dateTextY: number =
+                textYOffset + (dateRectDim.height - dateTextDim.height) / 2;
 
             dateText.setAttribute("x", `${dateTextX}`);
             dateText.setAttribute("y", `${dateTextY}`);
@@ -183,8 +193,7 @@ export const Timeline: React.FC = () => {
             dateRectX += dateRectDim.width;
         }
 
-        const dateContainerDim: DOMRect =
-            dateContainer.getBoundingClientRect();
+        const dateContainerDim: DOMRect = dateContainer.getBoundingClientRect();
 
         projContainerYOffset =
             dateContainerDim.height + textYOffset + defaultPadding;
@@ -201,43 +210,39 @@ export const Timeline: React.FC = () => {
             const projTitle = projRow.children[0] as HTMLElement;
             const projBar = projRow.children[1] as HTMLElement;
 
-            const projTitleDim: DOMRect =
-                projTitle.getBoundingClientRect();
+            const projTitleDim: DOMRect = projTitle.getBoundingClientRect();
 
-            projTitle.setAttribute("y", `${projContainerYOffset +
-                ((projTitleDim.height + ySpacing) * i)}`);
+            projTitle.setAttribute(
+                "y",
+                `${projContainerYOffset + (projTitleDim.height + ySpacing) * i}`,
+            );
 
             const elapsedDays: number = getAmountOfDays(
                 new Date(proj.startDate),
                 proj.endDate === "Present"
                     ? new Date(Date.now())
-                    : new Date(proj.endDate)
+                    : new Date(proj.endDate),
             );
 
-            projBar.setAttribute("width",
-                `${elapsedDays * multiplier}`);
+            projBar.setAttribute("width", `${elapsedDays * multiplier}`);
 
-            projBar.setAttribute("height",
-                `${projTitleDim.height}`);
+            projBar.setAttribute("height", `${projTitleDim.height}`);
 
-            projBar.setAttribute("x", `${xOffset + ((getAmountOfDays(
-                new Date(
-                    oldestProjectStartDate.getUTCFullYear(),
-                    oldestProjectStartDate.getMonth(),
-                    1,
-                ),
-                new Date(proj.startDate))) * multiplier)}`);
+            projBar.setAttribute(
+                "x",
+                `${xOffset + getAmountOfDays(new Date(oldestProjectStartDate.getUTCFullYear(), oldestProjectStartDate.getMonth(), 1), new Date(proj.startDate)) * multiplier}`,
+            );
 
-            projBar.setAttribute("y",
-                `${(projContainerYOffset - textYOffset) +
-                ((projTitleDim.height + ySpacing) * i)}`);
+            projBar.setAttribute(
+                "y",
+                `${projContainerYOffset - textYOffset + (projTitleDim.height + ySpacing) * i}`,
+            );
         }
 
         const projContainerHeight: number =
             projContainer?.getBoundingClientRect().height;
 
-        const ganttHeight: number =
-            projContainerHeight + projContainerYOffset;
+        const ganttHeight: number = projContainerHeight + projContainerYOffset;
 
         gantt.setAttribute("height", `${ganttHeight}px`);
         gantt.style.height = `${ganttHeight}px`;
@@ -245,34 +250,36 @@ export const Timeline: React.FC = () => {
         const containerHeight: number =
             container.getBoundingClientRect().height;
 
-        const timelineHeaderHeight: number | undefined =
-            document.querySelector("#timeline > header")
-                ?.getBoundingClientRect().height;
+        const timelineHeaderHeight: number | undefined = document
+            .querySelector("#timeline > header")
+            ?.getBoundingClientRect().height;
 
         if (containerHeight && timelineHeaderHeight) {
             const timeline = document.getElementById("timeline");
 
             if (timeline) {
-                timeline.style.height =
-                    `${containerHeight + timelineHeaderHeight}px`;
+                timeline.style.height = `${containerHeight + timelineHeaderHeight}px`;
             }
         }
     }
 
     function createTooltip(): SVGGElement {
-        const tt =
-            document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const tt = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
         tt.classList.add("tooltip");
         tt.style.display = "none";
 
-        const rect =
-            document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        const rect = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "rect",
+        );
 
         rect.style.fill = "#4d94ff";
 
-        const text =
-            document.createElementNS("http://www.w3.org/2000/svg", "text");
+        const text = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text",
+        );
 
         text.style.fill = "white";
         text.style.fontSize = `${fontSize / 1.5}em`;
@@ -280,8 +287,10 @@ export const Timeline: React.FC = () => {
         const fragments = [];
 
         for (let i = 0; i < Object.keys(projects[0]).length; i++) {
-            fragments[i] =
-                document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+            fragments[i] = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "tspan",
+            );
             text.appendChild(fragments[i]);
         }
 
@@ -309,8 +318,8 @@ export const Timeline: React.FC = () => {
 
         const ganttDim: DOMRect = gantt.getBoundingClientRect();
 
-        let ttX: number = (e.clientX - ganttDim.x) - padding;
-        let ttY: number = (e.clientY - ganttDim.y) - 100;
+        let ttX: number = e.clientX - ganttDim.x - padding;
+        let ttY: number = e.clientY - ganttDim.y - 100;
 
         let textX: number = ttX + padding;
 
@@ -328,11 +337,9 @@ export const Timeline: React.FC = () => {
         for (let i = 0; i < amountOfProperties; i++) {
             const property: [string, any] = Object.entries(proj)[i];
 
-            let spanDim: DOMRect =
-                textFragments[i].getBoundingClientRect();
+            let spanDim: DOMRect = textFragments[i].getBoundingClientRect();
 
-            let textY: number =
-                ttY + (spanDim.height * (i + 1));
+            let textY: number = ttY + spanDim.height * (i + 1);
 
             textFragments[i].textContent =
                 `${beautify(property[0])}: ${property[1]}`;
@@ -346,14 +353,12 @@ export const Timeline: React.FC = () => {
                 widestSpanWidth = spanDim.width;
 
             // avoid computing multiple times
-            const estimatedRectHeight = spanDim.height * amountOfProperties
-                + padding * 2;
+            const estimatedRectHeight =
+                spanDim.height * amountOfProperties + padding * 2;
 
-            if (ttY + estimatedRectHeight >
-                ganttDim.height) {
+            if (ttY + estimatedRectHeight > ganttDim.height) {
                 const visibleRectHeight: number = ganttDim.height - ttY;
-                const yOffset: number =
-                    estimatedRectHeight - visibleRectHeight;
+                const yOffset: number = estimatedRectHeight - visibleRectHeight;
 
                 textY -= yOffset;
                 ttY -= yOffset;
@@ -366,10 +371,8 @@ export const Timeline: React.FC = () => {
 
         if (textX + widestSpanWidth > ganttDim.width) {
             for (let i = 0; i < Object.keys(proj).length; i++) {
-                const visibleTextWidth: number =
-                    ganttDim.width - textX;
-                const xOffset: number =
-                    widestSpanWidth - visibleTextWidth;
+                const visibleTextWidth: number = ganttDim.width - textX;
+                const xOffset: number = widestSpanWidth - visibleTextWidth;
 
                 textX -= xOffset;
                 ttX -= xOffset;
@@ -401,6 +404,6 @@ export const Timeline: React.FC = () => {
             <div className="container">
                 <svg id="gantt" />
             </div>
-        </section >
+        </section>
     );
 };

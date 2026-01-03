@@ -3,26 +3,26 @@ id: "pomometrics"
 title: "Pomometrics"
 subtitle: "The ultimate Pomodoro technique calculator"
 tags:
-  - Mobile-first design
-  - Responsive design
-  - Conventional Commits
-  - Test coverage
-  - Refactoring
+    - Mobile-first design
+    - Responsive design
+    - Conventional Commits
+    - Test coverage
+    - Refactoring
 stack:
-  - HTML
-  - CSS3
-  - JavaScript
-  - Chart.js
-  - Vim
-  - Neovim
-  - ESLint
-  - Prettier
-  - PNPM
-  - Vite
-  - Mocha
+    - HTML
+    - CSS3
+    - JavaScript
+    - Chart.js
+    - Vim
+    - Neovim
+    - ESLint
+    - Prettier
+    - PNPM
+    - Vite
+    - Mocha
 colors:
-  - "#f70d1a"
-  - "#006400"
+    - "#f70d1a"
+    - "#006400"
 ---
 
 I wanted to visualize my Pomodoro sessions so I built Pomometrics, a simple, static, customizable Pomodoro breakdown visualization tool using HTML, CSS, JavaScript and Chart.js.

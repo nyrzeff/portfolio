@@ -2,140 +2,148 @@
 @use "sass:color";
 
 .contact {
-  color: $color-text;
-  background: linear-gradient(145deg, $color-canvas, #080808);
-  max-height: fit-content;
-  height: fit-content;
-  margin: 3rem auto;
-  padding: 3rem;
-  font-size: 2em;
-
-  p {
-    padding: 1rem;
-  }
-
-  label {
-    display: inline;
-    font-weight: bold;
-  }
-
-  label:after {
-    content: " *";
-    color: $color-critical;
-  }
-
-  input[type="text"],
-  textarea {
-    background: $color-base;
     color: $color-text;
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 100%;
+    background: linear-gradient(145deg, $color-canvas, #080808);
+    max-height: fit-content;
     height: fit-content;
-    font-size: 1em;
+    margin: 3rem auto;
+    padding: 3rem;
+    font-size: 2em;
 
-    &:focus {
-      outline: 1px solid $color-interaction;
+    p {
+        padding: 1rem;
     }
 
-    &::placeholder {
-      font-style: italic;
-      opacity: 0.5;
-    }
-  }
-
-  textarea {
-    height: 30vh;
-    resize: none;
-  }
-
-  button {
-    background: linear-gradient(90deg, $color-core, $color-highlight);
-    color: $color-text;
-    border: none;
-    outline: none;
-    padding: 10px 30px;
-    width: fit-content;
-    height: fit-content;
-    transition: transform 0.1s ease;
-    font-size: 1em;
-
-    &.sending {
-      background: linear-gradient(90deg, $color-highlight, $color-interaction);
+    label {
+        display: inline;
+        font-weight: bold;
     }
 
-    &.success {
-      background: linear-gradient(90deg, $color-spark, $color-highlight);
+    label:after {
+        content: " *";
+        color: $color-critical;
     }
 
-    &.error {
-      background: linear-gradient(90deg, $color-critical, $color-interaction);
+    input[type="text"],
+    textarea {
+        background: $color-base;
+        color: $color-text;
+        border: none;
+        outline: none;
+        padding: 10px;
+        width: 100%;
+        height: fit-content;
+        font-size: 1em;
+
+        &:focus {
+            outline: 1px solid $color-interaction;
+        }
+
+        &::placeholder {
+            font-style: italic;
+            opacity: 0.5;
+        }
     }
 
-    &:hover {
-      transform: scale(1.03);
-      cursor: pointer;
+    textarea {
+        height: 30vh;
+        resize: none;
     }
 
-    &:focus {
-      outline: 1px solid $color-interaction;
+    button {
+        background: linear-gradient(90deg, $color-core, $color-highlight);
+        color: $color-text;
+        border: none;
+        outline: none;
+        padding: 10px 30px;
+        width: fit-content;
+        height: fit-content;
+        transition: transform 0.1s ease;
+        font-size: 1em;
+
+        &.sending {
+            background: linear-gradient(
+                90deg,
+                $color-highlight,
+                $color-interaction
+            );
+        }
+
+        &.success {
+            background: linear-gradient(90deg, $color-spark, $color-highlight);
+        }
+
+        &.error {
+            background: linear-gradient(
+                90deg,
+                $color-critical,
+                $color-interaction
+            );
+        }
+
+        &:hover {
+            transform: scale(1.03);
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: 1px solid $color-interaction;
+        }
     }
-  }
 }
 
 .form {
-  display: grid;
-  grid-template-areas:
-    "name email"
-    "message message"
-    ". send";
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto;
-  gap: 1rem;
+    display: grid;
+    grid-template-areas:
+        "name email"
+        "message message"
+        ". send";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 1rem;
 
-  padding: 1rem 0;
-  width: 100%;
-  height: 100%;
+    padding: 1rem 0;
+    width: 100%;
+    height: 100%;
 
-  >div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 3px 0;
-  }
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3px 0;
+    }
 
-  .name-wrapper {
-    grid-area: name;
-  }
+    .name-wrapper {
+        grid-area: name;
+    }
 
-  .email-wrapper {
-    grid-area: email;
-  }
+    .email-wrapper {
+        grid-area: email;
+    }
 
-  .message-wrapper {
-    grid-area: message;
-  }
+    .message-wrapper {
+        grid-area: message;
+    }
 
-  .send {
-    grid-area: send;
-    margin-left: auto;
-  }
+    .send {
+        grid-area: send;
+        margin-left: auto;
+    }
 }
 
 @media (max-width: 768px) {
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    gap: 1rem;
-  }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 1rem;
+    }
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  .contact {
-    grid-column: 1 / 3;
-  }
+    .contact {
+        grid-column: 1 / 3;
+    }
 }

@@ -1,70 +1,70 @@
 @use "/src/styles/variables.scss" as *;
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  width: auto;
-  height: 50px;
-  padding: 0 1rem;
-  z-index: 100;
-  font-size: 1rem;
-
-  .hero-image-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 
-    width: 50px;
+    width: auto;
     height: 50px;
+    padding: 0 1rem;
+    z-index: 100;
+    font-size: 1rem;
 
-    .hero-image {
-      align-self: center;
-      width: auto;
-      height: 80%;
-      aspect-ratio: 1 / 1;
-    }
-  }
+    .hero-image-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
 
-  .batatas-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+        width: 50px;
+        height: 50px;
 
-    margin-left: auto;
-
-    /* 🍟 */
-    .batatas {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-
-      width: 2em;
-      height: 1.5em;
-      cursor: pointer;
-      color: $color-core;
-
-      .batatinhas {
-        display: block;
-        height: 3px;
-        background: currentColor;
-        padding: 1px 0;
-
-        &:nth-child(1),
-        &:nth-child(3) {
-          width: inherit;
+        .hero-image {
+            align-self: center;
+            width: auto;
+            height: 80%;
+            aspect-ratio: 1 / 1;
         }
-
-        &:nth-child(2) {
-          width: 1.5em;
-          align-self: flex-end;
-        }
-      }
     }
-  }
+
+    .batatas-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        margin-left: auto;
+
+        /* 🍟 */
+        .batatas {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 2em;
+            height: 1.5em;
+            cursor: pointer;
+            color: $color-core;
+
+            .batatinhas {
+                display: block;
+                height: 3px;
+                background: currentColor;
+                padding: 1px 0;
+
+                &:nth-child(1),
+                &:nth-child(3) {
+                    width: inherit;
+                }
+
+                &:nth-child(2) {
+                    width: 1.5em;
+                    align-self: flex-end;
+                }
+            }
+        }
+    }
 }

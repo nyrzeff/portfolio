@@ -34,7 +34,7 @@ export const getDaysInMonth = (date: Date): number => {
                 daysInMonth = 28;
             }
             break;
-    };
+    }
 
     return daysInMonth;
 };
@@ -45,11 +45,12 @@ export const formatDate = (date: Date): string => {
 };
 
 export const getAmountOfDays = (startDate: Date, endDate: Date): number => {
-    return (endDate.getTime() - startDate.getTime())
-        / (1000 * 60 * 60 * 24);
+    return (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
 };
 
 export const beautify = (str: string): string => {
-    return str.replace(str.charAt(0), str.charAt(0).toUpperCase())
-        .replace(/([A-Z])/g, " $1").trim();
+    return str
+        .replace(str.charAt(0), str.charAt(0).toUpperCase())
+        .replace(/([A-Z])/g, " $1")
+        .trim();
 };

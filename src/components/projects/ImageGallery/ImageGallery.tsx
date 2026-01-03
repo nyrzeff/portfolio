@@ -6,7 +6,11 @@ interface ImageData {
     images: string[];
 }
 
-export const ImageGallery: React.FC<ImageData> = ({ title, subtitle, images }: ImageData) => {
+export const ImageGallery: React.FC<ImageData> = ({
+    title,
+    subtitle,
+    images,
+}: ImageData) => {
     const imageDescriptor = `${title} - ${subtitle}`;
 
     return (

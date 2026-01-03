@@ -2,170 +2,176 @@
 @use "sass:color";
 
 .intro {
-  margin: 3rem auto;
-  height: 70vh;
-  font-size: 1rem;
+    margin: 3rem auto;
+    height: 70vh;
+    font-size: 1rem;
 
-  &,
-  & * {
-    max-width: 100%;
-    max-height: 100%;
-  }
+    &,
+    & * {
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
 
 .card {
-  width: 100%;
-  height: 100%;
-  color: $color-text;
-  cursor: pointer;
+    width: 100%;
+    height: 100%;
+    color: $color-text;
+    cursor: pointer;
 
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
 }
 
 .flipped {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 .face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  overflow: hidden;
-  padding: 0.5rem;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    padding: 0.5rem;
 }
 
 .front {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: center;
 
-  background:
-    linear-gradient(145deg,
-      rgba($color-core, 0.3),
-      rgba($color-canvas, 0.7)),
-    url("/src/assets/images/me.png");
-  background-size: cover;
-  background-position: left;
-  background-repeat: no-repeat;
-  z-index: 1;
+    background:
+        linear-gradient(
+            145deg,
+            rgba($color-core, 0.3),
+            rgba($color-canvas, 0.7)
+        ),
+        url("/src/assets/images/me.png");
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    z-index: 1;
 
-  footer {
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+
+        width: 100%;
+        padding: 2rem;
+        font-size: 1.75em;
+        background: rgba($color-canvas, 0.6);
+        backdrop-filter: blur(10px);
+
+        > span,
+        p {
+            white-space: pre-line;
+            width: 100%;
+            height: 100%;
+
+            strong {
+                white-space: nowrap;
+                background: linear-gradient(
+                    to right,
+                    color.adjust($color-core, $lightness: 10%),
+                    color.adjust($color-core, $lightness: -10%)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            em {
+                color: $color-core;
+            }
+        }
+
+        span:first-of-type {
+            font-size: 1.3em;
+            border-bottom: 1px solid rgba($color-core, 0.3);
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        q {
+            align-self: center;
+        }
+    }
+}
+
+.back {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0;
 
-    width: 100%;
-    padding: 2rem;
-    font-size: 1.75em;
-    background: rgba($color-canvas, 0.6);
-    backdrop-filter: blur(10px);
-
-    >span,
-    p {
-      white-space: pre-line;
-      width: 100%;
-      height: 100%;
-
-      strong {
-        white-space: nowrap;
-        background: linear-gradient(to right,
-            color.adjust($color-core, $lightness: 10%),
-            color.adjust($color-core, $lightness: -10%));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      em {
-        color: $color-core;
-      }
-    }
-
-    span:first-of-type {
-      font-size: 1.3em;
-      border-bottom: 1px solid rgba($color-core, 0.3);
-      width: 100%;
-      text-align: center;
-      margin: 0 auto;
-    }
-
-    q {
-      align-self: center;
-    }
-  }
-}
-
-.back {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  overflow: hidden;
-  z-index: 1;
-
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-
-  &:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(145deg, $color-canvas, #080808);
+    overflow: hidden;
+    z-index: 1;
 
     -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -ms-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
-  }
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(145deg, $color-canvas, #080808);
+
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
 }
 
 .about {
-  flex-grow: 1;
+    flex-grow: 1;
 
-  margin: 0 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  font-size: 2em;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    font-size: 2em;
 
-  h1 {
-    background: linear-gradient(to right,
-        color.adjust($color-core, $lightness: 20%),
-        color.adjust($color-core, $lightness: -10%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+    h1 {
+        background: linear-gradient(
+            to right,
+            color.adjust($color-core, $lightness: 20%),
+            color.adjust($color-core, $lightness: -10%)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-  h2 {
-    padding-top: clamp(1rem, 5vw, 3rem);
-  }
+    h2 {
+        padding-top: clamp(1rem, 5vw, 3rem);
+    }
 
-  h3 {
-    padding-top: clamp(0.7rem, 5vw, 2rem);
-  }
+    h3 {
+        padding-top: clamp(0.7rem, 5vw, 2rem);
+    }
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
-  .intro {
-    width: 40dvw;
-  }
+    .intro {
+        width: 40dvw;
+    }
 
-  .about {
-    padding: 3rem;
-  }
+    .about {
+        padding: 3rem;
+    }
 }
