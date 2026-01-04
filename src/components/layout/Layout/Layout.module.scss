@@ -18,6 +18,7 @@
 }
 
 :global(html.menu-open) {
+    position: fixed;
     overflow: hidden;
 }
 
