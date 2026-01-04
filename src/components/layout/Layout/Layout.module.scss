@@ -20,6 +20,11 @@
 :global(html.menu-open) {
     position: fixed;
     overflow: hidden;
+    pointer-events: none;
+
+    aside {
+        pointer-events: auto;
+    }
 }
 
 .content {
