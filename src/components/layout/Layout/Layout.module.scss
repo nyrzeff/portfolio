@@ -9,6 +9,7 @@
 }
 
 .overlay {
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -19,13 +20,6 @@
 
 :global(html.menu-open) {
     position: fixed;
-    overflow: hidden;
-    pointer-events: none;
-
-    aside,
-    header > div {
-        pointer-events: auto;
-    }
 }
 
 .content {
