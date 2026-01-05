@@ -22,7 +22,8 @@
     overflow: hidden;
     pointer-events: none;
 
-    aside {
+    aside,
+    header > div {
         pointer-events: auto;
     }
 }
