@@ -51,6 +51,20 @@
     height: inherit;
 }
 
+:global(html.modal-open) {
+    position: fixed;
+}
+
+.overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
+}
+
 .project-content {
     display: none;
     flex-direction: column;
@@ -63,6 +77,8 @@
     top: 5vh;
     left: 5vw;
 
+    position: fixed;
+    z-index: 2;
     background-color: $color-canvas;
 }
 

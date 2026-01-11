@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ImageGallery } from "@components/projects";
 import type { StackItem } from "@/types/stack";
 import { stackItems } from "@assets/icons";
@@ -25,6 +25,16 @@ export const Card: React.FC<CardProps> = ({
 }: CardProps) => {
     const dialog = useRef<HTMLDialogElement>(null);
     const items = stackItems.filter((item) => stack.includes(item.title));
+    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+        const html = document.documentElement;
+
+        if (modalOpen) html.classList.add("modal-open");
+        else html.classList.remove("modal-open");
+
+        return () => html.classList.remove("modal-open");
+    }, [modalOpen]);
 
     const gradient = (degrees: number): string =>
         `linear-gradient(${degrees}deg, ${colors[0]}, ${colors[1]})`;
@@ -33,9 +43,11 @@ export const Card: React.FC<CardProps> = ({
         if (dialog.current instanceof HTMLDialogElement) {
             show
                 ? ((dialog.current.style.display = "flex"),
-                  dialog.current.showModal())
+                    setModalOpen(true),
+                    dialog.current.showModal())
                 : ((dialog.current.style.display = "none"),
-                  dialog.current.close());
+                    setModalOpen(false),
+                    dialog.current.close());
         }
     };
 
@@ -72,6 +84,12 @@ export const Card: React.FC<CardProps> = ({
                 <summary>{title}</summary>
                 {DialogButton(true)}
             </div>
+            {modalOpen && (
+                <div
+                    className={styles["overlay"]}
+                    onClick={() => setModalOpen(false)}
+                />
+            )}
             <dialog className={styles["project-content"]} ref={dialog}>
                 <div className={styles["project-header-container"]}>
                     <div className={styles["project-header"]}>
