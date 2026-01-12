@@ -24,8 +24,8 @@ export const Card: React.FC<CardProps> = ({
     colors,
 }: CardProps) => {
     const dialog = useRef<HTMLDialogElement>(null);
-    const items = stackItems.filter((item) => stack.includes(item.title));
     const [modalOpen, setModalOpen] = useState(false);
+    const items = stackItems.filter((item) => stack.includes(item.title));
 
     useEffect(() => {
         const html = document.documentElement;
@@ -36,26 +36,18 @@ export const Card: React.FC<CardProps> = ({
         return () => html.classList.remove("modal-open");
     }, [modalOpen]);
 
+    if (dialog.current instanceof HTMLDialogElement) {
+        modalOpen ? dialog.current.showModal() : dialog.current.close();
+    }
+
     const gradient = (degrees: number): string =>
         `linear-gradient(${degrees}deg, ${colors[0]}, ${colors[1]})`;
-
-    const handleDialog = (show: boolean): void => {
-        if (dialog.current instanceof HTMLDialogElement) {
-            show
-                ? ((dialog.current.style.display = "flex"),
-                    setModalOpen(true),
-                    dialog.current.showModal())
-                : ((dialog.current.style.display = "none"),
-                    setModalOpen(false),
-                    dialog.current.close());
-        }
-    };
 
     const DialogButton = (show: boolean) => (
         <button
             className={styles["dialog-button"]}
             type="button"
-            onClick={() => handleDialog(show)}
+            onClick={() => setModalOpen(show)}
         >
             {show ? (
                 <svg className={styles["dialog-symbol"]}>
@@ -84,12 +76,6 @@ export const Card: React.FC<CardProps> = ({
                 <summary>{title}</summary>
                 {DialogButton(true)}
             </div>
-            {modalOpen && (
-                <div
-                    className={styles["overlay"]}
-                    onClick={() => setModalOpen(false)}
-                />
-            )}
             <dialog className={styles["project-content"]} ref={dialog}>
                 <div className={styles["project-header-container"]}>
                     <div className={styles["project-header"]}>
