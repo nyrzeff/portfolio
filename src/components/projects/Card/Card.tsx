@@ -4,10 +4,6 @@ import type { StackItem } from "@/types/stack";
 import { stackItems } from "@assets/icons";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
-import {
-    lockParentWithScrollingChild,
-    unlockParentWithScrollingChild,
-} from "@/lib/preventScroll";
 import styles from "./Card.module.scss";
 
 interface CardProps {
@@ -38,7 +34,10 @@ export const Card: React.FC<CardProps> = ({
                     setModalOpen(false);
                     dialog.current.close();
                     dialog.current.style.display = "none";
-                    unlockParentWithScrollingChild("html", "dialog");
+
+                    const html = document.documentElement;
+                    html.style.overflow = "auto";
+                    html.style.position = "static";
                 }
             }
         });
@@ -49,16 +48,22 @@ export const Card: React.FC<CardProps> = ({
 
     const handleDialog = (show: boolean) => {
         if (dialog.current instanceof HTMLDialogElement) {
+            const html = document.documentElement;
+
             if (show) {
                 setModalOpen(true);
                 dialog.current.showModal();
                 dialog.current.style.display = "flex";
-                lockParentWithScrollingChild("html", "dialog");
+
+                html.style.overflow = "hidden";
+                html.style.position = "fixed";
             } else {
                 setModalOpen(false);
                 dialog.current.close();
                 dialog.current.style.display = "none";
-                unlockParentWithScrollingChild("html", "dialog");
+
+                html.style.overflow = "auto";
+                html.style.position = "static";
             }
         }
     };
