@@ -8,7 +8,7 @@
         "clean": "rm -rf dist .tsbuildinfo node-modules/.tmp",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
-        "preview": "vite preview --port 4000 --host"
+        "preview": "pnpm build && vite preview --port 4000 --host"
     },
     "dependencies": {
         "@vercel/node": "^5.5.16",
