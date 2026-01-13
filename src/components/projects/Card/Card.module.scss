@@ -51,12 +51,18 @@
     height: inherit;
 }
 
-:global(html.modal-open) {
-    overflow: hidden;
-    visibility: hidden; // hihihi
+.overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .project-content {
+    display: none;
     flex-direction: column;
     gap: 1rem;
     font-size: 2em;

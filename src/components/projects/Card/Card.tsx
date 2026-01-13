@@ -4,6 +4,10 @@ import type { StackItem } from "@/types/stack";
 import { stackItems } from "@assets/icons";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import {
+    lockParentWithScrollingChild,
+    unlockParentWithScrollingChild,
+} from "@/lib/preventScroll";
 import styles from "./Card.module.scss";
 
 interface CardProps {
@@ -28,26 +32,42 @@ export const Card: React.FC<CardProps> = ({
     const items = stackItems.filter((item) => stack.includes(item.title));
 
     useEffect(() => {
-        const html = document.documentElement;
-
-        if (modalOpen) html.classList.add("modal-open");
-        else html.classList.remove("modal-open");
-
-        return () => html.classList.remove("modal-open");
-    }, [modalOpen]);
-
-    if (dialog.current instanceof HTMLDialogElement) {
-        modalOpen ? dialog.current.showModal() : dialog.current.close();
-    }
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                if (dialog.current instanceof HTMLDialogElement) {
+                    setModalOpen(false);
+                    dialog.current.close();
+                    dialog.current.style.display = "none";
+                    unlockParentWithScrollingChild("html", "dialog");
+                }
+            }
+        });
+    }, []);
 
     const gradient = (degrees: number): string =>
         `linear-gradient(${degrees}deg, ${colors[0]}, ${colors[1]})`;
+
+    const handleDialog = (show: boolean) => {
+        if (dialog.current instanceof HTMLDialogElement) {
+            if (show) {
+                setModalOpen(true);
+                dialog.current.showModal();
+                dialog.current.style.display = "flex";
+                lockParentWithScrollingChild("html", "dialog");
+            } else {
+                setModalOpen(false);
+                dialog.current.close();
+                dialog.current.style.display = "none";
+                unlockParentWithScrollingChild("html", "dialog");
+            }
+        }
+    };
 
     const DialogButton = (show: boolean) => (
         <button
             className={styles["dialog-button"]}
             type="button"
-            onClick={() => setModalOpen(show)}
+            onClick={() => handleDialog(show)}
         >
             {show ? (
                 <svg className={styles["dialog-symbol"]}>
@@ -76,6 +96,7 @@ export const Card: React.FC<CardProps> = ({
                 <summary>{title}</summary>
                 {DialogButton(true)}
             </div>
+            {modalOpen && <div className={styles["overlay"]} />}
             <dialog className={styles["project-content"]} ref={dialog}>
                 <div className={styles["project-header-container"]}>
                     <div className={styles["project-header"]}>
