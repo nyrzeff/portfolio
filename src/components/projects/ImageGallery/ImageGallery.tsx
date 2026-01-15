@@ -14,16 +14,16 @@ export const ImageGallery: React.FC<ImageData> = ({
     const imageDescriptor = `${title} - ${subtitle}`;
 
     return (
-        <div className={styles["image-container"]}>
+        <ul className={styles["image-container"]}>
             {images.map((image, index) => (
-                <div key={index} className={styles["image"]}>
+                <li key={index} className={styles["image"]}>
                     <img
-                        src={image ?? ""}
+                        src={image}
                         alt={`${imageDescriptor}
                         (image ${index + 1})`}
                     />
-                </div>
+                </li>
             ))}
-        </div>
+        </ul>
     );
 };

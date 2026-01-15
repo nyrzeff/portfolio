@@ -70,6 +70,7 @@
     max-height: 90vh;
     margin-inline: auto;
     margin-block: auto;
+    padding-bottom: 1rem;
     background-color: $color-canvas;
     border: none;
 }
@@ -89,12 +90,6 @@
     }
 }
 
-.project-stack,
-.project-text,
-.project-images {
-    padding: 1rem;
-}
-
 .project-stack {
     display: flex;
     flex-direction: column;
@@ -112,7 +107,7 @@
     justify-content: center;
     align-items: center;
     gap: 3rem;
-    margin: 0 auto;
+    margin-inline: auto;
 
     i {
         font-size: 3em;
@@ -122,11 +117,7 @@
 .project-text {
     color: $color-text;
     font-size: 1em;
-}
-
-.project-images img {
-    width: 50%;
-    height: 50%;
+    padding-inline: 10dvw;
 }
 
 @media (orientation: landscape) and (min-width: 768px) {

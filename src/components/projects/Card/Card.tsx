@@ -4,6 +4,7 @@ import type { StackItem } from "@/types/stack";
 import { stackItems } from "@assets/icons";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { useScreen } from "@/hooks/useScreen";
 import styles from "./Card.module.scss";
 
 interface CardProps {
@@ -26,6 +27,7 @@ export const Card: React.FC<CardProps> = ({
     const dialog = useRef<HTMLDialogElement>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const items = stackItems.filter((item) => stack.includes(item.title));
+    const { isDesktopExperience } = useScreen();
 
     useEffect(() => {
         document.addEventListener("keydown", (event) => {
@@ -57,6 +59,13 @@ export const Card: React.FC<CardProps> = ({
 
                 html.style.overflow = "hidden";
                 html.style.position = "fixed";
+
+                if (images.length === 0 && isDesktopExperience) {
+                    dialog.current.style.maxWidth = "40dvw";
+                    const projectText = dialog.current
+                        .children[2] as HTMLElement;
+                    projectText.style.paddingInline = "5dvw";
+                }
             } else {
                 setModalOpen(false);
                 dialog.current.close();
@@ -130,13 +139,15 @@ export const Card: React.FC<CardProps> = ({
                 <div className={styles["project-text"]}>
                     <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
                 </div>
-                <div className={styles["project-images"]}>
-                    <ImageGallery
-                        title={title}
-                        subtitle={subtitle}
-                        images={images}
-                    />
-                </div>
+                {images.length > 0 && (
+                    <div className={styles["project-images"]}>
+                        <ImageGallery
+                            title={title}
+                            subtitle={subtitle}
+                            images={images}
+                        />
+                    </div>
+                )}
             </dialog>
         </article>
     );
