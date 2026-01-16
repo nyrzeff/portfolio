@@ -129,6 +129,14 @@ export const Timeline: React.FC = () => {
                 `${(projTitleDim.height + ySpacing) * i}`,
             );
 
+            if (!hasBeenExecutedOnce) {
+                // hack to prevent having to hover over the
+                // project bar twice in order to show the tooltip
+                projBar.addEventListener("mouseenter", (e) => {
+                    displayTooltip(e, proj);
+                });
+            }
+
             projBar.addEventListener("mouseenter", (e) => {
                 displayTooltip(e, proj);
             });
