@@ -12,6 +12,40 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 assetFileNames: `assets/[name].[ext]`,
+                manualChunks(id) {
+                    if (
+                        id.includes("react") ||
+                        id.includes("react-dom") ||
+                        id.includes("react-router")
+                    ) {
+                        return "react-vendor";
+                    }
+                    if (
+                        id.includes("lodash") ||
+                        id.includes("date-fns") ||
+                        id.includes("axios") ||
+                        id.includes("gray-matter") ||
+                        id.includes("rehype-raw") ||
+                        id.includes("sass")
+                    ) {
+                        return "utils-vendor";
+                    }
+                    if (
+                        id.includes("chart.js") ||
+                        id.includes("recharts") ||
+                        id.includes("d3")
+                    ) {
+                        return "chart-vendor";
+                    }
+                    if (
+                        id.includes("lucide") ||
+                        id.includes("react-icons") ||
+                        id.includes("@iconify")
+                    ) {
+                        return "icons-vendor";
+                    }
+                    return "vendor";
+                },
             },
         },
     },
