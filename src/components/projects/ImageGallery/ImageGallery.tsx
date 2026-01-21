@@ -24,21 +24,28 @@ export const ImageGallery: React.FC<ImageData> = ({
     const imageDescriptor = `${title} - ${subtitle}`;
 
     const goToPreviousImage = () => {
-        imageContainer.current.scrollBy(-imageContainer.current.clientWidth, 0);
+        imageContainer.current?.scrollBy(
+            -imageContainer.current.clientWidth,
+            0,
+        );
     };
 
     const goToNextImage = () => {
-        imageContainer.current.scrollBy(imageContainer.current.clientWidth, 0);
+        imageContainer.current?.scrollBy(imageContainer.current.clientWidth, 0);
     };
 
     function handleScroll() {
-        imageContainer.current.scrollLeft <= imageContainer.current.clientWidth
+        imageContainer.current?.scrollLeft! <=
+        imageContainer.current?.clientWidth!
             ? setButtonLeftDisabled(true)
             : setButtonLeftDisabled(false);
 
-        imageContainer.current.scrollLeft >=
-        imageContainer.current.scrollLeftMax -
-            imageContainer.current.clientWidth
+        const maxScroll =
+            imageContainer.current?.scrollWidth! -
+            imageContainer.current?.clientWidth!;
+
+        imageContainer.current?.scrollLeft! >=
+        maxScroll - imageContainer.current?.clientWidth!
             ? setButtonRightDisabled(true)
             : setButtonRightDisabled(false);
     }
