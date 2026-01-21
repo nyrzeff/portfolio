@@ -145,6 +145,7 @@ export const Card: React.FC<CardProps> = ({
                             title={title}
                             subtitle={subtitle}
                             images={images}
+                            colors={colors}
                         />
                     </div>
                 )}
