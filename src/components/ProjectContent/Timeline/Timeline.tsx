@@ -1,77 +1,105 @@
-import { useState, useEffect } from "react";
-import json from "@/content/project-timeline.json";
+import { useRef, useLayoutEffect } from "react";
 import {
     getDaysInMonth,
     formatDate,
     getAmountOfDays,
     beautify,
 } from "@/lib/dateUtils";
+import type { Frontmatter } from "@/types/markdown";
 import styles from "./Timeline.module.scss";
 import "./Timeline.css";
 
-interface Project {
-    title: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-    technologies: string;
+interface TimelineProps {
+    // actually only includes the metadata (frontmatter) from each project
+    projects?: Frontmatter[];
 }
 
-export const Timeline: React.FC = () => {
-    const projects: Project[] = json.projects;
-    if (!projects) return;
+export const Timeline: React.FC<TimelineProps> = ({
+    projects,
+}: TimelineProps) => {
+    if (!projects) return null;
+
+    const usedProperties = [
+        "title",
+        "subtitle",
+        "startDate",
+        "endDate",
+        "stack",
+    ];
+
+    if (projects && projects.length > 0) {
+        // show only relevant properties in tooltip
+        projects.map((proj: Frontmatter) => {
+            Object.keys(proj).forEach((key) => {
+                if (!usedProperties.includes(key)) {
+                    delete proj[key as keyof Frontmatter];
+                }
+            });
+            return proj;
+        });
+    }
+
+    let gantt = useRef<SVGSVGElement>(null);
+
+    let dates: Date[] | null = [];
+    let oldestProjectStartDate: Date;
+    let hasBeenExecutedOnce = false;
 
     const fontSize = 1;
     const defaultPadding = 50;
 
-    const [tooltip] = useState<SVGGElement>(() => createTooltip());
+    dates = getDates();
 
-    let hasBeenExecutedOnce = false;
+    useLayoutEffect(() => {
+        const tooltip = createTooltip();
+        if (dates && tooltip) createGanttChart(dates, tooltip);
+        if (gantt.current && tooltip) gantt.current.appendChild(tooltip);
+    }, [dates]);
 
-    const oldestProjectStartDate: Date = new Date(projects[0].startDate);
+    function getDates(): Date[] | null {
+        if (!projects || projects.length === 0) return null;
 
-    const latestProject: Project | undefined = projects.at(projects.length - 1);
+        oldestProjectStartDate = new Date(projects[0].startDate);
 
-    if (!latestProject) return;
-
-    const latestProjectEndDate: Date =
-        latestProject.endDate == "Present"
-            ? new Date(Date.now())
-            : new Date(latestProject.endDate);
-
-    const dates: Date[] = [];
-    let date: Date = oldestProjectStartDate;
-
-    dates.push(date);
-
-    while (date < latestProjectEndDate) {
-        date = new Date(
-            date.getFullYear(),
-            date.getMonth() + 1,
-            date.getDate(),
+        const latestProject: Frontmatter | undefined = projects.at(
+            projects.length - 1,
         );
-        dates.push(date);
+
+        if (!latestProject) return null;
+
+        const latestProjectEndDate: Date =
+            latestProject.endDate == "Present"
+                ? new Date(Date.now())
+                : new Date(latestProject.endDate);
+
+        let date: Date = oldestProjectStartDate;
+
+        dates?.push(date);
+
+        while (date < latestProjectEndDate) {
+            date = new Date(
+                date.getFullYear(),
+                date.getMonth() + 1,
+                date.getDate(),
+            );
+            dates?.push(date);
+        }
+
+        return dates;
     }
 
-    useEffect(() => {
-        createGanttChart(dates);
-    }, []);
+    function createGanttChart(dates: Date[], tooltip: SVGGElement): void {
+        if (!projects || projects.length === 0) return;
 
-    function createGanttChart(dates: Date[]): void {
         const ySpacing: number = defaultPadding;
         let xOffset = 0;
         let dateRectX = 0;
         let multiplier = -1;
         let textYOffset = 0;
 
-        const container: HTMLElement | null =
-            document.querySelector(".container");
+        const container = document.querySelector(".container");
 
-        if (!container) return;
-
-        const gantt: HTMLElement | null = document.getElementById("gantt");
-
-        if (!gantt) return;
+        if (!container || !gantt.current) return;
 
         let projContainerYOffset = 0;
 
@@ -80,19 +108,19 @@ export const Timeline: React.FC = () => {
             "g",
         );
         projContainer.classList.add("proj-container");
-        gantt.appendChild(projContainer);
+        gantt.current.appendChild(projContainer);
 
         const dateContainer: SVGGElement = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "g",
         );
         dateContainer.classList.add("date-container");
-        gantt?.appendChild(dateContainer);
+        gantt.current.appendChild(dateContainer);
 
         let widestProjTitleWidth = 0;
 
         for (let i = 0; i < projects.length; i++) {
-            const proj: Project = projects[i];
+            const proj: Frontmatter = projects[i];
 
             const projRow: SVGGElement = document.createElementNS(
                 "http://www.w3.org/2000/svg",
@@ -114,6 +142,7 @@ export const Timeline: React.FC = () => {
                 "http://www.w3.org/2000/svg",
                 "rect",
             );
+
             projBar.classList.add("proj-bar");
             projBar.style.fill = "#4d94ff";
             projRow.appendChild(projBar);
@@ -132,13 +161,13 @@ export const Timeline: React.FC = () => {
             if (!hasBeenExecutedOnce) {
                 // hack to prevent having to hover over the
                 // project bar twice in order to show the tooltip
-                projBar.addEventListener("mouseenter", (e) => {
-                    displayTooltip(e, proj);
+                projBar.addEventListener("mouseenter", (e: MouseEvent) => {
+                    displayTooltip(e, proj, tooltip);
                 });
             }
 
-            projBar.addEventListener("mouseenter", (e) => {
-                displayTooltip(e, proj);
+            projBar.addEventListener("mouseenter", (e: MouseEvent) => {
+                displayTooltip(e, proj, tooltip);
             });
 
             projBar.addEventListener("mouseleave", () => {
@@ -208,11 +237,11 @@ export const Timeline: React.FC = () => {
 
         const ganttWidth: number = dateRectX;
 
-        gantt.setAttribute("width", `${ganttWidth}px`);
-        gantt.style.width = `${ganttWidth + 1}px`;
+        gantt.current.setAttribute("width", `${ganttWidth}px`);
+        gantt.current.style.width = `${ganttWidth + 1}px`;
 
         for (let i = 0; i < projects.length; i++) {
-            const proj: Project = projects[i];
+            const proj: Frontmatter = projects[i];
 
             const projRow = projContainer.children[i] as HTMLElement;
             const projTitle = projRow.children[0] as HTMLElement;
@@ -252,79 +281,45 @@ export const Timeline: React.FC = () => {
 
         const ganttHeight: number = projContainerHeight + projContainerYOffset;
 
-        gantt.setAttribute("height", `${ganttHeight}px`);
-        gantt.style.height = `${ganttHeight}px`;
+        gantt.current.setAttribute("height", `${ganttHeight}px`);
+        gantt.current.style.height = `${ganttHeight}px`;
 
         const containerHeight: number =
             container.getBoundingClientRect().height;
 
-        const timelineHeaderHeight: number | undefined = document
-            .querySelector("#timeline > header")
-            ?.getBoundingClientRect().height;
+        const header = document.querySelector(".timeline-header");
+        if (!header) return;
+
+        const timelineHeaderHeight: number | undefined =
+            header.getBoundingClientRect().height;
 
         if (containerHeight && timelineHeaderHeight) {
             const timeline = document.getElementById("timeline");
+            if (!timeline) return;
 
-            if (timeline) {
-                timeline.style.height = `${containerHeight + timelineHeaderHeight}px`;
-            }
+            timeline.style.height = `${containerHeight + timelineHeaderHeight}px`;
         }
     }
 
-    function createTooltip(): SVGGElement {
-        const tt = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const displayTooltip = (
+        e: MouseEvent,
+        proj: Frontmatter | null,
+        tooltip: SVGGElement | null,
+    ): void => {
+        if (!tooltip || !proj) return;
 
-        tt.classList.add("tooltip");
-        tt.style.display = "none";
+        const padding = 10;
 
-        const rect = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "rect",
-        );
-
-        rect.style.fill = "#4d94ff";
-
-        const text = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "text",
-        );
-
-        text.style.fill = "white";
-        text.style.fontSize = `${fontSize / 1.5}em`;
-
-        const fragments = [];
-
-        for (let i = 0; i < Object.keys(projects[0]).length; i++) {
-            fragments[i] = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "tspan",
-            );
-            text.appendChild(fragments[i]);
+        if (!gantt.current) {
+            tooltip.style.display = "none";
+            return;
         }
-
-        tt.insertAdjacentElement("beforeend", rect);
-        tt.insertAdjacentElement("beforeend", text);
-
-        return tt;
-    }
-
-    const displayTooltip = (e: any, proj: Project): void => {
-        if (!tooltip) return;
 
         if (hasBeenExecutedOnce) {
             tooltip.style.display = "block";
         }
 
-        const padding = 10;
-
-        const gantt: HTMLElement = e.relatedTarget;
-
-        if (!gantt) {
-            tooltip.style.display = "none";
-            return;
-        }
-
-        const ganttDim: DOMRect = gantt.getBoundingClientRect();
+        const ganttDim: DOMRect = gantt.current.getBoundingClientRect();
 
         let ttX: number = e.clientX - ganttDim.x - padding;
         let ttY: number = e.clientY - ganttDim.y - 100;
@@ -340,14 +335,14 @@ export const Timeline: React.FC = () => {
 
         let widestSpanWidth = 0;
 
-        const amountOfProperties: number = Object.keys(proj).length;
+        const amountOfProperties = Object.keys(proj).length;
 
         for (let i = 0; i < amountOfProperties; i++) {
             const property: [string, any] = Object.entries(proj)[i];
 
             let spanDim: DOMRect = textFragments[i].getBoundingClientRect();
 
-            let textY: number = ttY + spanDim.height * (i + 1);
+            let textY = ttY + spanDim.height * (i + 1);
 
             textFragments[i].textContent =
                 `${beautify(property[0])}: ${property[1]}`;
@@ -390,18 +385,56 @@ export const Timeline: React.FC = () => {
         }
 
         const textDim: DOMRect = ttText.getBoundingClientRect();
-        const width: number = textDim.width + padding * 2;
-        const height: number = textDim.height + padding * 2;
+        const width = textDim.width + padding * 2;
+        const height = textDim.height + padding * 2;
 
+        console.log(`X is ${ttX} and Y is ${ttY}`);
         ttRect.setAttribute("x", `${ttX}`);
         ttRect.setAttribute("y", `${ttY}`);
 
         ttRect.setAttribute("width", `${width}px`);
         ttRect.setAttribute("height", `${height}px`);
 
-        gantt.appendChild(tooltip);
-
         hasBeenExecutedOnce = true;
+    };
+
+    const createTooltip = (): SVGGElement | null => {
+        if (!projects || projects.length === 0) return null;
+
+        const tt = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+        tt.classList.add("tooltip");
+        tt.style.display = "none";
+
+        const rect = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "rect",
+        );
+
+        rect.style.fill = "#4d94ff";
+
+        const text = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text",
+        );
+
+        text.style.fill = "white";
+        text.style.fontSize = `${fontSize / 1.5}em`;
+
+        const fragments = [];
+
+        for (let i = 0; i < Object.keys(projects[0]).length; i++) {
+            fragments[i] = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "tspan",
+            );
+            text.appendChild(fragments[i]);
+        }
+
+        tt.insertAdjacentElement("beforeend", rect);
+        tt.insertAdjacentElement("beforeend", text);
+
+        return tt;
     };
 
     return (
@@ -410,7 +443,7 @@ export const Timeline: React.FC = () => {
                 <h2>Timeline</h2>
             </header>
             <div className="container">
-                <svg id="gantt" />
+                <svg ref={gantt} id="gantt" />
             </div>
         </section>
     );

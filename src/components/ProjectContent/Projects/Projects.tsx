@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
-import type { MarkdownFile } from "@/types/markdown";
-import { Card } from "@components/projects";
+import type { Project } from "@/types/markdown";
+import { Card } from "./Card";
 import styles from "./Projects.module.scss";
 
-export interface Project extends MarkdownFile {
+export interface EnrichedProject extends Project {
     images: string[];
 }
 
+// DRY: import projects only once
+// 1. get relevant project info for Timeline
+// 2. then enrich the already provided project info with images, etc.
 const getProjectImages = async (projectId: string): Promise<string[]> => {
     // import everything and then filter during runtime because
     // glob import is a build-time feature
@@ -23,18 +26,19 @@ const getProjectImages = async (projectId: string): Promise<string[]> => {
     return imagePaths;
 };
 
-const importProjects = async () => {
-    const files = await parseMarkdownFromDir();
 
-    const projects = await Promise.all(
-        files.map(async (file) => {
-            const images = await getProjectImages(file.frontmatter.id);
-            return { ...file, images };
-        }),
-    );
-
-    return projects;
-};
+// const importProjects = async () => {
+//     const files = await parseMarkdownFromDir();
+//
+//     const projects = await Promise.all(
+//         files.map(async (file) => {
+//             const images = await getProjectImages(file.frontmatter.id);
+//             return { ...file, images };
+//         }),
+//     );
+//
+//     return projects;
+// };
 
 export const Projects: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -42,6 +46,7 @@ export const Projects: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await importProjects();
+            debugger;
             setProjects(data);
         };
 

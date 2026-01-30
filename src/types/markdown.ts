@@ -2,12 +2,15 @@ export interface Frontmatter {
     id: string;
     title: string;
     subtitle: string;
-    tags: string[];
+    repo?: string;
+    startDate: string;
+    endDate: string;
     stack: string[];
-    colors: string[];
+    colors?: string[];
+    tags?: string[];
 }
 
-export interface MarkdownFile {
+export interface Project {
     frontmatter: Frontmatter;
-    content: string;
+    content?: string;
 }

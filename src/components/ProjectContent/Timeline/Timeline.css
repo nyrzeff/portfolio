@@ -3,18 +3,12 @@
     overflow: scroll;
     width: auto;
     height: fit-content;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 #gantt {
     width: fit-content;
     height: fit-content;
+    overflow: visible;
     stroke: none;
 
     .date-rect {

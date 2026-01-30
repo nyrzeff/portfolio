@@ -1,12 +1,11 @@
-import { Layout, Intro, Stack, Timeline, Projects, Contact } from "@components";
+import { Layout, Intro, Stack, ProjectContent, Contact } from "@components";
 
 export function App() {
     return (
         <Layout>
             <Intro />
             <Stack />
-            <Timeline />
-            <Projects />
+            <ProjectContent />
             <Contact />
         </Layout>
     );

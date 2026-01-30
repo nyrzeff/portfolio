@@ -1,16 +1,25 @@
-import type { Frontmatter, MarkdownFile } from "@/types/markdown";
+import type { Frontmatter, Project } from "@/types/markdown";
 
 const parseFrontmatter = (raw: string): Frontmatter => {
-    type StringKey = "id" | "title" | "subtitle";
+    type StringKey =
+        | "id"
+        | "title"
+        | "subtitle"
+        | "repo"
+        | "startDate"
+        | "endDate";
     type ArrayKey = "tags" | "stack" | "colors";
 
     const frontmatter: Frontmatter = {
         id: "",
         title: "",
         subtitle: "",
-        tags: [],
+        repo: "",
+        startDate: "",
+        endDate: "",
         stack: [],
         colors: [],
+        tags: [],
     };
 
     const chunks = raw.split("\n");
@@ -44,7 +53,7 @@ const parseFrontmatter = (raw: string): Frontmatter => {
 
 // all .md files are inside the same directory anyway,
 // so no problem in setting a static path
-export const parseMarkdownFromDir = async (): Promise<MarkdownFile[]> => {
+export const parseMarkdownFromDir = async (): Promise<Project[]> => {
     const modules = import.meta.glob("/src/content/projects/*.md", {
         query: "?raw",
         import: "default",

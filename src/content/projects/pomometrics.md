@@ -2,12 +2,9 @@
 id: "pomometrics"
 title: "Pomometrics"
 subtitle: "The ultimate Pomodoro technique calculator"
-tags:
-    - Mobile-first design
-    - Responsive design
-    - Conventional Commits
-    - Test coverage
-    - Refactoring
+repo: "https://github.com/nyrzeff/pomometrics"
+startDate: "2024-09-22"
+endDate: "2025-04-30"
 stack:
     - HTML
     - CSS3
@@ -23,6 +20,12 @@ stack:
 colors:
     - "#f70d1a"
     - "#006400"
+tags:
+    - "mobile-first design"
+    - "responsive design"
+    - "conventional commits"
+    - "test coverage"
+    - "refactoring"
 ---
 
 I wanted to visualize my Pomodoro sessions so I built Pomometrics, a simple, static, customizable Pomodoro breakdown visualization tool using HTML, CSS, JavaScript and Chart.js.
