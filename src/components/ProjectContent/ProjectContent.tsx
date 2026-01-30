@@ -4,10 +4,7 @@ import { Projects } from "./Projects";
 import type { Frontmatter, Project } from "@/types/markdown";
 import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
 
-const importProjects = async () => {
-    const files = await parseMarkdownFromDir();
-    return files;
-};
+const importProjects = async () => await parseMarkdownFromDir();
 
 export const ProjectContent: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -27,9 +24,14 @@ export const ProjectContent: React.FC = () => {
         (proj) => proj.frontmatter,
     );
 
-    const byDate = (a: Frontmatter, b: Frontmatter) => {
-        const date1 = new Date(a.startDate);
-        const date2 = new Date(b.startDate);
+    const byDate = (a: Project | Frontmatter, b: Project | Frontmatter) => {
+        const startDate =
+            "frontmatter" in a ? a.frontmatter.startDate : a.startDate;
+        const endDate =
+            "frontmatter" in b ? b.frontmatter.startDate : b.startDate;
+
+        const date1 = new Date(startDate);
+        const date2 = new Date(endDate);
 
         if (date1 > date2) return 1;
         return 0;
@@ -37,10 +39,8 @@ export const ProjectContent: React.FC = () => {
 
     return (
         <>
-            {projects && metadataOnly && (
-                <Timeline projects={metadataOnly.sort(byDate)} />
-                // ) // <Projects projects={projects} />
-            )}
+            {metadataOnly && <Timeline projects={metadataOnly.sort(byDate)} />}
+            {projects && <Projects projects={projects.sort(byDate)} />}
         </>
     );
 };

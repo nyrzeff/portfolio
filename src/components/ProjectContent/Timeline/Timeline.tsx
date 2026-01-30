@@ -17,8 +17,6 @@ interface TimelineProps {
 export const Timeline: React.FC<TimelineProps> = ({
     projects,
 }: TimelineProps) => {
-    if (!projects) return null;
-
     const usedProperties = [
         "title",
         "subtitle",
@@ -55,6 +53,8 @@ export const Timeline: React.FC<TimelineProps> = ({
         if (dates && tooltip) createGanttChart(dates, tooltip);
         if (gantt.current && tooltip) gantt.current.appendChild(tooltip);
     }, [dates]);
+
+    if (!projects || projects.length === 0) return null;
 
     function getDates(): Date[] | null {
         if (!projects || projects.length === 0) return null;
@@ -301,11 +301,11 @@ export const Timeline: React.FC<TimelineProps> = ({
         }
     }
 
-    const displayTooltip = (
+    function displayTooltip(
         e: MouseEvent,
         proj: Frontmatter | null,
         tooltip: SVGGElement | null,
-    ): void => {
+    ): void {
         if (!tooltip || !proj) return;
 
         const padding = 10;
@@ -396,9 +396,9 @@ export const Timeline: React.FC<TimelineProps> = ({
         ttRect.setAttribute("height", `${height}px`);
 
         hasBeenExecutedOnce = true;
-    };
+    }
 
-    const createTooltip = (): SVGGElement | null => {
+    function createTooltip(): SVGGElement | null {
         if (!projects || projects.length === 0) return null;
 
         const tt = document.createElementNS("http://www.w3.org/2000/svg", "g");
@@ -435,7 +435,7 @@ export const Timeline: React.FC<TimelineProps> = ({
         tt.insertAdjacentElement("beforeend", text);
 
         return tt;
-    };
+    }
 
     return (
         <section id="timeline" className={styles["timeline"]}>

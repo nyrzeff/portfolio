@@ -1,28 +1,29 @@
 import { useState, useEffect, useRef } from "react";
-import { ImageGallery } from "@components/projects";
+import { ImageGallery } from "./ImageGallery/";
 import type { StackItem } from "@/types/stack";
+import type { Frontmatter } from "@/types/markdown";
 import { stackItems } from "@assets/icons";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import { useScreen } from "@/hooks/useScreen";
 import styles from "./Card.module.scss";
 
-interface CardProps {
-    title: string;
-    subtitle: string;
-    stack: string[];
+interface CardProps extends Frontmatter {
     content: string;
     images: string[];
-    colors: string[];
 }
 
 export const Card: React.FC<CardProps> = ({
     title,
     subtitle,
+    repo,
+    startDate,
+    endDate,
     stack,
+    colors,
+    tags,
     content,
     images,
-    colors,
 }: CardProps) => {
     const dialog = useRef<HTMLDialogElement>(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -46,7 +47,7 @@ export const Card: React.FC<CardProps> = ({
     }, []);
 
     const gradient = (degrees: number): string =>
-        `linear-gradient(${degrees}deg, ${colors[0]}, ${colors[1]})`;
+        `linear-gradient(${degrees}deg, ${colors && colors[0]}, ${colors && colors[1]})`;
 
     const handleDialog = (show: boolean) => {
         if (dialog.current instanceof HTMLDialogElement) {
@@ -145,7 +146,7 @@ export const Card: React.FC<CardProps> = ({
                             title={title}
                             subtitle={subtitle}
                             images={images}
-                            colors={colors}
+                            colors={colors ?? []}
                         />
                     </div>
                 )}
