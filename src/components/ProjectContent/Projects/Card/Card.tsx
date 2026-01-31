@@ -49,6 +49,9 @@ export const Card: React.FC<CardProps> = ({
         if (!content && intro.current) {
             intro.current.style.opacity = "0.5";
 
+            const button = intro.current.querySelector("button");
+            if (button) button.style.pointerEvents = "none";
+
             const summary = intro.current.querySelector("summary");
 
             intro.current.addEventListener("mouseenter", () => {
