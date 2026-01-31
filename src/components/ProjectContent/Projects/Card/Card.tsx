@@ -16,12 +16,8 @@ interface CardProps extends Frontmatter {
 export const Card: React.FC<CardProps> = ({
     title,
     subtitle,
-    repo,
-    startDate,
-    endDate,
     stack,
     colors,
-    tags,
     content,
     images,
 }: CardProps) => {
