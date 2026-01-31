@@ -4,14 +4,9 @@ import { Card } from "./Card";
 import styles from "./Projects.module.scss";
 
 export interface EnrichedProject extends Project {
-    key: string;
     images?: string[];
 }
 
-// DRY: import projects only once
-// 1. get relevant project info for Timeline
-// 2. then enrich the already provided project info with images, etc.
-//
 const getProjectImages = async (projectId: string): Promise<string[]> => {
     // import everything and then filter during runtime because
     // glob import is a build-time feature
@@ -31,9 +26,9 @@ const enrichProjects = async (
     projects: Project[],
 ): Promise<EnrichedProject[]> => {
     const enrichedProjects = await Promise.all(
-        projects.map(async (file) => {
-            const images = await getProjectImages(file.frontmatter.id);
-            return { ...file, images };
+        projects.map(async (project: Project) => {
+            const images = await getProjectImages(project.frontmatter.id);
+            return { ...project, images };
         }),
     );
 
@@ -47,7 +42,7 @@ interface ProjectsProps {
 export const Projects: React.FC<ProjectsProps> = ({
     projects,
 }: ProjectsProps) => {
-    if(!projects) return null;
+    if (!projects) return null;
 
     const [enrichedProjects, setEnrichedProjects] = useState<EnrichedProject[]>(
         [],
@@ -55,7 +50,7 @@ export const Projects: React.FC<ProjectsProps> = ({
 
     useEffect(() => {
         const fetchData = async () => {
-            if(projects.length === 0) return;
+            if (projects.length === 0) return;
             const data: EnrichedProject[] = await enrichProjects(projects);
             setEnrichedProjects(data);
         };
@@ -73,13 +68,13 @@ export const Projects: React.FC<ProjectsProps> = ({
                     id={project.frontmatter.id}
                     title={project.frontmatter.title}
                     subtitle={project.frontmatter.subtitle}
-                    repo={project.frontmatter.repo}
+                    repo={project.frontmatter.repo ?? ""}
                     startDate={project.frontmatter.startDate}
                     endDate={project.frontmatter.endDate}
                     stack={project.frontmatter.stack}
-                    colors={project.frontmatter.colors!}
-                    tags={project.frontmatter.tags}
-                    content={project.content}
+                    colors={project.frontmatter.colors ?? []}
+                    tags={project.frontmatter.tags ?? []}
+                    content={project.content ?? null}
                     images={project.images ?? []}
                 />
             ))}

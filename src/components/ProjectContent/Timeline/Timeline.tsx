@@ -5,36 +5,21 @@ import {
     getAmountOfDays,
     beautify,
 } from "@/lib/dateUtils";
-import type { Frontmatter } from "@/types/markdown";
+import type { PartialFrontmatter } from "../ProjectContent";
 import styles from "./Timeline.module.scss";
 import "./Timeline.css";
 
 interface TimelineProps {
-    // actually only includes the metadata (frontmatter) from each project
-    projects?: Frontmatter[];
+    metadata?: PartialFrontmatter[];
 }
 
 export const Timeline: React.FC<TimelineProps> = ({
-    projects,
+    metadata,
 }: TimelineProps) => {
-    const usedProperties = [
-        "title",
-        "subtitle",
-        "startDate",
-        "endDate",
-        "stack",
-    ];
+    let projects: PartialFrontmatter[];
 
-    if (projects && projects.length > 0) {
-        // show only relevant properties in tooltip
-        projects.map((proj: Frontmatter) => {
-            Object.keys(proj).forEach((key) => {
-                if (!usedProperties.includes(key)) {
-                    delete proj[key as keyof Frontmatter];
-                }
-            });
-            return proj;
-        });
+    if (metadata && metadata.length > 0) {
+        projects = metadata;
     }
 
     let gantt = useRef<SVGSVGElement>(null);
@@ -54,14 +39,12 @@ export const Timeline: React.FC<TimelineProps> = ({
         if (gantt.current && tooltip) gantt.current.appendChild(tooltip);
     }, [dates]);
 
-    if (!projects || projects.length === 0) return null;
-
     function getDates(): Date[] | null {
         if (!projects || projects.length === 0) return null;
 
         oldestProjectStartDate = new Date(projects[0].startDate);
 
-        const latestProject: Frontmatter | undefined = projects.at(
+        const latestProject: PartialFrontmatter | undefined = projects.at(
             projects.length - 1,
         );
 
@@ -120,7 +103,7 @@ export const Timeline: React.FC<TimelineProps> = ({
         let widestProjTitleWidth = 0;
 
         for (let i = 0; i < projects.length; i++) {
-            const proj: Frontmatter = projects[i];
+            const proj: PartialFrontmatter = projects[i];
 
             const projRow: SVGGElement = document.createElementNS(
                 "http://www.w3.org/2000/svg",
@@ -241,7 +224,7 @@ export const Timeline: React.FC<TimelineProps> = ({
         gantt.current.style.width = `${ganttWidth + 1}px`;
 
         for (let i = 0; i < projects.length; i++) {
-            const proj: Frontmatter = projects[i];
+            const proj: PartialFrontmatter = projects[i];
 
             const projRow = projContainer.children[i] as HTMLElement;
             const projTitle = projRow.children[0] as HTMLElement;
@@ -303,7 +286,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 
     function displayTooltip(
         e: MouseEvent,
-        proj: Frontmatter | null,
+        proj: PartialFrontmatter | null,
         tooltip: SVGGElement | null,
     ): void {
         if (!tooltip || !proj) return;
@@ -388,7 +371,6 @@ export const Timeline: React.FC<TimelineProps> = ({
         const width = textDim.width + padding * 2;
         const height = textDim.height + padding * 2;
 
-        console.log(`X is ${ttX} and Y is ${ttY}`);
         ttRect.setAttribute("x", `${ttX}`);
         ttRect.setAttribute("y", `${ttY}`);
 

@@ -9,7 +9,7 @@ import { useScreen } from "@/hooks/useScreen";
 import styles from "./Card.module.scss";
 
 interface CardProps extends Frontmatter {
-    content: string;
+    content: string | null;
     images: string[];
 }
 
@@ -26,6 +26,7 @@ export const Card: React.FC<CardProps> = ({
     images,
 }: CardProps) => {
     const dialog = useRef<HTMLDialogElement>(null);
+    const intro = useRef<HTMLDivElement>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const items = stackItems.filter((item) => stack.includes(item.title));
     const { isDesktopExperience } = useScreen();
@@ -44,10 +45,26 @@ export const Card: React.FC<CardProps> = ({
                 }
             }
         });
+
+        if (!content && intro.current) {
+            intro.current.style.opacity = "0.5";
+
+            const summary = intro.current.querySelector("summary");
+
+            intro.current.addEventListener("mouseenter", () => {
+                if (!summary) return;
+                summary.textContent = "In progress...";
+            });
+
+            intro.current.addEventListener("mouseleave", () => {
+                if (!summary) return;
+                summary.textContent = title;
+            });
+        }
     }, []);
 
     const gradient = (degrees: number): string =>
-        `linear-gradient(${degrees}deg, ${colors && colors[0]}, ${colors && colors[1]})`;
+        `linear-gradient(${degrees}deg, ${colors && (colors[0] ?? "#ffffff")}, ${colors && (colors[1] ?? "#000000")})`;
 
     const handleDialog = (show: boolean) => {
         if (dialog.current instanceof HTMLDialogElement) {
@@ -106,7 +123,7 @@ export const Card: React.FC<CardProps> = ({
 
     return (
         <article className={styles["card"]}>
-            <div className={styles["card-intro"]}>
+            <div ref={intro} className={styles["card-intro"]}>
                 <div style={{ background: gradient(45) }}></div>
                 <summary>{title}</summary>
                 {DialogButton(true)}

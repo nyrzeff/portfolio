@@ -4,14 +4,16 @@ import { Projects } from "./Projects";
 import type { Frontmatter, Project } from "@/types/markdown";
 import { parseMarkdownFromDir } from "@/lib/parseMarkdown";
 
-const importProjects = async () => await parseMarkdownFromDir();
+const allowed = ["title", "subtitle", "startDate", "endDate", "stack"] as const;
+type Allowed = (typeof allowed)[number];
+export type PartialFrontmatter = Pick<Frontmatter, Allowed>;
 
 export const ProjectContent: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await importProjects();
+            const data = await parseMarkdownFromDir();
             setProjects(data);
         };
 
@@ -20,11 +22,29 @@ export const ProjectContent: React.FC = () => {
 
     if (!projects) return <p>Loading...</p>;
 
-    const metadataOnly: Frontmatter[] = projects.map(
-        (proj) => proj.frontmatter,
-    );
+    const filteredMetadata: PartialFrontmatter[] = projects
+        .map((proj: Project) => proj.frontmatter)
+        .map((metadata: Frontmatter) => {
+            const partialMetadata = {} as PartialFrontmatter;
 
-    const byDate = (a: Project | Frontmatter, b: Project | Frontmatter) => {
+            Object.keys(metadata).forEach((metadataKey) => {
+                const key = metadataKey as keyof Frontmatter;
+                const partialKey = metadataKey as keyof PartialFrontmatter;
+
+                // bad practice but idk how to satisfy tsc
+                if (allowed.includes(partialKey)) {
+                    partialMetadata[partialKey] = metadata[
+                        key as keyof PartialFrontmatter
+                    ] as string & string[];
+                }
+            });
+            return partialMetadata;
+        });
+
+    const byDate = (
+        a: Project | PartialFrontmatter,
+        b: Project | PartialFrontmatter,
+    ) => {
         const startDate =
             "frontmatter" in a ? a.frontmatter.startDate : a.startDate;
         const endDate =
@@ -39,7 +59,9 @@ export const ProjectContent: React.FC = () => {
 
     return (
         <>
-            {metadataOnly && <Timeline projects={metadataOnly.sort(byDate)} />}
+            {filteredMetadata && (
+                <Timeline metadata={filteredMetadata.sort(byDate)} />
+            )}
             {projects && <Projects projects={projects.sort(byDate)} />}
         </>
     );

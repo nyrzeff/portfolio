@@ -29,9 +29,11 @@ const parseFrontmatter = (raw: string): Frontmatter => {
 
     for (const chunk of chunks) {
         if (chunk.includes(":") && chunk.includes('"')) {
-            const fragments = chunk.split(":");
-            const propertyKey = fragments[0].trim() as StringKey;
-            const propertyValue = fragments[1].trim().slice(1, -1) as string;
+            const propertyKey = chunk.split(":")[0].trim() as StringKey;
+            const propertyValue = chunk
+                .substring(chunk.indexOf(":") + 1)
+                .trim()
+                .slice(1, -1) as string;
             frontmatter[propertyKey] = propertyValue;
         } else {
             if (chunk.charAt(chunk.length - 1) === ":") {
