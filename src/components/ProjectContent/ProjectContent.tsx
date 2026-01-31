@@ -14,6 +14,7 @@ export const ProjectContent: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await parseMarkdownFromDir();
+            data.sort(byDate);
             setProjects(data);
         };
 
@@ -21,6 +22,24 @@ export const ProjectContent: React.FC = () => {
     }, []);
 
     if (!projects) return <p>Loading...</p>;
+
+    const byDate = (
+        a: Project | PartialFrontmatter,
+        b: Project | PartialFrontmatter,
+    ) => {
+        const startDate =
+            "frontmatter" in a ? a.frontmatter.startDate : a.startDate;
+        const endDate =
+            "frontmatter" in b ? b.frontmatter.startDate : b.startDate;
+
+        const date1 = new Date(startDate);
+        const date2 = new Date(endDate);
+
+        if (date1 > date2) return 1;
+        if (date1 < date2) return -1;
+
+        return 0;
+    };
 
     const filteredMetadata: PartialFrontmatter[] = projects
         .map((proj: Project) => proj.frontmatter)
@@ -41,28 +60,10 @@ export const ProjectContent: React.FC = () => {
             return partialMetadata;
         });
 
-    const byDate = (
-        a: Project | PartialFrontmatter,
-        b: Project | PartialFrontmatter,
-    ) => {
-        const startDate =
-            "frontmatter" in a ? a.frontmatter.startDate : a.startDate;
-        const endDate =
-            "frontmatter" in b ? b.frontmatter.startDate : b.startDate;
-
-        const date1 = new Date(startDate);
-        const date2 = new Date(endDate);
-
-        if (date1 > date2) return 1;
-        return 0;
-    };
-
     return (
         <>
-            {filteredMetadata && (
-                <Timeline metadata={filteredMetadata.sort(byDate)} />
-            )}
-            {projects && <Projects projects={projects.sort(byDate)} />}
+            {filteredMetadata && <Timeline metadata={filteredMetadata} />}
+            {projects && <Projects projects={projects} />}
         </>
     );
 };
