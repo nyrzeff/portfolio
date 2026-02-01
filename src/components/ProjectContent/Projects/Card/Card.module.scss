@@ -16,10 +16,17 @@
     text-align: center;
     font-size: 1em;
 
+    a,
     summary {
         color: $color-text;
         font-weight: bold;
         font-size: 26.67px;
+    }
+
+    a {
+        &:hover {
+            border-bottom: 3px solid $color-text;
+        }
     }
 }
 
@@ -33,7 +40,7 @@
     }
 }
 
-.dialog-button {
+.dialog-open-button {
     position: absolute;
     top: 0;
     right: 0;
@@ -41,14 +48,33 @@
     width: 40px;
     height: 40px;
     cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
-.dialog-symbol {
+.dialog-open-symbol {
     fill: none;
     stroke: $color-text;
     stroke-width: 2px;
     width: inherit;
     height: inherit;
+}
+
+.dialog-close-button {
+    margin-left: auto;
+    align-self: start;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.dialog-close-symbol {
+    font-size: 2em;
+    color: rgba($color-text, 0.7);
+    cursor: pointer;
 }
 
 .overlay {
@@ -81,11 +107,17 @@
 }
 
 .project-header {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    width: 100%;
     position: relative;
     background: $color-canvas;
 
     summary {
+        margin-left: auto;
         font-size: 2em;
+        color: rgba($color-text, 0.8);
     }
 }
 

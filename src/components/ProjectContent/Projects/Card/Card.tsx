@@ -70,7 +70,7 @@ export const Card: React.FC<CardProps> = ({
     const gradient = (degrees: number): string =>
         `linear-gradient(${degrees}deg, ${colors && (colors[0] ?? "#ffffff")}, ${colors && (colors[1] ?? "#000000")})`;
 
-    const handleDialog = (show: boolean) => {
+    const showDialog = (show: boolean) => {
         if (dialog.current instanceof HTMLDialogElement) {
             const html = document.documentElement;
 
@@ -99,55 +99,46 @@ export const Card: React.FC<CardProps> = ({
         }
     };
 
-    const DialogButton = (show: boolean) => (
-        <button
-            className={styles["dialog-button"]}
-            type="button"
-            onClick={() => handleDialog(show)}
-            style={modalOpen ? { marginTop: "1rem", marginRight: "1rem" } : {}}
-        >
-            {show ? (
-                <svg className={styles["dialog-symbol"]}>
-                    <polyline points="5 5,15 5,5 5,5 15" />
-                    <line x1="5" y1="5" x2="15" y2="15" />
-                    <polyline points="35 5,25 5,35 5,35 15" />
-                    <line x1="35" y1="5" x2="25" y2="15" />
-                    <polyline points="5 35,15 35,5 35,5 25" />
-                    <line x1="5" y1="35" x2="15" y2="25" />
-                    <polyline points="35 35,25 35,35 35,35 25" />
-                    <line x1="35" y1="35" x2="25" y2="25" />
-                </svg>
-            ) : (
-                <svg className={styles["dialog-symbol"]}>
-                    <polyline points="5 5,35 35" />
-                    <polyline points="5 35,35 5" />
-                </svg>
-            )}
-        </button>
-    );
-
     return (
         <article className={styles["card"]}>
             <div ref={intro} className={styles["card-intro"]}>
                 <div style={{ background: gradient(45) }}></div>
-                <summary>{title}</summary>
-                {DialogButton(true)}
+                {content ? (
+                    <a href={repo}>{title}</a>
+                ) : (
+                    <summary>{title}</summary>
+                )}
+                <button
+                    className={styles["dialog-open-button"]}
+                    type="button"
+                    onClick={() => showDialog(true)}
+                >
+                    <svg className={styles["dialog-open-symbol"]}>
+                        <polyline points="5 5,15 5,5 5,5 15" />
+                        <line x1="5" y1="5" x2="15" y2="15" />
+                        <polyline points="35 5,25 5,35 5,35 15" />
+                        <line x1="35" y1="5" x2="25" y2="15" />
+                        <polyline points="5 35,15 35,5 35,5 25" />
+                        <line x1="5" y1="35" x2="15" y2="25" />
+                        <polyline points="35 35,25 35,35 35,35 25" />
+                        <line x1="35" y1="35" x2="25" y2="25" />
+                    </svg>
+                </button>
             </div>
             {modalOpen && <div className={styles["overlay"]} />}
             <dialog className={styles["project-content"]} ref={dialog}>
                 <div className={styles["project-header-container"]}>
                     <div className={styles["project-header"]}>
-                        <summary
-                            style={{
-                                background: gradient(90),
-                                whiteSpace: "nowrap",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                            }}
+                        <summary><i>{title}</i></summary>
+                        <button
+                            className={styles["dialog-close-button"]}
+                            type="button"
+                            onClick={() => showDialog(false)}
                         >
-                            {title}
-                        </summary>
-                        {DialogButton(false)}
+                            <span className={styles["dialog-close-symbol"]}>
+                                ✕
+                            </span>
+                        </button>
                     </div>
                 </div>
                 <div className={styles["project-stack"]}>
