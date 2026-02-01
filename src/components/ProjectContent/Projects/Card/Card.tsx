@@ -14,10 +14,15 @@ interface CardProps extends Frontmatter {
 }
 
 export const Card: React.FC<CardProps> = ({
+    id,
     title,
     subtitle,
+    repo,
+    startDate,
+    endDate,
     stack,
     colors,
+    tags,
     content,
     images,
 }: CardProps) => {
@@ -28,7 +33,7 @@ export const Card: React.FC<CardProps> = ({
     const { isDesktopExperience } = useScreen();
 
     useEffect(() => {
-        document.addEventListener("keydown", (event) => {
+        document.addEventListener("keydown", (event: KeyboardEvent) => {
             if (event.key === "Escape") {
                 if (dialog.current instanceof HTMLDialogElement) {
                     setModalOpen(false);
@@ -99,22 +104,23 @@ export const Card: React.FC<CardProps> = ({
             className={styles["dialog-button"]}
             type="button"
             onClick={() => handleDialog(show)}
+            style={modalOpen ? { marginTop: "1rem", marginRight: "1rem" } : {}}
         >
             {show ? (
                 <svg className={styles["dialog-symbol"]}>
-                    <polyline points="5 5,10 5,5 5,5 10" />
-                    <line x1="5" y1="5" x2="10" y2="10" />
-                    <polyline points="25 5,20 5,25 5,25 10" />
-                    <line x1="25" y1="5" x2="20" y2="10" />
-                    <polyline points="5 25,10 25,5 25,5 20" />
-                    <line x1="5" y1="25" x2="10" y2="20" />
-                    <polyline points="25 25,20 25,25 25,25 20" />
-                    <line x1="25" y1="25" x2="20" y2="20" />
+                    <polyline points="5 5,15 5,5 5,5 15" />
+                    <line x1="5" y1="5" x2="15" y2="15" />
+                    <polyline points="35 5,25 5,35 5,35 15" />
+                    <line x1="35" y1="5" x2="25" y2="15" />
+                    <polyline points="5 35,15 35,5 35,5 25" />
+                    <line x1="5" y1="35" x2="15" y2="25" />
+                    <polyline points="35 35,25 35,35 35,35 25" />
+                    <line x1="35" y1="35" x2="25" y2="25" />
                 </svg>
             ) : (
                 <svg className={styles["dialog-symbol"]}>
-                    <polyline points="5 5,25 25" />
-                    <polyline points="5 25,25 5" />
+                    <polyline points="5 5,35 35" />
+                    <polyline points="5 35,35 5" />
                 </svg>
             )}
         </button>
