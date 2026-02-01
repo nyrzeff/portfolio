@@ -18,11 +18,8 @@ export const Card: React.FC<CardProps> = ({
     title,
     subtitle,
     repo,
-    startDate,
-    endDate,
     stack,
     colors,
-    tags,
     content,
     images,
 }: CardProps) => {
@@ -100,7 +97,7 @@ export const Card: React.FC<CardProps> = ({
     };
 
     return (
-        <article className={styles["card"]}>
+        <article id={`card-${id}`} className={styles["card"]}>
             <div ref={intro} className={styles["card-intro"]}>
                 <div style={{ background: gradient(45) }}></div>
                 {content ? (
