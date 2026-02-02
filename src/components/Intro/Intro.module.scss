@@ -51,12 +51,12 @@
     background:
         linear-gradient(
             145deg,
-            rgba($color-core, 0.3),
-            rgba($color-canvas, 0.7)
+            rgba($color-core, 0.2),
+            rgba($color-canvas, 0.3)
         ),
-        url("/src/assets/images/me.png");
+        url("/src/assets/images/me.jpg");
     background-size: cover;
-    background-position: left;
+    background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
 
@@ -165,6 +165,18 @@
     h3 {
         padding-top: clamp(0.7rem, 5vw, 2rem);
     }
+}
+
+@media (orientation: landscape) and (max-width: 768px) {
+  .front {
+    background-size: contain;
+    background-position: center;
+    background-image: url("/src/assets/images/septet.svg");
+
+    footer {
+      visibility: hidden;
+    }
+  }
 }
 
 @media (orientation: landscape) and (min-width: 768px) {
