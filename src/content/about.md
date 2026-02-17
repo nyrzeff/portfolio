@@ -24,16 +24,17 @@ Designing with built-in security, using the right tool for the job and following
 
 <br />
 
-- **Operating system:** Arch Linux
+- **Operating system:** <em>OpenSUSE Tumbleweed</em>, Arch Linux
 - **Shell:** Bash
 - **Tiling window manager:** Sway
-- **Terminal emulator:** Kitty
+- **Terminal emulator:** <del>Kitty</del> WezTerm
 - **Terminal multiplexer:** Zellij
-- **Code editor:** Neovim
+- **Code editor/IDE:** <em>Neovim</em>, VSCode, IntelliJ IDEA
 - **Version control:** git (with a custom alias + bare repo at $HOME)
-- **Package managers:** pacman, pnpm, cargo, pip, brew, flatpak
-- **Fonts:** Nimbus Sans, Monocraft, ComicMono
-  <br />
+- **Package managers:** zypper, pacman, pnpm, cargo, pip, brew, flatpak, snap
+- **Fonts:** JetBrains Mono, Monocraft, ComicMono
+
+<br />
 
 ## 🎨 Interests / hobbies
 
