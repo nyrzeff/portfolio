@@ -34,8 +34,6 @@ Designing with built-in security, using the right tool for the job and following
 - **Package managers:** zypper, pacman, pnpm, cargo, pip, brew, flatpak, snap
 - **Fonts:** JetBrains Mono, Monocraft, ComicMono
 
-<br />
-
 ## 🎨 Interests / hobbies
 
 <br />
