@@ -75,9 +75,7 @@ export const Card: React.FC<CardProps> = ({
                 setModalOpen(true);
                 dialog.current.showModal();
                 dialog.current.style.display = "flex";
-
                 html.style.overflow = "hidden";
-                html.style.position = "fixed";
 
                 if (images.length === 0 && isDesktopExperience) {
                     dialog.current.style.maxWidth = "40dvw";
@@ -89,9 +87,7 @@ export const Card: React.FC<CardProps> = ({
                 setModalOpen(false);
                 dialog.current.close();
                 dialog.current.style.display = "none";
-
                 html.style.overflow = "auto";
-                html.style.position = "static";
             }
         }
     };
